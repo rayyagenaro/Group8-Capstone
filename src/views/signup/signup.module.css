@@ -1,0 +1,260 @@
+.background {
+  min-height: 100vh;
+  position: relative;
+  z-index: 0;
+  background: linear-gradient(140deg, #e7ebf5 0%, #b5c3e8 100%);
+  overflow: hidden;
+}
+.background::before {
+  content: "";
+  position: fixed;
+  left: 0; top: 0; right: 0; bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -2;
+  background: url('/assets/bankindonesia.png') center center / cover no-repeat;
+  opacity: 0.35;
+  pointer-events: none;
+}
+.background::after {
+  content: "";
+  position: fixed;
+  left: 0; top: 0; right: 0; bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  background: linear-gradient(140deg, #e7ebf5 0%, #b5c3e8 100%);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.topbar {
+  width: 100vw;
+  height: 68px;
+  background: #2F4D8E;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 38px;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+.logoWrap { display: flex; align-items: center; gap: 8px; }
+.logoDone {
+  width: 160px !important;
+  max-width: 75vw;
+  height: auto !important;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto 0 auto;
+}
+.menu { display: flex; align-items: center; gap: 18px; }
+.signIn { color: #fff; font-size: 16px; cursor: pointer; text-decoration: none; }
+.signUp { color: #FFFFFF; font-size: 16px; font-weight: bold; margin-left: 10px; cursor: pointer; text-decoration: none; }
+
+.contentWrapper {
+  padding-top: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 68px);
+}
+.card {
+  background: #fff;
+  min-width: 340px;
+  max-width: 700px;
+  width: 100%;
+  border-radius: 23px;
+  box-shadow: 0 8px 38px 0 rgba(70,90,150,0.19), 0 1.5px 8px 0 rgba(70,90,150,0.07);
+  padding: 35px 36px 26px 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+/* === Header dalam card: logo center, tombol back absolute kiri === */
+.cardHeaderRowMod{
+  position: relative;
+  width: 100%;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+.backBtn{
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #f3f6fa;
+  border: 1.2px solid #bcd0f0;
+  color: #2F4D8E;
+  border-radius: 12px;
+  padding: 7px 10px;
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(70,90,150,0.08);
+  transition: background 0.15s, color 0.15s, border 0.15s;
+  border: none;
+  outline: none;
+  font-size: 0;
+}
+.backBtn:hover, .backBtn:focus{
+  background: #e3eaf7;
+  color: #253e70;
+  border: 1.2px solid #253e70;
+}
+.headerLogoWrapper{ display: flex; justify-content: center; align-items: center; }
+
+.logoBI {
+  width: 200px !important;
+  height: 60px !important;
+  object-fit: contain;
+  margin-bottom: 12px;
+}
+
+.cardTitle {
+  font-size: 40px;
+  color: #595959;
+  text-align: center;
+  margin-bottom: 5px;
+  font-weight: 700;
+  font-family: inherit;
+  letter-spacing: 1px;
+}
+.cardSubtitle { font-size: 16px; color: #949494; margin-bottom: 24px; text-align: center; }
+
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  margin-bottom: 14px;
+}
+.formGroup { width: 100%; display: flex; flex-direction: column; gap: 1px; position: relative; }
+.input {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 19px;
+  border: 1.5px solid #e1e5f3;
+  font-size: 1.1rem;
+  outline: none;
+  background: #f7faff;
+  transition: border 0.18s;
+  color: #253e70;
+  font-weight: 500;
+}
+.input:focus { border: 1.5px solid #2F4D8E; background: #fff; color: #253e70; }
+.input::placeholder { color: #bbc6e6; }
+
+.eyeIcon {
+  position: absolute;
+  right: 13px;
+  top: 55%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  opacity: 0.86;
+  padding: 2px;
+  z-index: 3;
+}
+.errorMsg { font-size: 13px; color: #d62c2c; margin-top: 2px; margin-left: 10px; }
+
+.button {
+  background: #2F4D8E;
+  color: #ffffff;
+  border: none;
+  border-radius: 22px;
+  padding: 11px 0;
+  font-size: 18px;
+  width: 100%;
+  font-weight: 600;
+  margin: 22px auto 2px auto;
+  cursor: pointer;
+  box-shadow: 0 4px 14px 0 rgba(70,90,150,0.13);
+  transition: background 0.18s;
+}
+.button:disabled { background: #6c7b97; color: #fff; cursor: not-allowed; }
+
+.registerArea { margin-top: 10px; font-size: 13px; color: #969db1; text-align: center; }
+.registerLink { color: #2F4D8E; text-decoration: none; margin-left: 5px; font-weight: bold; letter-spacing: 0.3px; font-size: 13px; }
+.registerLink:hover { text-decoration: underline; }
+
+/* Responsive */
+@media (max-width: 650px) {
+  .card { max-width: 99vw; min-width: 0; padding: 16px 2vw 12px 2vw; }
+  .cardTitle { font-size: 27px; }
+  .logoBI { width: 80px !important; height: 18px !important; margin-bottom: 8px; }
+  .topbar { height: 54px; padding: 0 10px; }
+  .contentWrapper { padding-top: 66px; }
+  .cardHeaderRowMod { min-height: 38px; }
+  .backBtn { width: 34px; height: 34px; padding: 4px; }
+}
+
+/* === POPUP SUKSES === */
+.popupOverlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(44, 52, 83, 0.18);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 9999;
+  font-family: inherit;
+}
+.popupBox {
+  position: relative;
+  background: white;
+  padding: 28px 26px 22px;
+  border-radius: 18px;
+  text-align: center;
+  border: 1.2px solid #d6d9e4;
+  box-shadow: 0 8px 32px rgba(70,90,150,0.13);
+  width: min(92vw, 560px);
+  animation: popupFadeIn .2s cubic-bezier(.24,.97,.54,.98);
+  font-family: inherit;
+}
+@keyframes popupFadeIn {
+  from { opacity: 0; transform: translateY(12px) scale(.99); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.popupCloseBtn{
+  position: absolute;
+  top: 8px; right: 10px;
+  border: none; background: transparent;
+  font-size: 22px; cursor: pointer; color: #2f4d8e;
+  border-radius: 50%;
+  width: 30px; height: 30px; line-height: 30px;
+}
+.popupCloseBtn:hover{ background: #e8f0fe; }
+.popupIcon { margin-bottom: 8px; display: flex; justify-content: center; }
+.popupTitle {
+  font-size: 20px;
+  color: #2F4D8E;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+.popupMsg {
+  font-size: 15.5px;
+  color: #263a5a;
+  font-weight: 600;
+  line-height: 1.45;
+}
+.popupActions { margin-top: 12px; }
+.okBtn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(95deg, #2f4d8e 85%, #3759aa 100%);
+  color: #fff;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 3px 14px rgba(47,77,142,0.14);
+}
+.okBtn:hover { filter: brightness(1.03); }

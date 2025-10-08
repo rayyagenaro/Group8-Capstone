@@ -1,0 +1,376 @@
+.background {
+  min-height: 100vh;
+  position: relative;
+  z-index: 0;
+  background: linear-gradient(140deg, #e7ebf5 0%, #b5c3e8 100%);
+  /* overflow: hidden; */
+}
+
+/* Tambahkan ini di akhir file css kamu */
+.background::before {
+  content: "";
+  position: fixed; /* Supaya gambar tetap dan full */
+  left: 0; top: 0; right: 0; bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -2;
+  background: url('/assets/bankindonesia.png') center center / cover no-repeat;
+  opacity: 0.35;      /* Atur transparansi gambar biar tidak terlalu gelap/terang */
+  pointer-events: none; /* Supaya ga ganggu klik apapun */
+}
+
+/* Supaya gradient tetap terlihat di atas gambar */
+.background::after {
+  content: "";
+  position: fixed;
+  left: 0; top: 0; right: 0; bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  background: linear-gradient(140deg, #e7ebf5 0%, #b5c3e8 100%);
+  opacity: 0.7;      /* atur sesuai kebutuhan supaya gabungannya halus */
+  pointer-events: none;
+}
+
+
+.logoSidebar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 92px;
+  padding-left: 28px;
+  padding-top: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #ececec;
+}
+.logoDone {
+  width: 160px !important;
+  height: 160px !important;
+  object-fit: contain;
+}
+.navMenu {
+  flex: 1;
+  width: 100%;
+  margin-top: 20px;
+}
+.navMenu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.navMenu li {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 30px 14px 28px;
+  font-size: 17px;
+  color: #888b96;
+  cursor: pointer;
+  border-radius: 0 28px 28px 0;
+  transition: background .15s, color .15s;
+  margin-bottom: 2px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+.menuIcon {
+  font-size: 20px;
+}
+.navMenu li.active,
+.navMenu li:hover {
+  background: #2f4d8e;
+  color: #fff;
+}
+.logoBIWrapper {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.logoBI {
+  width: 170px !important;
+  height: 34px !important;
+  object-fit: contain;
+}
+.mainContent {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  background: #2f4d8e;
+  min-height: 100vh;
+  margin-left: 255px;
+  /* padding-top: 92px; */
+}
+.formBox {
+  background: #fff;
+  border-radius: 22px;
+  box-shadow: 0 4px 20px 0 rgba(47,77,142,0.11);
+  width: 93%;
+  max-width: 1050px;
+  margin: 44px auto 32px auto;
+  padding: 38px 42px 34px 42px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+.topRow {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 15px;
+  justify-content: flex-start;
+  gap: 18px;
+}
+.backBtn {
+  background: #fff;
+  color: #2F4D8E;
+  border: none;
+  font-weight: 600;
+  font-size: 17px;
+  font-family: inherit;
+  border-radius: 21px;
+  padding: 8px 27px 8px 17px;
+  cursor: pointer;
+  box-shadow: 0 1px 6px 0 rgba(47,77,142,0.10);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background 0.14s, color 0.14s;
+}
+.backBtn:hover {
+  background: #e8f0fe;
+  color: #1c295a;
+}
+.title {
+  flex: 1;
+  text-align: center;
+  font-size: 30px;
+  color: #2F4D8E;
+  font-weight: bold;
+  letter-spacing: 0.8px;
+  margin-right: 75px;
+}
+.profileForm {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  margin: 0 auto;
+  margin-top: 22px;
+  max-width: 970px;
+}
+.formGroup {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.formGroup label {
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: #363958;
+  margin-bottom: 2px;
+}
+.input {
+  width: 100%;
+  padding: 13px 16px;
+  border-radius: 9px;
+  border: 1.6px solid #cfd4dc;
+  font-size: 1.05rem;
+  font-weight: bold;
+  outline: none;
+  background: #f7faff;
+  transition: border 0.18s;
+  color: #253e70;
+  font-weight: 700;
+  font-family: inherit;
+}
+.input:focus {
+  border: 1.6px solid #2F4D8E;
+  background: #fff;
+  color: #253e70;
+}
+.input:disabled,
+.input[readonly] {
+  background: #f5f5f5;
+  color: #888 !important;
+}
+.errorMsg {
+  font-size: 13px;
+  color: #d62c2c;
+  margin-top: 1px;
+  margin-left: 2px;
+  font-weight: 500;
+}
+.buttonWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 34px;
+}
+.saveBtn {
+  background: #2f4d8e;
+  color: #fff;
+  border: none;
+  border-radius: 15px;
+  padding: 13px 56px;
+  font-size: 19px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.17s;
+  box-shadow: 0 1px 8px 0 rgba(47,77,142,0.09);
+}
+.saveBtn:hover {
+  background: #233969;
+}
+.popupOverlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 9999;
+}
+.popupBox {
+  background: white;
+  padding: 30px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+.popupIcon {
+  margin-bottom: 16px;
+}
+.popupMsg {
+  font-size: 18px;
+  color: #2F4D8E;
+}
+.popupClose {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 22px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #444;
+}
+.popupOverlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(40, 54, 82, 0.15);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 9999;
+  backdrop-filter: blur(2.2px);
+  animation: popupfade 0.19s;
+}
+@keyframes popupfade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.popupBox {
+  background: #fff;
+  border-radius: 22px;
+  box-shadow: 0 4px 32px 0 rgba(60,60,60,0.10), 0 1.5px 6px 0 rgba(70,90,150,0.05);
+  text-align: center;
+  width: 97vw;
+  max-width: 370px;
+  padding: 36px 22px 28px 22px;
+  box-sizing: border-box;
+  animation: fadeinpop .23s cubic-bezier(0.23,1,0.32,1);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@keyframes fadeinpop {
+  from { transform: scale(0.92); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+.popupIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 13px;
+  margin-top: 2px;
+}
+.popupIcon svg {
+  filter: drop-shadow(0 2px 12px #ffe4807a);
+}
+.popupMsg {
+  font-size: 1.13rem;
+  color: #253e70;
+  margin-bottom: 25px;
+  margin-top: 5px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+.popupButtonRow {
+  display: flex;
+  gap: 18px;
+  justify-content: center;
+  margin-top: 2px;
+}
+.cancelButton, .logoutButton {
+  border: none; outline: none;
+  border-radius: 18px;
+  padding: 10px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  min-width: 110px;
+  box-shadow: 0 1.5px 6px 0 rgba(70,90,150,0.06);
+  transition: background 0.17s, color 0.14s, box-shadow 0.18s;
+}
+.cancelButton {
+  background: #f6f8fd;
+  color: #2F4D8E;
+  border: 1.7px solid #e4e6ef;
+}
+.cancelButton:hover {
+  background: #edf2fa;
+  color: #16336c;
+}
+.logoutButton {
+  background: linear-gradient(90deg, #2F4D8E 70%, #3f65b7 100%);
+  color: #fff;
+  border: none;
+  font-weight: 600; /* JANGAN 800! */
+}
+.logoutButton:hover {
+  background: linear-gradient(90deg, #244073 70%, #3f65b7 100%);
+  color: #fff;
+  box-shadow: 0 2px 16px #d1e0ff3b;
+}
+/* Responsive */
+@media (max-width: 1200px) {
+  .formBox {
+    padding: 18px 4vw 12px 4vw;
+  }
+  .title {
+    font-size: 27px;
+    margin-right: 65px;
+  }
+  .mainContent {
+    margin: 30px auto auto 0;
+  }
+}
+
+@media (max-width:500px) {
+  .title {
+    font-size: 20px;
+  }
+  .formGroup label {
+    font-size: 14px;
+  }
+  .formGroup input {
+    font-size: 14px;
+  }
+  .saveBtn {
+    font-size: 16px;
+    padding: 11px 36px;
+  }
+}

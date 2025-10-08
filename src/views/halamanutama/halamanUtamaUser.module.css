@@ -1,0 +1,299 @@
+.background {
+  min-height: 100vh;
+  position: relative;
+  z-index: 0;
+  background: #2f4d8e;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 255px;
+  background: #fff;
+  border-right: 1px solid #ececec;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 99;
+}
+
+.logoSidebar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 92px;
+  padding-left: 28px;
+  padding-top: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #ececec;
+}
+
+.logoDone {
+  width: 160px !important;
+  height: 160px !important;
+  object-fit: contain;
+}
+
+.navMenu { flex: 1; width: 100%; margin-top: 10px; }
+.navMenu ul { list-style: none; padding: 0; margin: 0; }
+.navMenu li {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 30px 14px 28px;
+  font-size: 17px;
+  color: #6c757d;
+  cursor: pointer;
+  border-radius: 0 28px 28px 0;
+  transition: background .15s, color .15s;
+  margin-bottom: 2px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+.menuIcon { font-size: 20px; }
+.navMenu li.active,
+.navMenu li:hover { background: #2f4d8e; color: #fff; }
+
+.logout {
+  margin: 20px 0 28px 28px;
+  color: #ed6257;
+  font-weight: 600;
+  font-size: 17px;
+  cursor: pointer;
+  letter-spacing: 0.01em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.logoutIcon { font-size: 20px; }
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 255px;
+  right: 0;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 60px 0 38px;
+  box-sizing: border-box;
+  box-shadow: 0 1px 4px 0 rgba(47,77,142,0.04);
+  z-index: 10;
+}
+.logoBIWrapper { display: flex; align-items: center; gap: 16px; }
+.logoBI { width: 170px !important; height: 34px !important; object-fit: contain; }
+
+.mainContent {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  background: #2f4d8e;
+  min-height: 100vh;
+  margin-left: 255px;
+}
+
+.welcomeBox {
+  width: 90%;
+  max-width: 1050px;
+  margin: 50px auto 50px auto;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 2px 16px rgba(47,77,142,0.07);
+  padding: 34px 40px 36px 40px;
+}
+
+.greeting {
+  color: #2f4d8e;
+  font-weight: 700;
+  font-size: 28px;
+  text-align: center;
+  margin-bottom: 22px;
+  letter-spacing: 0.01em;
+  overflow: hidden;
+}
+
+.servicesBox { width: 100%; margin-top: 0; }
+.servicesTitle { font-size: 20px; font-weight: 700; color: #23263b; margin-bottom: 9px; text-align: left; overflow: hidden; }
+.servicesDesc { color: #828282; font-size: 15px; margin-bottom: 28px; overflow: hidden; }
+
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 34px 24px;
+  margin-top: 10px;
+}
+
+.card {
+  background: #fafbff;
+  border: 1.4px solid #2f4d8e;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(47,77,142,0.03);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 22px 26px 22px;
+  min-height: 215px;
+  min-width: 0;
+}
+.cardLogo { width: 500px !important; height: 100px !important; object-fit: contain; }
+.cardTitle { color: #2f4d8e; font-size: 16px; font-weight: 700; text-align: center; letter-spacing: 0.01em; }
+.cardDesc { color: #6b6b6b; font-size: 14px; text-align: center; min-height: 6px; margin-bottom: 16px; }
+
+
+/* === ACTION BUTTONS (baru: 2 tombol sejajar) === */
+.actionsRow {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 12px;
+}
+
+.btn {
+  display: inline-block;
+  flex: 1 1 0;
+  max-width: 100%;
+  padding: 12px 18px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 15px;
+  text-align: center;
+  text-decoration: none; /* supaya <Link> terlihat tombol */
+  cursor: pointer;
+  transition: background-color .18s ease, box-shadow .18s ease;
+  box-shadow: 0 1px 4px rgba(47,77,142,0.08);
+  border: none;
+  line-height: 1.2;
+  color: #fff; /* pastikan teks selalu putih */
+}
+
+/* Booking = biru utama */
+.btnPrimary {
+  background: #2f4d8e;
+  color: #fff;
+  border: 1.7px solid #eef3ff;
+}
+.btnPrimary:hover {
+  background: #003261;
+  transition: ease-in-out;
+  transition-duration: 150ms;
+}
+
+/* On Going = abu-abu netral */
+.btnSecondary {
+  background: #eef3ff;
+  color : #2f4d8e;
+  border: 1.7px solid #2f4d8e;
+}
+.btnSecondary:hover {
+  background: #2f4d8e;
+  color: #fff;
+  transition: ease-in-out;
+  transition-duration: 150ms;
+}
+
+.btn:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+
+/* Popup */
+.popupOverlay { position: fixed; z-index: 1400; left: 0; top: 0; width: 100vw; height: 100vh; background: rgba(40, 54, 82, 0.15); display: flex; align-items: center; justify-content: center; backdrop-filter: blur(2.2px); animation: popupfade 0.19s; }
+@keyframes popupfade { from { opacity: 0; } to { opacity: 1; } }
+.popupBox { background: #fff; border-radius: 22px; box-shadow: 0 4px 32px 0 rgba(60,60,60,0.10), 0 1.5px 6px 0 rgba(70,90,150,0.05); text-align: center; width: 97vw; max-width: 370px; padding: 36px 22px 28px 22px; box-sizing: border-box; animation: fadeinpop .23s cubic-bezier(0.23,1,0.32,1); position: relative; }
+@keyframes fadeinpop { from { transform: scale(0.92); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.popupIcon { display: flex; justify-content: center; align-items: center; margin-bottom: 13px; margin-top: 2px; }
+.popupIcon svg { filter: drop-shadow(0 2px 12px #ffe4807a); }
+.popupMsg { font-size: 1.13rem; color: #253e70; margin-bottom: 25px; margin-top: 5px; font-weight: 500; letter-spacing: 0.01em; }
+.popupButtonRow { display: flex; gap: 18px; justify-content: center; margin-top: 2px; }
+.cancelButton, .logoutButton { border: none; outline: none; border-radius: 18px; padding: 10px 28px; font-size: 1rem; font-weight: 600; cursor: pointer; min-width: 110px; box-shadow: 0 1.5px 6px 0 rgba(70,90,150,0.06); transition: background 0.17s, color 0.14s, box-shadow 0.18s; }
+.cancelButton { background: #f6f8fd; color: #2F4D8E; border: 1.7px solid #e4e6ef; }
+.cancelButton:hover { background: #edf2fa; color: #16336c; }
+.logoutButton { background: linear-gradient(90deg, #2F4D8E 70%, #3f65b7 100%); color: #fff; border: none; }
+.logoutButton:hover { background: linear-gradient(90deg, #244073 70%, #3f65b7 100%); color: #fff; box-shadow: 0 2px 16px #d1e0ff3b; }
+
+
+@media (max-width: 520px) {
+  .actionsRow { flex-direction: column; gap: 12px; }
+  .btn { max-width: 100px; width: 100%; }
+}
+
+@media (max-width: 600px) {
+  .popupBox { max-width: 99vw; padding: 16px 8px 18px 8px; font-size: 0.99rem; }
+  .popupMsg { font-size: 1.03rem; }
+  .popupIcon svg { width: 44px !important; height: 44px !important; }
+  .cancelButton, .logoutButton { padding: 9px 0; min-width: 90px; font-size: .95rem; }
+  .greeting {
+    font-size: 22px;
+    margin-bottom: 18px;
+  }
+}
+
+@media (max-width: 900px) {
+  .cardsGrid { grid-template-columns: 1fr; }
+  .greeting { font-size: 24px; }
+  .cardTitle { font-size: 15px;  }
+  .cardDesc { font-size: 13px; min-height: 36px; }
+  .btn { max-width: 160px; font-size: 12px; padding: 10px 14px; }
+}
+
+@media (max-width: 768px) {
+  .header {
+    left: 0;
+    padding: 0 20px 0 20px;
+  }
+  .logoBI { width: 140px !important; height: 28px !important; }
+
+  .greeting {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  .servicesTitle {
+    font-size: 14px;
+    max-width: 100%;
+  }
+
+  .servicesDesc {
+    font-size: 13px;
+    margin-bottom: 20px;
+  }
+
+  .welcomeBox {
+    padding : 24px 28px 26px 28px;
+  }
+}
+@media (max-width: 1000px) {
+  .cardTitle { font-size: 15px;  }
+  .cardDesc { font-size: 13px; min-height: 36px; }
+  .btn { max-width: 100%; font-size: 13px; padding: 10px 14px; }
+  .card {
+    min-height: 200px ;
+  }
+}
+
+@media (max-width: 1200px) {
+  .mainContent {
+    margin-left: 0px;
+    margin-top: 30px;
+    padding: 0 20px 20px 20px;
+  }
+  .header {
+    left: 0;
+    padding: 0 20px 0 20px;
+  }
+  .welcomeBox {
+    width: 100%;
+    padding : 24px 28px 26px 28px;
+  }
+}
+
+
+

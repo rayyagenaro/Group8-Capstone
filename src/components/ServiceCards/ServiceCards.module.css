@@ -1,0 +1,131 @@
+/* /src/components/ServiceCards/ServicesCards.module.css */
+
+.wrapper {
+  width: 100%;
+}
+
+/* ====== GRID ====== */
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 34px 24px;
+  margin-top: 10px;
+}
+@media (max-width: 900px) {
+  .cardsGrid { grid-template-columns: 1fr; }
+}
+
+/* ====== CARD ====== */
+.card {
+  background: #fafbff;
+  border: 1.4px solid #dbe2f2;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(47,77,142,0.03);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 22px 22px 22px;
+  min-height: 225px;
+  transition: border .15s, box-shadow .15s, background .15s;
+}
+.card:hover {
+  border-color: #2F4D8E;
+  box-shadow: 0 2px 12px rgba(47,77,142,0.10);
+  background: #f6f8ff;
+}
+
+.cardLogo {
+  width: 500px !important;
+  height: 100px !important;
+  object-fit: contain;
+}
+
+.cardTitle {
+  color: #2f4d8e;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 0.01em;
+  margin-top: 6px;
+}
+
+.cardDesc {
+  color: #6b6b6b;
+  font-size: 14px;
+  text-align: center;
+  min-height: 36px;
+  margin: 8px 0 16px 0;
+}
+
+/* ====== FOOTER (badge + tombol) ====== */
+.cardFooter {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  width: 100%;
+  align-items: center;
+}
+
+.badge {
+  justify-self: start;
+  background: #eef3ff;
+  border: 1.5px solid #d7e3ff;
+  color: #244073;
+  font-weight: 800;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+}
+
+.manageBtn {
+  justify-self: end;
+  background: #2f4d8e;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 0;
+  width: 100%;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+  transition: background .15s, box-shadow .18s;
+  box-shadow: 0 1px 4px 0 rgba(47,77,142,0.05);
+}
+.manageBtn:hover {
+  background: #233969;
+  box-shadow: 0 2px 12px rgba(47,77,142,0.12);
+}
+
+/* ====== SKELETON & ERROR ====== */
+.skeletonGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px 18px;
+}
+@media (max-width: 900px) {
+  .skeletonGrid { grid-template-columns: 1fr; }
+}
+.skeletonCard {
+  height: 225px;
+  border-radius: 14px;
+  background: linear-gradient(90deg, #eef2fb 0%, #f6f8ff 40%, #eef2fb 80%);
+  background-size: 200% 100%;
+  animation: shimmer 1.1s infinite;
+  border: 1.4px solid #e6ecfb;
+  box-shadow: 0 2px 8px rgba(47,77,142,0.03);
+}
+@keyframes shimmer {
+  0% { background-position: -200px 0; }
+  100% { background-position: calc(200px + 100%) 0; }
+}
+
+.errorBox {
+  background: #fff2f2;
+  border: 1.5px solid #ffd2d2;
+  color: #b83939;
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-weight: 600;
+  text-align: center;
+}

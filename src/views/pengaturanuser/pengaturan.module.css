@@ -1,0 +1,1162 @@
+.background {
+  min-height: 100vh;
+  position: relative;
+  background: #2f4d8e;
+}
+
+.sidebar {
+  width: 255px;
+  background: #fff;
+  border-right: 1px solid #ececec;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 99;
+}
+.label {
+  margin-right: 8px;
+  color: #22335e;
+  font-weight: 400;
+}
+.logoSidebar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 92px;
+  padding-left: 28px;
+  padding-top: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #ececec;
+}
+.navMenu {
+  flex: 1;
+  width: 100%;
+  margin-top: 10px;
+}
+.navMenu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.navMenu li {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 30px 14px 28px;
+  font-size: 17px;
+  font: inter;
+  font-weight: 500;
+  color: #888b96;
+  cursor: pointer;
+  border-radius: 0 28px 28px 0;
+  transition: background .15s, color .15s;
+  margin-bottom: 2px;
+  letter-spacing: 0.01em;
+}
+.menuIcon {
+  font-size: 20px;
+}
+.navMenu li.active,
+.navMenu li:hover {
+  background: #2f4d8e;
+  color: #fff;
+}
+.logout {
+  margin: 20px 0 28px 28px;
+  color: #ed6257;
+  font-weight: 600;
+  font-size: 17px;
+  cursor: pointer;
+  letter-spacing: 0.01em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.logoutIcon {
+  font-size: 20px;
+}
+.header {
+  position: fixed;
+  top: 0;
+  left: 255px;
+  right: 0;
+  height: 92px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  padding: 0 60px 0 38px;
+  box-sizing: border-box;
+  box-shadow: 0 1px 4px 0 rgba(47,77,142,0.04);
+  z-index: 10;
+  gap: 16px;
+}
+.logoBIWrapper {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.logoBI {
+  width: 170px !important;
+  height: 34px !important;
+  object-fit: contain;
+}
+.mainContent {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  background: #2f4d8e;
+  min-height: 100vh;
+  margin-left: 255px;
+  /* padding-top: 92px; */
+}
+.tableBox {
+  background: #fff;
+  border-radius: 22px;
+  box-shadow: 0 4px 20px 0 rgba(47,77,142,0.11);
+  width: 93%;
+  max-width: 1280px;
+  margin: 44px auto 32px auto;
+  padding: 36px 30px 34px 30px;
+  display: flex;
+  flex-direction: column;
+}
+.tableTopRow {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+.backBtn {
+  background: #fff;
+  color: #2F4D8E;
+  border: none;
+  font-weight: 600;
+  font-size: 17px;
+  border-radius: 21px;
+  padding: 8px 27px 8px 17px;
+  cursor: pointer;
+  box-shadow: 0 1px 6px 0 rgba(47,77,142,0.10);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background 0.14s, color 0.14s;
+}
+.backBtn:hover {
+  background: #e8f0fe;
+  color: #1c295a;
+}
+.tableTitle {
+  flex: 1;
+  text-align: center;
+  font-size: 25px;
+  color: #2F4D8E;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  text-shadow: 0 2px 5px #465b8d2a;
+}
+.tableWrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+.dataTable {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #f8fafd;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 1.5px 12px 0 rgba(47,77,142,0.07);
+}
+.dataTable th, .dataTable td {
+  padding: 14px 18px;
+  font-size: 16px;
+  text-align: left;
+}
+.dataTable th {
+  background: #e8edf6;
+  font-weight: bold;
+  color: #233969;
+  border-bottom: 2.2px solid #dbe8ff;
+}
+.dataTable td {
+  background: #f8fafd;
+  color: #222;
+  border-bottom: 1px solid #e6e6e6;
+  font-size: 16px;
+}
+.dataTable tr:last-child td {
+  border-bottom: none;
+}
+.editBtn {
+  background: #e6edfa;
+  color: #1d3796;
+  border: none;
+  border-radius: 9px;
+  padding: 7px 19px;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  box-shadow: 0 1.5px 8px 0 rgba(70,90,150,0.07);
+  transition: background 0.14s, color 0.13s;
+}
+.editBtn:hover {
+  background: #d6e6fb;
+  color: #0c2466;
+}
+
+/* ========== POPUP (Edit & Logout) ========== */
+.popupOverlay {
+  position: fixed;
+  z-index: 1200;
+  left: 0; top: 0; width: 100vw; height: 100vh;
+  background: rgba(44, 51, 66, 0.19);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(2.2px);
+}
+.popupBox {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 26px 0 rgba(80,80,120,0.16);
+  padding: 34px 30px 22px 30px;
+  min-width: 320px;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  position: relative;
+  animation: popupIn .17s;
+}
+@keyframes popupIn {
+  from { transform: scale(.94); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+.popupTitle {
+  font-size: 21px;
+  font-weight: 700;
+  font-family: inherit;
+  color: #253e70;
+  margin-bottom: 16px;
+  text-align: center;
+  letter-spacing: 0.01em;
+}
+.popupForm {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+.popupForm label {
+  font-size: 15px;
+  font-weight: 600;
+  font-family: inherit;
+  color: #222;
+  margin-bottom: 2px;
+}
+.popupForm input[type="text"] {
+  border: 1.2px solid #bfc7df;
+  border-radius: 8px;
+  padding: 10px 13px;
+  font-size: 15px;
+  font-family: inherit;
+  color: #253e70;
+  background: #f8fafd;
+  transition: border .15s;
+  margin-bottom: 2px;
+}
+.popupForm input[type="text"]:focus {
+  border-color: #2f4d8e;
+  background: #fff;
+}
+.saveBtn {
+  background: #2f4d8e;
+  color: #fff;
+  border: none;
+  border-radius: 13px;
+  padding: 10px 38px;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.18s;
+  margin-top: 7px;
+}
+.saveBtn:hover {
+  background: #233969;
+}
+.cancelBtn {
+  background: #f5f8ff;
+  color: #2F4D8E;
+  border: 1.5px solid #e4e6ef;
+  border-radius: 13px;
+  padding: 10px 38px;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.16s, color 0.16s;
+  margin-top: 7px;
+}
+.cancelBtn:hover {
+  background: #ecf0fa;
+  color: #18396b;
+}
+.popupMsg {
+  font-size: 17px;
+  font-family: inherit;
+  color: #253e70;
+  text-align: center;
+  margin-bottom: 24px;
+  font-weight: 600;
+}
+.popupButtonRow {
+  display: flex;
+  gap: 18px;
+  justify-content: center;
+  margin-top: 2px;
+}
+.errorMsg {
+  color: #d63031;
+  font-size: 13px;
+  font-family: inherit;
+  margin-top: 1px;
+  font-weight: 500;
+  min-height: 16px;
+  line-height: 1.2;
+}
+
+.toastSuccess {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #2fbb70;
+  color: #fff;
+  font-weight: 700;
+  padding: 13px 36px;
+  border-radius: 15px;
+  font-size: 16px;
+  box-shadow: 0 4px 20px 0 rgba(50,190,120,0.15);
+  z-index: 1600;
+  animation: fadeInOut .8s;
+}
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateX(-50%) translateY(15px);}
+  20% { opacity: 1; transform: translateX(-50%) translateY(0);}
+  80% { opacity: 1; }
+  100% { opacity: 0; transform: translateX(-50%) translateY(20px);}
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 950px) {
+  .header {
+    padding: 0 10px 0 255px;
+  }
+  .tableBox {
+    padding: 20px 2vw 20px 2vw;
+    margin: 18px auto;
+  }
+  .tableTopRow {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .tableTitle {
+    font-size: 20px;
+  }
+}
+@media (max-width: 750px) {
+  .sidebar {
+    display: none;
+  }
+  .header {
+    left: 0;
+    padding: 0 4px 0 4px;
+    height: 60px;
+  }
+  .mainContent {
+    margin-left: 0;
+    padding-top: 70px;
+  }
+  .tableBox {
+    padding: 7vw 1vw 5vw 1vw;
+    margin: 10px 0;
+    border-radius: 12px;
+    min-width: 0;
+  }
+  .dataTable th, .dataTable td {
+    font-size: 13px;
+    padding: 8px 6px;
+  }
+}
+/* === Tambahan khusus popup ganti password dan input password === */
+.popupForm input[type="password"] {
+  border: 1.2px solid #bfc7df;
+  border-radius: 8px;
+  padding: 10px 13px;
+  font-size: 15px;
+  color: #253e70;
+  background: #f8fafd;
+  transition: border .15s, box-shadow .15s;
+  font-family: inherit;
+  margin-bottom: 2px;
+  letter-spacing: 0.14em;
+}
+
+.popupForm input[type="password"]:focus {
+  border-color: #2f4d8e;
+  background: #fff;
+  box-shadow: 0 0 0 1.7px #2f4d8e2e;
+}
+
+.popupBox {
+  min-width: 340px;
+  max-width: 97vw;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px 0 rgba(60,80,150,0.22);
+  padding: 38px 35px 28px 35px;
+}
+
+.popupTitle {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #21406c;
+  margin-bottom: 18px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  justify-content: center;
+  letter-spacing: 0.03em;
+}
+
+.popupActionRow {
+  display: flex;
+  gap: 15px;
+  justify-content: flex-end;
+  margin-top: 14px;
+}
+
+.saveBtn {
+  background: linear-gradient(90deg,#254e97 60%,#356fd9 100%);
+  color: #fff;
+  border: none;
+  border-radius: 13px;
+  padding: 10px 38px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.18s;
+  margin-top: 7px;
+  box-shadow: 0 2px 10px 0 rgba(30,40,140,0.11);
+}
+
+.saveBtn:hover {
+  background: #233969;
+}
+
+.cancelBtn {
+  background: #f5f8ff;
+  color: #2F4D8E;
+  border: 1.5px solid #e4e6ef;
+  border-radius: 13px;
+  padding: 10px 38px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.16s, color 0.16s;
+  margin-top: 7px;
+}
+
+.cancelBtn:hover {
+  background: #ecf0fa;
+  color: #18396b;
+}
+/* ========== PAGINATION ========== */
+
+.paginationControls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 24px;
+  padding: 0 10px;
+}
+
+.resultsText {
+  font-size: 15px;
+  color: #555;
+  font-weight: 500;
+}
+
+.itemsPerPageDropdown {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1.5px solid #e0e0e0;
+  background-color: #fff;
+  color: #000000;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* Penyesuaian untuk layar kecil */
+@media (max-width: 750px) {
+  .paginationControls {
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+  }
+}
+/* === STATUS PILL === */
+.statusPill {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 800;
+  font-family: inherit;
+  letter-spacing: 0.02em;
+}
+.pillPending  { background: #fff4d6; color: #a86b00; border: 1px solid #ffe3a1; }
+.pillVerified { background: #e7fbef; color: #0c8a4d; border: 1px solid #bff0d2; }
+.pillRejected { background: #ffe7e7; color: #b42525; border: 1px solid #ffc3c3; }
+
+.rejectNote { margin-top: 4px; font-size: 12px; color: #aa2d2d; }
+
+/* === AKSI VERIFIKASI === */
+.actionCell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.verifyGroup {
+  display: inline-flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.verifyBtn {
+  background: #2fbb70;
+  color: #fff;
+  border: none;
+  border-radius: 9px;
+  padding: 7px 14px;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 1.5px 8px rgba(60, 160, 110, 0.18);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: filter .12s ease;
+}
+.verifyBtn:hover { filter: brightness(1.05); }
+.verifyBtn:disabled { opacity: .55; cursor: not-allowed; }
+
+.rejectBtn {
+  background: #f7e3e3;
+  color: #c62828;
+  border: 1.5px solid #f0b5b5;
+  border-radius: 9px;
+  padding: 7px 14px;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background .14s;
+}
+.rejectBtn:hover { background: #ffecec; }
+.rejectBtn:disabled { opacity: .55; cursor: not-allowed; }
+/* === Tabs row === */
+.tabsRow {
+  display: flex;
+  gap: 12px;
+  margin: 6px 0 16px 0;
+}
+.tabBtn {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 999px;
+  background: #f1f3fb;
+  color: #5b6b8f;
+  font-weight: 900;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: 0 1.5px 8px rgba(47,77,142,0.07);
+}
+.tabActive {
+  background: #2F4D8E;
+  color: #fff;
+}
+
+/* === STATUS PILL === */
+.statusPill {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+.pillPending  { background: #fff4d6; color: #a86b00; border: 1px solid #ffe3a1; }
+.pillVerified { background: #e7fbef; color: #0c8a4d; border: 1px solid #bff0d2; }
+.pillRejected { background: #ffe7e7; color: #b42525; border: 1px solid #ffc3c3; }
+.rejectNote { margin-top: 4px; font-size: 12px; color: #aa2d2d; }
+
+.actionCell { display: flex; align-items: center; gap: 8px; }
+.verifyGroup { display: inline-flex; gap: 8px; flex-wrap: wrap; }
+
+.verifyBtn {
+  background: #2fbb70;
+  color: #fff;
+  border: none;
+  border-radius: 9px;
+  padding: 7px 14px;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 1.5px 8px rgba(60, 160, 110, 0.18);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.verifyBtn:hover { filter: brightness(1.05); }
+.verifyBtn:disabled { opacity: .55; cursor: not-allowed; }
+
+.rejectBtn {
+  background: #f7e3e3;
+  color: #c62828;
+  border: 1.5px solid #f0b5b5;
+  border-radius: 9px;
+  padding: 7px 14px;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.rejectBtn:hover { background: #ffecec; }
+.rejectBtn:disabled { opacity: .55; cursor: not-allowed; }
+/* === POPUP VERIFIKASI USER === */
+.verifyPopupTitle {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #0c8a4d;
+  margin-bottom: 18px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  justify-content: center;
+  letter-spacing: 0.03em;
+}
+
+.verifyPopupMsg {
+  font-size: 16px;
+  font-weight: 500;
+  color: #1b4332;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.verifyActionBtn {
+  background: #2fbb70;
+  color: #fff;
+  border: none;
+  border-radius: 13px;
+  padding: 10px 38px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.18s;
+  box-shadow: 0 2px 10px 0 rgba(30,140,80,0.11);
+}
+.verifyActionBtn:hover {
+  background: #23925b;
+}
+
+/* === POPUP PENOLAKAN VERIFIKASI USER === */
+.rejectPopupTitle {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #b42525;
+  margin-bottom: 18px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  justify-content: center;
+  letter-spacing: 0.03em;
+}
+
+.rejectPopupMsg {
+  font-size: 16px;
+  font-weight: 500;
+  color: #7a1c1c;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.rejectTextarea {
+  border: 1.2px solid #e4b9b9;
+  border-radius: 8px;
+  padding: 10px 13px;
+  font-size: 15px;
+  font-family: inherit;
+  color: #b42525;
+  background: #fff8f8;
+  transition: border .15s;
+  min-height: 85px;
+  resize: vertical;
+}
+.rejectTextarea:focus {
+  border-color: #d64545;
+  background: #fff;
+  outline: none;
+}
+
+.rejectSubmitBtn {
+  background: #b42525;
+  color: #fff;
+  border: none;
+  border-radius: 13px;
+  padding: 10px 38px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.18s;
+  box-shadow: 0 2px 10px 0 rgba(140,30,30,0.11);
+}
+.rejectSubmitBtn:hover {
+  background: #991f1f;
+}
+/* === Actions layout (rapi) === */
+.actionCell {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Edit kiri, group kanan */
+  gap: 12px;
+  white-space: nowrap;
+}
+
+/* Tombol ghost utk Edit (lebih ringan) */
+.editGhostBtn {
+  background: #ffffff;
+  color: #2F4D8E;
+  border: 1.5px solid #e2e8fb;
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-size: 14px;
+  font-weight: 800;
+  font-family: inherit;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  box-shadow: 0 1px 6px rgba(47,77,142,0.06);
+}
+.editGhostBtn:hover { background:#f5f8ff; }
+
+/* Kapsul 2 tombol (Verifikasi | Tolak) */
+.splitGroup {
+  display: inline-flex;
+  border: 1.5px solid #e2e8fb;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 6px rgba(47,77,142,0.06);
+}
+
+.splitBtn {
+  border: 0;
+  padding: 8px 14px;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #f7faff;
+}
+.splitBtn + .splitBtn {
+  border-left: 1.5px solid #e2e8fb; /* garis pemisah */
+}
+
+/* Variasi warna */
+.approve { background: #eaf8f1; color:#0d7b49; }
+.approve:hover { filter: brightness(1.05); }
+
+.reject  { background: #ffeeee; color:#bf2626; }
+.reject:hover  { filter: brightness(1.05); }
+
+/* Responsif: tumpuk ke bawah bila sempit */
+@media (max-width: 860px) {
+  .actionCell {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+  .splitGroup {
+    width: 100%;
+  }
+  .splitBtn {
+    flex: 1;
+    justify-content: center;
+  }
+}
+.actionCell {
+  display: flex;
+  justify-content: center; /* biar semua tombol ada di tengah */
+  gap: 8px; /* jarak antar tombol */
+}
+
+.actionBtn {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+}
+
+.editBtn {
+  background: #eef3ff;
+  color: #2f4d8e;
+}
+.editBtn:hover {
+  background: #d9e5ff;
+}
+
+.verifyBtn {
+  background: #1c7f4e;
+  color: #fff;
+}
+.verifyBtn:hover {
+  filter: brightness(1.05);
+}
+
+.rejectBtn {
+  background: #d92d20;
+  color: #fff;
+}
+.rejectBtn:hover {
+  filter: brightness(1.05);
+}
+/* Kolom aksi */
+.actionCell {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Biar tombolnya di tengah kolom */
+  gap: 12px; /* Jarak antara Edit dan group tombol kanan */
+}
+
+/* Tombol Edit (ghost style) */
+.editGhostBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #fff;
+  border: 1px solid #cfdaf3;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #2f4d8e;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.editGhostBtn:hover {
+  background: #eef3ff;
+}
+
+/* Group Verifikasi & Tolak */
+.splitGroup {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Jarak antar tombol */
+}
+
+/* Style tombol Verifikasi dan Tolak */
+.splitBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #fff;
+  transition: filter 0.15s, transform 0.1s;
+}
+
+.splitBtn.approve {
+  background: #28a745; /* hijau */
+  box-shadow: 0 2px 6px rgba(40, 167, 69, 0.2);
+}
+.splitBtn.approve:hover {
+  filter: brightness(1.08);
+}
+
+.splitBtn.reject {
+  background: #dc3545; /* merah */
+  box-shadow: 0 2px 6px rgba(220, 53, 69, 0.2);
+}
+.splitBtn.reject:hover {
+  filter: brightness(1.08);
+}
+
+/* Biar header "Aksi" di tengah */
+.dataTable th:last-child {
+  text-align: center;
+}
+.centerMuted {
+  text-align: center;
+  color: #888;
+}
+.centerError {
+  text-align: center;
+  color: #b04141;
+}
+
+/* hint daftar layanan di tabel admin */
+.servicesHint {
+  font-size: 12px;
+  color: #5a6aa3;
+  margin-top: 4px;
+}
+
+/* tombol "Lihat Alasan" */
+.reasonBtn {
+  height: 36px;
+  border-radius: 10px;
+  padding: 0 14px;
+  font-size: 14px;
+  font-weight: 800;
+  background: #fff;
+  border: 1.2px solid #e4b9b9;
+  color: #7a1c1c;
+}
+.reasonBtn:hover { background: #fff8f8; }
+
+/* header info pada viewer alasan */
+.reasonHeader {
+  margin-bottom: 12px;
+  color: #41507a;
+  font-size: 14px;
+}
+.reasonHeader > div + div { margin-top: 4px; }
+
+/* kotak alasan (viewer) */
+.reasonView {
+  background: #fff8f8;
+  border: 1.2px solid #e4b9b9;
+  border-radius: 10px;
+  padding: 12px 14px;
+  color: #7a1c1c;
+  font-size: 15px;
+  line-height: 1.45;
+  white-space: pre-wrap;
+}
+/* === Tabs row === */
+.tabsRow {
+  display: flex;
+  gap: 12px;
+  margin: 6px 0 16px 0;
+}
+
+/* bentuk dasar tombol tab */
+.tabBtn {
+  padding: 8px 20px;
+  border-radius: 999px;
+  border: 1.5px solid transparent;
+  font-weight: 800;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: 0 1.5px 8px rgba(47,77,142,0.07);
+  transition: filter .15s ease, transform .05s ease;
+}
+
+/* ====== VARIAN WARNA ====== */
+/* Pending = kuning */
+.tabPending {
+  background: #FFF4CC;
+  color: #8A6D00;
+  border-color: #FFE08A;
+}
+.tabPendingActive {
+  background: #F2C94C;   /* kuning aktif */
+  color: #3B2D00;
+  border-color: #EAB308;
+}
+
+/* Verified = hijau (#4CB782) */
+.tabVerified {
+  background: #EAF7F1;
+  color: #2E7D60;
+  border-color: #BFE9D5;
+}
+.tabVerifiedActive {
+  background: #4CB782;
+  color: #FFFFFF;
+  border-color: #4CB782;
+}
+
+/* Rejected = merah */
+.tabRejected {
+  background: #FFE8E8;
+  color: #B42525;
+  border-color: #FFC7C7;
+}
+.tabRejectedActive {
+  background: #E04F4F;
+  color: #FFFFFF;
+  border-color: #E04F4F;
+}
+
+/* efek hover kecil */
+.tabPending:hover,
+.tabVerified:hover,
+.tabRejected:hover,
+.tabPendingActive:hover,
+.tabVerifiedActive:hover,
+.tabRejectedActive:hover {
+  filter: brightness(1.04);
+}
+
+/* 1) Tabel: biar memanjang & swipe ke kanan, header tetap nempel */
+.tableWrapper{
+  overflow-x: auto;           /* geser kanan-kiri */
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+.dataTable{
+  width: max-content;         /* jangan dipaksa 100%, biar ikut isi kolom */
+  min-width: 100%;            /* tapi minimum selebar viewport */
+  border-collapse: separate;
+  border-spacing: 0;
+}
+.dataTable thead th{
+  position: sticky; top: 0; z-index: 1;
+}
+.dataTable thead th,
+.dataTable tbody td{
+  white-space: nowrap;        /* kolom tidak turun ke bawah */
+}
+
+/* 2) Tabs & kontrol: boleh wrap di layar sempit */
+.tabsRow{
+  flex-wrap: wrap;
+  row-gap: 8px;
+}
+.tabBtn{ min-height: 36px; }
+
+/* 3) Kolom Aksi: rapi di desktop, menumpuk di HP */
+@media (max-width: 900px){
+  .actionCell{
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+  .editGhostBtn,
+  .splitGroup{ width: 100%; }
+  .splitBtn{ justify-content: center; flex: 1; }
+}
+
+/* 4) Header/Sidebar & konten: ruang aman di mobile */
+@media (max-width: 750px){
+  .sidebar{ display: none; }                 /* sidebar disembunyikan */
+  .mainContent{
+    margin-left: 0;
+    padding-top: 72px;                       /* ruang untuk header */
+  }
+  .tableBox{
+    margin: 10px 0;
+    padding: 6vw 3vw;                        /* padding lebih ringkas */
+    border-radius: 12px;
+  }
+  .dataTable th, .dataTable td{
+    font-size: 13px;
+    padding: 8px 10px;
+  }
+}
+
+/* 5) Pagination: stack di HP */
+@media (max-width: 750px){
+  .paginationControls{
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+}
+
+/* 6) Toast & popup tetap muat layar kecil */
+.popupBox{
+  max-width: 96vw;
+}
+
+/* ==== FIX: Sidebar gap & header di tablet/HP ==== */
+@media (max-width: 1200px) {
+  /* header tidak lagi menggeser 255px */
+  .header {
+    left: 0 !important;
+    padding: 0 16px !important;   /* buang padding-left 255px dari rule lama */
+    height: 72px;
+  }
+
+  /* konten full-width + ruang untuk header */
+  .mainContent {
+    margin-left: 0 !important;
+    padding-top: 92px;            /* tinggi topbar */
+  }
+}
+
+/* ==== FIX: Gutter & lebar kartu supaya tidak mepet ==== */
+.tableBox {
+  width: 100%;
+  max-width: 980px;                          /* biar rapi di desktop lebar */
+  margin: 16px auto;
+  padding: clamp(16px, 3vw, 28px);           /* gutter responsif */
+  border-radius: 18px;
+}
+
+/* tabel bisa di-scroll horizontal bila kolom banyak */
+.tableWrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Tabs & tombol rapih saat sempit */
+@media (max-width: 900px) {
+  .tabsRow { flex-wrap: wrap; gap: 10px; }
+}
+
+@media (max-width: 750px) {
+  .tableBox {
+    max-width: 640px;                        /* jangan terlalu lebar di HP landscape */
+    padding: 16px 14px;
+    border-radius: 14px;
+  }
+  .dataTable th,
+  .dataTable td {
+    font-size: 13px;
+    padding: 8px 6px;
+  }
+}
+
+/* (Opsional) header judul biar tidak nempel kiri di HP */
+.tableTopRow { padding: 0 2px; }
+.tableTitle   { text-align: left; }

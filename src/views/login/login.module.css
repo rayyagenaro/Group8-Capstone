@@ -1,0 +1,566 @@
+/* Background */
+.background {
+  min-height: 100vh;
+  width: 100vw;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Background Image */
+.bgImage {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-image: url('/assets/bankindonesia.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: brightness(0.6) blur(1.2px);
+  opacity: 0.38;
+  pointer-events: none;
+}
+
+/* TOPBAR */
+.topbar {
+  width: 100vw;
+  height: 62px;
+  background: #2F4D8E;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 38px;
+  box-sizing: border-box;
+  z-index: 2;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.logoOnly {
+  width: 160px !important;
+  height: 160px !important;
+  object-fit: contain;
+  margin-left: 2px;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.signIn, .signUp {
+  color: #ffffff;
+  font-size: 16px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.signUp {
+  font-weight: bold;
+  margin-left: 4px;
+}
+
+/* CARD LOGIN */
+.card {
+  background: #fff;
+  max-width: 600px;
+  width: 94vw;
+  min-height: 530px;
+  margin: 0 auto;
+  border-radius: 24px;
+  box-shadow: 0 8px 40px 0 rgba(70,90,150,0.16), 0 1.5px 6px 0 rgba(70,90,150,0.05);
+  padding: 46px 38px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  top: 38px;
+  animation: cardpop 0.7s cubic-bezier(.77,0,.18,1) 1;
+}
+
+/* Card animation */
+@keyframes cardpop {
+  0% {
+    opacity: 0;
+    transform: scale(0.92) translateY(80px);
+  }
+  80% {
+    opacity: 1;
+    transform: scale(1.05) translateY(-6px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Header Card */
+.cardHeader {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px; /* Adjust margin */
+}
+
+.cardBankLogo {
+  width: 150px !important;
+  max-width: 80vw;
+  height: auto !important;
+  object-fit: contain;
+  margin-bottom: 12px;
+}
+
+.welcome {
+  font-size: 25px;
+  font-weight: 600;
+  color: #2F4D8E;
+  letter-spacing: 0.2px;
+  font-family: inherit;
+  text-align: center;
+  margin-bottom: 10px; /* Adjust margin */
+}
+
+.logoDoneWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.logoLarge {
+  width: 250px !important;
+  max-width: 75vw;
+  height: auto !important;
+  object-fit: contain;
+  display: block;
+}
+
+.cardTitle {
+  font-size: 18px;
+  color: #2F4D8E;
+  text-align: center;
+  margin-bottom: 20px; /* Adjust margin */
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+/* Button Styling */
+.button {
+  background: #2F4D8E;
+  color: #ffffff;
+  border: none;
+  border-radius: 30px;
+  padding: 13px 0;
+  font-size: 18px;
+  font-family: inherit;
+  width: 100%;
+  max-width: 370px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 14px 0 rgba(70,90,150,0.18);
+  transition: background 0.2s;
+  letter-spacing: 0.2px;
+  margin-bottom: 10px; /* Adjust margin */
+}
+
+.button:hover {
+  background: #243768;
+}
+
+/* OR Section */
+.orSection {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 20px 0;
+}
+
+.orLine {
+  flex: 1;
+  height: 2px;
+  background: #2F4D8E;
+  border-radius: 2px;
+  margin: 0 12px;
+}
+
+.orText {
+  padding: 0 12px;
+  color: #2F4D8E;
+  font-size: 15px;
+  font-weight: 500;
+  opacity: 0.7;
+}
+
+/* Signup text */
+.signupText {
+  text-align: center;
+  margin-top: 18px;
+  font-size: 15px;
+  color: #3a4e85;
+  font-family: inherit;
+  letter-spacing: 0.1px;
+}
+
+.signupLink {
+  color: #2F4D8E;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: underline;
+  transition: color 0.18s;
+}
+
+.signupLink:hover {
+  color:#0048ff ;
+}
+
+/* RESPONSIVE */
+@media (max-width: 320px) {
+  .card {
+    max-width: 80vw;
+    max-height: 80vh;
+    padding-bottom: 0;
+    padding-left: 15px; 
+    padding-right: 15px;
+  }
+  .topbar {
+    width: 100vw;  
+    padding: 0 10px; 
+  }
+  .logoOnly {
+    width: 10px !important; 
+    height: 100px !important;  
+    object-fit: contain;
+    margin-left: 2px;
+  }
+  .logoLarge {
+    width: 100px !important; 
+    max-width: 60vw;
+    height: auto !important;
+    margin-bottom: 8px;
+  }
+  .cardTitle {
+    font-size: 10px;
+    margin-bottom: 12px;  
+  }
+  .button {
+    font-size: 12px;
+    width: 80%; 
+    padding: 10px 0; 
+  }
+  .orText {
+    font-size: 12px;
+  }
+  .orLine {
+    height: 1px;
+    max-width: 80px; 
+  }
+  .orSection {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px; 
+  }
+  .orLine {
+    flex: 1;
+    height: 2px;
+    background: #2F4D8E;
+    border-radius: 2px;
+    max-width: 100px;  
+  }
+  .orText {
+    padding: 0 12px;
+    color: #2F4D8E;
+    font-size: 15px;
+    font-weight: 500;
+    opacity: 0.7;
+    font-family: inherit;
+  }
+  .signupText,
+  .signUp,
+  .signIn {
+    font-size: 12px;
+    margin-top: 2px; 
+  }
+    .logoDoneWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0px;
+  }
+}
+
+@media (max-width: 375px) {
+  .card {
+    max-width: 80vw;
+    max-height: 80vh;
+    padding-bottom: 0;
+    padding-left: 15px; 
+    padding-right: 15px;
+  }
+  .topbar {
+    width: 100vw;  
+    padding: 0 10px; 
+  }
+  .logoOnly {
+    width: 100px !important; 
+    height: 100px !important;  
+    object-fit: contain;
+    margin-left: 2px;
+  }
+  .logoLarge {
+    width: 100px !important; 
+    max-width: 60vw;
+    height: auto !important;
+    margin-bottom: 8px;
+  }
+  .cardTitle {
+    font-size: 12px;
+    margin-bottom: 12px;  
+  }
+  .button {
+    font-size: 12px;
+    width: 80%; 
+    padding: 10px 0; 
+  }
+  .orSection {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    width: 100%;
+    margin: 20px 0;
+  }
+  .orLine {
+    flex: 1;
+    height: 2px;
+    background: #2F4D8E;
+    border-radius: 2px;
+    max-width: 100px;  
+  }
+  .orText {
+    padding: 0 12px;
+    color: #2F4D8E;
+    font-size: 15px;
+    font-weight: 500;
+    opacity: 0.7;
+    font-family: inherit;
+  }
+  .signupText,
+  .signUp,
+  .signIn {
+    font-size: 12px;
+    margin-top: 2px; 
+  }
+    .logoDoneWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0px;
+  }
+}
+
+@media (max-width: 425px) {
+  .card {
+    max-width: 80vw;
+    max-height: 80vh;
+    padding: 15px;
+    margin: 0 auto; 
+  }
+  .topbar {
+    width: 100vw;
+    padding: 0 10px;
+  }
+  .logoOnly {
+    width: 100px !important;
+    height: 100px !important;
+    object-fit: contain;
+    margin-left: 2px;
+    margin-bottom: 2px; 
+  }
+  .logoLarge {
+    width: 100px !important;
+    max-width: 60vw;
+    height: auto !important;
+    margin-bottom: 8px;
+  }
+  .cardTitle {
+    font-size: 10px;
+    margin-bottom: 16px;  
+  }
+  .button {
+    font-size: 12px;
+    width: 80%; 
+    padding: 10px 0;
+    margin-bottom: 12px; 
+  }
+  .orText {
+    font-size: 12px;
+  }
+  .orLine {
+    height: 1px;
+    max-width: 80px;
+    margin: 0 8px; 
+  }
+  .signupText,
+  .signUp,
+  .signIn {
+    font-size: 12px;
+    margin-top: 2px;
+  }
+  .orSection {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px; 
+  }
+    .logoDoneWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0px;
+  }
+}
+
+@media (max-width: 768px) {
+  .card {
+    max-width: 85vw; 
+    max-height: 85vh; 
+    min-height: 0;
+    padding: 20px; 
+    margin: 0 auto;
+  }
+  .topbar {
+    width: 100vw;
+    padding: 0 15px; 
+  }
+  .logoOnly {
+    width: 120px !important;
+    height: 120px !important; 
+    object-fit: contain;
+    margin-left: 2px;
+    margin-bottom: 2px; 
+  }
+  .logoLarge {
+    width: 120px !important;
+    max-width: 60vw;
+    height: auto !important;
+    margin-bottom: 12px; 
+  }
+  .cardTitle {
+    font-size: 14px; 
+    margin-bottom: 20px;  
+  }
+  .button {
+    font-size: 14px; 
+    width: 80%; 
+    padding: 12px 0; 
+    margin-bottom: 15px; 
+  }
+  .orText {
+    font-size: 14px; 
+  }
+  .orLine {
+    height: 1px;
+    max-width: 100px; 
+    margin: 0 12px; 
+  }
+  .signupText,
+  .signUp,
+  .signIn {
+    font-size: 14px; 
+    margin-top: 5px;
+  }
+  .orSection {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px; 
+  }
+    .logoDoneWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0px;
+  }
+}
+
+/* @media (max-width: 1024px) {
+  .card {
+    max-width: 75vw;
+    max-height: 80vh;
+    min-height: 0;
+    padding: 25px;
+    margin: 0 auto;
+  }
+
+  .topbar {
+    width: 100vw;
+    padding: 0 20px;
+  }
+
+  .logoOnly {
+    width: 150px !important;
+    height: 130px !important;
+    object-fit: contain;
+    margin-left: 2px;
+    margin-bottom: 2px;
+  }
+
+  .logoLarge {
+    width: 150px !important;
+    max-width: 60vw;
+    height: auto !important;
+    margin-bottom: 16px;
+  }
+
+  .cardTitle {
+    font-size: 16px;
+    margin-bottom: 24px;
+  }
+
+  .button {
+    font-size: 14px;
+    width: 80%;
+    padding: 14px 0;
+    margin-bottom: 18px;
+  }
+
+  .orText {
+    font-size: 14px;
+  }
+
+  .orLine {
+    height: 1px;
+    max-width: 120px;
+    margin: 0 12px;
+  }
+
+  .signupText,
+  .signUp,
+  .signIn {
+    font-size: 14px;
+    margin-top: 6px;
+  }
+
+  .orSection {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+  }
+  .logoDoneWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0px;
+  }
+} */
+
+
+

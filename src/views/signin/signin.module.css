@@ -1,0 +1,450 @@
+.background {
+  min-height: 100vh;
+  position: relative;
+  z-index: 0;
+  background: linear-gradient(140deg, #e7ebf5 0%, #b5c3e8 100%);
+  overflow: hidden;
+}
+.background::before {
+  content: "";
+  position: fixed;
+  left: 0; top: 0; right: 0; bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -2;
+  background: url('/assets/bankindonesia.png') center center / cover no-repeat;
+  opacity: 0.35;
+  pointer-events: none;
+}
+.background::after {
+  content: "";
+  position: fixed;
+  left: 0; top: 0; right: 0; bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  background: linear-gradient(140deg, #e7ebf5 0%, #b5c3e8 100%);
+  opacity: 0.7;
+  pointer-events: none;
+}
+.topbar {
+  width: 100vw;
+  height: 68px;
+  background: #2F4D8E;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 38px;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+.contentWrapper {
+  padding-top: 80px;
+  min-height: calc(100vh - 65px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+.logoOnly {
+  width: 160px !important;
+  height: 160px !important;
+  object-fit: contain;
+  margin-left: 2px;
+}
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.signIn {
+  color: #ffffff;
+  font-size: 16px;
+  cursor: pointer;
+}
+.signUp {
+  color: #FFFFFF;
+  font-size: 16px;
+  font-weight: bold;
+  margin-left: 4px;
+  cursor: pointer;
+  font-family: inherit;
+}
+.card {
+  background: #ffffff;
+  max-width: 600px;
+  width: 100%;
+  margin: 30px auto 0 auto;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px 0 rgba(70,90,150,0.12), 0 1.5px 6px 0 rgba(70,90,150,0.05);
+  padding: 15px 30px 100px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+.cardHeader {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+  margin-top: 0;
+  gap: 14px;
+}
+.cardBankLogo {
+  width: 160px !important;
+  max-width: 160px;
+  height: auto !important;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto 0 auto;
+}
+.welcome {
+  font-size: 24px;
+  font-weight: 100;
+  color: #253e70;
+  letter-spacing: 0.2px;
+  font-family: inherit;
+}
+.cardTitle {
+  font-size: 34px;
+  color: #253e70;
+  text-align: center;
+  margin-bottom: 10px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  font-family: inherit;
+}
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.inputLabel {
+  color: #253e70;
+  font-weight: 600;
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+.input {
+  width: 100%;
+  padding: 13px 16px;
+  border-radius: 14px;
+  border: 1.6px solid #bcd0f0;
+  font-size: 1.08rem;
+  outline: none;
+  background: #f7faff;
+  transition: border 0.18s;
+  color: #373E3C;
+  font-weight: 600;
+}
+.input:focus {
+  border: 1.6px solid #253e70;
+  background: #fff;
+}
+
+/* beri ruang ekstra untuk ikon mata */
+.inputWithIcon {
+  padding-right: 48px;
+}
+
+.passwordGroup {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* === FIX: tombol mata tanpa kotak hitam === */
+.eyeIcon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  /* hilangkan semua default style tombol */
+  background: transparent !important;
+  border: none !important;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  box-shadow: none;
+  /* ukuran klik yang nyaman */
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+  cursor: pointer;
+  opacity: 0.9;
+  border-radius: 50%;
+}
+.eyeIcon:hover {
+  background: rgba(37, 62, 112, 0.06);
+}
+.eyeIcon:focus-visible {
+  box-shadow: 0 0 0 2px rgba(37,62,112,0.28);
+}
+.eyeIcon svg {
+  display: block;
+  pointer-events: none;
+}
+
+.optionsRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: -4px;
+}
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  color: #253e70;
+  cursor: pointer;
+  gap: 7px;
+  user-select: none;
+  font-weight: 600;
+}
+.checkbox {
+  accent-color: #2F4D8E;
+  width: 15px;
+  height: 15px;
+}
+.forgotLink {
+  color: #253e70;
+  font-size: 13px;
+  text-decoration: none;
+  transition: color 0.15s;
+  font-weight: 600;
+}
+.forgotLink:hover {
+  text-decoration: underline;
+  color: #1d2e54;
+}
+.button {
+  background: #2F4D8E;
+  color: #ffffff;
+  border: none;
+  border-radius: 30px;
+  padding: 12px 0;
+  font-size: 18px;
+  width: 100%;
+  max-width: 370px;
+  font-weight: 500;
+  margin-top: 50px;
+  margin-bottom: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  cursor: pointer;
+  box-shadow: 0 4px 14px 0 rgba(70,90,150,0.18);
+  transition: background 0.2s;
+}
+.button:hover {
+  background: #253e70;
+}
+.registerArea {
+  margin-top: 18px;
+  font-size: 12px;
+  color: #878787;
+  text-align: center;
+  letter-spacing: 0.2px;
+}
+.registerLink {
+  color: #253e70;
+  text-decoration: none;
+  margin-left: 5px;
+  font-weight: bold;
+  letter-spacing: 0.3px;
+  font-size: 12px;
+}
+.registerLink:hover {
+  text-decoration: underline;
+  color: #1d2e54;
+}
+.errorMsgBlue {
+  color: #253e70;
+  font-size: 15px;
+  margin-bottom: 10px;
+  font-weight: 600;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .card {
+    max-width: 95vw;
+    padding: 28px 10px 32px 10px;
+  }
+  .topbar {
+    padding: 0 8px;
+    height: 54px;
+  }
+  .logoOnly {
+    width: 44px !important;
+    height: 44px !important;
+  }
+  .cardBankLogo {
+    width: 60px !important;
+    height: 25px !important;
+  }
+  .welcome {
+    font-size: 18px;
+  }
+  .cardTitle {
+    font-size: 22px;
+  }
+}
+
+/* Overlay full screen untuk popup */
+.popupOverlay {
+  position: fixed;
+  z-index: 1200;
+  left: 0; top: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(44, 51, 66, 0.21);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.22s;
+  backdrop-filter: blur(1.5px);
+}
+
+/* Card popup responsif */
+.popupBox {
+  background: #fff;
+  border-radius: 22px;
+  box-shadow: 0 4px 32px 0 rgba(60,60,60,0.11);
+  text-align: center;
+  min-width: 0;
+  max-width: 97vw;
+  width: 100%;
+  max-width: 400px;
+  padding: 32px 18px 22px 18px;
+  box-sizing: border-box;
+  animation: fadeinpop .24s cubic-bezier(0.23,1,0.32,1);
+}
+
+@keyframes fadeinpop {
+  from { transform: scale(0.93); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+.popupIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 13px;
+  margin-top: 2px;
+}
+.popupIcon svg {
+  width: 52px !important;
+  height: 52px !important;
+}
+
+.popupMsg {
+  font-size: 1.07rem;
+  color: #2c4065;
+  margin-bottom: 22px;
+  word-break: break-word;
+  line-height: 1.47;
+}
+
+@media (max-width: 600px) {
+  .popupBox {
+    max-width: 99vw;
+    padding: 16px 7px 16px 7px;
+    font-size: 0.99rem;
+  }
+  .popupMsg {
+    font-size: 0.95rem;
+  }
+  .popupIcon svg {
+    width: 40px !important;
+    height: 40px !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .popupBox {
+    padding: 8px 2vw 10px 2vw;
+    border-radius: 13px;
+  }
+}
+
+.cardHeaderRowMod {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  margin-top: 30px;
+  gap: 0;
+  min-height: 44px;
+}
+.backBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f3f6fa;
+  border: 1.2px solid #bcd0f0;
+  color: #2F4D8E;
+  border-radius: 12px;
+  padding: 7px 10px;
+  min-width: 44px;
+  min-height: 44px;
+  width: 44px;
+  height: 44px;
+  font-size: 0;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(70,90,150,0.08);
+  transition: background 0.15s, color 0.15s, border 0.15s;
+  border: none;
+  outline: none;
+}
+.backBtn:hover, .backBtn:focus {
+  background: #e3eaf7;
+  color: #253e70;
+  border: 1.2px solid #253e70;
+}
+.backBtn svg {
+  display: block;
+  margin: 0 auto;
+}
+.headerLogoWrapper {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  min-width: 80px;
+}
+.backBtnSpacer {
+  width: 44px;
+  min-width: 44px;
+}
+@media (max-width: 600px) {
+  .cardHeaderRowMod {
+    min-height: 30px;
+  }
+  .backBtn {
+    width: 32px;
+    min-width: 32px;
+    height: 32px;
+    min-height: 32px;
+    padding: 3px;
+  }
+  .headerLogoWrapper {
+    min-width: 60px;
+  }
+  .backBtnSpacer {
+    width: 32px;
+    min-width: 32px;
+  }
+}

@@ -1,0 +1,241 @@
+/* Latar belakang dengan logo BI dan gradasi */
+.background {
+  min-height: 100vh;
+  position: relative;
+  z-index: 0;
+  background: linear-gradient(140deg, #e7ebf5 0%, #b5c3e8 100%);
+  overflow: hidden;
+}
+.background::before {
+  content: "";
+  position: fixed;
+  left: 0; top: 0; right: 0; bottom: 0;
+  width: 100vw; height: 100vh;
+  z-index: -2;
+  background: url('/assets/bankindonesia.png') center center / cover no-repeat;
+  opacity: 0.35;
+  pointer-events: none;
+}
+.background::after {
+  content: "";
+  position: fixed;
+  left: 0; top: 0; right: 0; bottom: 0;
+  width: 100vw; height: 100vh;
+  z-index: -1;
+  background: linear-gradient(140deg, #e7ebf5 0%, #b5c3e8 100%);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* Top bar */
+.topbar {
+  width: 100vw;
+  height: 68px;
+  background: #2F4D8E;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 38px;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+.logoWrap { display: flex; align-items: center; }
+
+/* Isi konten */
+.contentWrapper {
+  padding-top: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 68px);
+}
+
+.card {
+  background: #fff;
+  min-width: 340px;
+  max-width: 700px;
+  width: 100%;
+  border-radius: 23px;
+  box-shadow: 0 8px 38px 0 rgba(70,90,150,0.19), 0 1.5px 8px 0 rgba(70,90,150,0.07);
+  padding: 26px 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+/* ===== HEADER: logo center, back absolute kiri ===== */
+.cardHeaderRowMod {
+  position: relative;          /* referensi posisi untuk tombol back */
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;     /* logo persis di tengah */
+  min-height: 44px;
+  margin-bottom: 12px;
+}
+.backBtn {
+  position: absolute;
+  left: 0;                     /* tempel ke kiri card */
+  top: 50%;
+  transform: translateY(-50%); /* sejajar vertikal dengan logo */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #f3f6fa;
+  border: 1.2px solid #bcd0f0;
+  color: #2F4D8E;
+  border-radius: 12px;
+  padding: 7px 10px;
+  width: 44px; height: 44px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(70,90,150,0.08);
+  transition: background 0.15s, color 0.15s, border 0.15s;
+  border: none; outline: none;
+  font-size: 0;
+}
+.backBtn:hover,
+.backBtn:focus { background: #e3eaf7; color: #253e70; border: 1.2px solid #253e70; }
+.backBtn svg { display: block; }
+
+/* wrapper logo tetap center */
+.headerLogoWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cardBankLogo { width: 110px !important; height: 42px !important; object-fit: contain; }
+
+/* Judul & subjudul */
+.cardTitle {
+  font-size: 38px;
+  color: #2F4D8E;
+  text-align: center;
+  margin: 0 0 5px 0;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.cardSubtitle {
+  font-size: 15px;
+  color: #949494;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+/* Form */
+.form { width: 100%; display: flex; flex-direction: column; gap: 13px; margin-bottom: 14px; }
+.formGroup { 
+  width: 100%; 
+  display: flex; 
+  flex-direction: column;
+  gap: 1px; 
+  position: relative;
+  border-radius: 12px;
+  background-color: #f0f7ff; 
+  color: #1e3a8a
+}
+.input {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 2px solid #e1e5f3;
+  font-size: 1.1rem;
+  font-weight: 500;
+  outline: none;
+}
+.input:focus { border: 2px solid #2F4D8E; border-radius: 12px; background: #fff; color: #253e70; }
+.input::placeholder { color: #587adf; }
+
+.eyeIcon {
+  position: absolute;
+  right: 13px;
+  top: 55%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  opacity: 0.86;
+  padding: 2px;
+  z-index: 3;
+}
+
+
+/* Grid & item */
+.checkboxGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.checkboxItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border: 2px solid #2563eb; /* biru tegas */
+  border-radius: 12px;
+  background-color: #f0f7ff; /* biru muda */
+  color: #1e3a8a; /* teks biru tua */
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.checkboxItem:hover {
+  background-color: #dbeafe; /* hover lebih terang */
+  border-color: #1e40af;
+}
+
+.badgeSmall {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  background: #1e40af; /* biru gelap */
+  color: white ;
+}
+
+.mutedText {
+  color: #000; /* hitam pekat */
+  font-size: 14px;
+}
+
+
+
+.errorMsg { font-size: 13px; color: #d62c2c; margin-top: 2px; margin-left: 10px; }
+
+.button {
+  background: #2F4D8E;
+  color: #ffffff;
+  border: none;
+  border-radius: 22px;
+  padding: 11px 0;
+  font-size: 18px;
+  width: 100%;
+  font-weight: 600;
+  margin: 22px auto 2px auto;
+  cursor: pointer;
+  box-shadow: 0 4px 14px 0 rgba(70,90,150,0.13);
+  transition: background 0.18s;
+}
+.button:disabled { background: #6c7b97; color: #fff; cursor: not-allowed; }
+
+.registerArea { margin-top: 10px; font-size: 13px; color: #969db1; text-align: center; }
+.registerLink { color: #2F4D8E; text-decoration: none; margin-left: 5px; font-weight: 500; letter-spacing: 0.3px; font-size: 13px; }
+.registerLink:hover { text-decoration: underline; }
+
+/* Responsive */
+@media (max-width: 650px) {
+  .card { max-width: 99vw; min-width: 0; padding: 16px 2vw 12px 2vw; border-radius: 16px; }
+  .topbar { height: 54px; padding: 0 10px; }
+  .contentWrapper { padding-top: 66px; }
+  .cardTitle { font-size: 27px; }
+  .cardHeaderRowMod { min-height: 38px; }
+  .backBtn { width: 34px; height: 34px; padding: 4px; }
+}
+
+/* Popup */
+.popupOverlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; z-index: 9999; }
+.popupBox { background: white; padding: 30px; border-radius: 16px; text-align: center; box-shadow: 0 8px 25px rgba(0,0,0,0.2); position: relative; }
+.popupIcon { margin-bottom: 16px; }
+.popupMsg { font-size: 18px; color: #2F4D8E; }

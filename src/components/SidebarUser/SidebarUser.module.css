@@ -1,0 +1,194 @@
+/* Header hanya tampil di mobile */
+.mobileHeader {
+  display: none;
+}
+.sidebar {
+  width: 255px;
+  background: #fff;
+  border-right: 1px solid #ececec;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1000;
+  transition: transform .3s ease-in-out;
+  overflow: hidden;
+}
+.logoSidebar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 92px;
+  padding-left: 28px;
+  padding-top: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #ececec;
+}
+.logoDone {
+  width: 160px;
+  height: 160px;
+  object-fit: contain;
+}
+.headerLogo {
+  height: 50px;
+  width: auto;
+  object-fit: contain;
+  margin: auto;
+}
+.toggleBtn {
+  display: none;
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 2000;
+  background: transparent;
+  border: none;
+  font-size: 1.8rem;
+  color: #9b9b9b;
+  cursor: pointer;
+}
+.navMenu {
+  flex: 1;
+  width: 100%;
+  margin-top: 10px;
+}
+.navMenu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.navMenu li {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 30px 14px 28px;
+  font-size: 17px;
+  color: #888b96;
+  cursor: pointer;
+  border-radius: 0 28px 28px 0;
+  transition: background .15s, color .15s;
+  margin-bottom: 2px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+.menuIcon {
+  font-size: 20px;
+}
+.navMenu li:hover,
+.navMenu li.active {
+  background: #2f4d8e;
+  color: #fff;
+}
+.logout {
+  margin: 20px 0 28px 28px;
+  color: #ed6257;
+  font-weight: 600;
+  font-size: 17px;
+  cursor: pointer;
+  letter-spacing: 0.01em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.logoutIcon {
+  font-size: 20px;
+}
+
+/* Overlay gelap */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1100;
+  animation: fadeIn 0.3s ease;
+}
+
+/* Animasi fade in */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (max-width: 1200px) {
+  .mobileHeader {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: #fff;
+    border-bottom: 1px solid #2f4d8e;
+    z-index: 1100;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  .navMenu li {
+    font-size: 15px;
+    padding: 10px 20px 10px 20px;
+  }
+
+  .logout,
+  .logoutIcon {
+    font-size: 15px;
+    margin: 15px 0 20px 20px;
+  }
+
+  .headerContent {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    padding: 0 1rem;
+  }
+
+  .toggleBtn {
+    display: block;
+    cursor: pointer;
+  }
+  .sidebar {
+    transform: translateX(-100%);
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 1200;
+    width: 50%;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+}
+
+/* Sidebar responsive */
+/* @media (max-width: 3000px) {
+  .sidebar {
+    width: 15%;
+  }
+  .navMenu li {
+    font-size: 25px;
+  }
+  .logout,
+  .logoutIcon {
+    font-size: 25px;
+  }
+} */
+
+@media (max-width: 600px) {
+  .logoSidebar {
+    justify-content: center;
+    padding-left: 0;
+  }
+  .logoDone {
+    width: 120px !important;
+    height: 120px !important;
+  }
+}
+

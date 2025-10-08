@@ -1,0 +1,216 @@
+/* ======================= */
+/*  BACKGROUND             */
+/* ======================= */
+.background {
+  min-height: 100vh;
+  position: relative;
+  z-index: 0;
+  background: #2f4d8e;
+  overflow: hidden;
+}
+
+/* Opsional overlay foto - aman untuk performa (fixed + cover) */
+.background::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: #2f4d8e;
+  z-index: -2;
+  pointer-events: none;
+}
+.background::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: #2f4d8e;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ======================= */
+/*  MAIN CONTENT           */
+/* ======================= */
+.mainContent {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  margin-left: 255px;    /* ruang sidebar desktop */
+  padding: 24px 28px;
+  /* gunakan latar putih/transparent? ini opsional:
+     background: transparent; */
+}
+
+/* ======================= */
+/*  WELCOME BOX            */
+/* ======================= */
+.welcomeBox {
+  width: 90%;
+  max-width: 1050px;
+  margin: 28px auto 20px auto;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 2px 16px rgba(47,77,142,0.07);
+  padding: 34px 40px 36px 40px;
+}
+
+.greeting {
+  color: #2f4d8e;
+  font-weight: 700;
+  font-size: 28px;
+  text-align: center;
+  margin-bottom: 14px;
+  letter-spacing: 0.01em;
+}
+
+.roleBadge {
+  background: #e7ebf5;
+  color: #2f4d8e;
+  border-radius: 12px;
+  padding: 4px 12px;
+  font-size: 14px;
+  font-weight: 600;
+  display: inline-block;
+  margin: 4px 0 18px 0;
+}
+
+.servicesBox { width: 100%; }
+.servicesTitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: #23263b;
+  margin-bottom: 9px;
+  text-align: left;
+}
+.servicesDesc {
+  color: #828282;
+  font-size: 15px;
+  margin-bottom: 22px;
+}
+
+/* ======================= */
+/*  KARTU (kalau dipakai   */
+/*  oleh ServicesCards)    */
+/* ======================= */
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-top: 10px;
+}
+.card {
+  background: #fafbff;
+  border: 1.4px solid #dbe2f2;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(47,77,142,0.03);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 26px 20px 22px 20px;
+  min-height: 215px;
+  transition: border .15s, box-shadow .15s, background .15s;
+}
+.card:hover {
+  border-color: #2F4D8E;
+  box-shadow: 0 2px 12px rgba(47,77,142,0.10);
+  background: #f6f8ff;
+}
+.cardLogo {
+  width: 420px !important;
+  height: 90px !important;
+  object-fit: contain;
+}
+.cardTitle {
+  color: #2f4d8e;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 0.01em;
+  margin-top: 6px;
+}
+.cardDesc {
+  color: #6b6b6b;
+  font-size: 14px;
+  text-align: center;
+  min-height: 36px;
+  margin: 8px 0 16px 0;
+}
+.manageBtn {
+  background: #2f4d8e;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 0;
+  width: 100%;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+  transition: background .15s, box-shadow .18s;
+  box-shadow: 0 1px 4px rgba(47,77,142,0.06);
+}
+.manageBtn:hover {
+  background: #233969;
+  box-shadow: 0 2px 12px rgba(47,77,142,0.12);
+}
+
+/* ======================= */
+/*  RESPONSIVE BREAKPOINTS */
+/* ======================= */
+
+/* Tablet & small laptop */
+@media (max-width: 1200px) {
+  .mainContent {
+    margin-left: 0;        /* sidebar off-canvas/hidden di mobile */
+    padding: 24px 16px;
+    padding-top: 72px;     /* ruang untuk mobile header hamburger */
+  }
+  .welcomeBox {
+    width: 100%;
+    padding: 24px 24px 26px 24px;
+    border-radius: 16px;
+  }
+}
+
+/* Grid 1 kolom, tipografi turun sedikit */
+@media (max-width: 900px) {
+  .cardsGrid { grid-template-columns: 1fr; gap: 18px; }
+  .greeting { font-size: 24px; }
+  .servicesTitle { font-size: 18px; }
+  .servicesDesc { font-size: 14px; }
+  .cardLogo { width: 320px !important; height: 74px !important; }
+}
+
+/* Phone */
+@media (max-width: 700px) {
+  .welcomeBox {
+    margin: 8px 0;
+    padding: 18px 16px 20px 16px;
+    border-radius: 12px;
+  }
+  .greeting { font-size: 21px; margin-bottom: 12px; }
+  .roleBadge { font-size: 12.5px; padding: 4px 10px; }
+  .servicesTitle { font-size: 16px; margin-bottom: 8px; }
+  .servicesDesc { font-size: 13px; margin-bottom: 16px; }
+  .card { padding: 20px 14px; min-height: 190px; }
+  .cardTitle { font-size: 15px; }
+  .cardDesc { font-size: 13px; }
+}
+
+/* Small phone */
+@media (max-width: 480px) {
+  .mainContent { padding-left: 14px; padding-right: 14px; }
+  .welcomeBox { padding: 16px 12px 18px 12px; }
+  .greeting { font-size: 19px; }
+  .cardLogo { width: 260px !important; height: 64px !important; }
+}
+
+/* Loader tetap rapi */
+.loading {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  color: #2f4d8e;
+  font-weight: 600;
+}
