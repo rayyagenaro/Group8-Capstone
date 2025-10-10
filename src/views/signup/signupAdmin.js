@@ -173,7 +173,7 @@ export default function SignupAdmin() {
             </button>
 
             <div className={styles.headerLogoWrapper}>
-              <Image src="/assets/BI-One-Blue.png" alt="BI One Logo" width={180} height={60} priority />
+              <Image src="/assets/BI-One-Blue.svg" alt="BI One Logo" width={180} height={60} priority />
             </div>
           </div>
 
