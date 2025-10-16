@@ -1,4 +1,4 @@
-import History from '../../../views/statusbooking/statusBooking';
+import History from '../../../views/history/history';
 
 export default function HalStatusBooking() {
   return <History />;

@@ -28,7 +28,7 @@ export default function SidebarUser({ onLogout }) {
 
   const menuItems = [
     { href: '/User/HalamanUtama/hal-utamauser', text: 'Beranda', icon: FaHome },
-    // { href: '/User/History/hal-history', text: 'History', icon: FaClipboardList },
+    { href: '/User/History/hal-history', text: 'History', icon: FaClipboardList },
     { href: '/User/EditProfile/hal-editprofile', text: 'Pengaturan', icon: FaCog },
   ];
 

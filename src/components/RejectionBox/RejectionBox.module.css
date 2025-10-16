@@ -1,0 +1,47 @@
+/* ukuran normal (untuk halaman detail penuh) */
+.rejectBox {
+  margin-top: 12px;
+  background: #fff5f5;
+  border: 1.2px solid #f2b7b3;
+  border-radius: 12px;
+  padding: 12px 14px;
+  box-shadow: 0 2px 8px rgba(218,59,59,0.06);
+}
+.rejectTitle {
+  font-size: 13px;
+  font-weight: 800;
+  color: #c82b2b;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-bottom: 6px;
+}
+.rejectText {
+  font-size: 14px;
+  color: #2b1e1e;
+  font-weight: 600;
+  line-height: 1.45;
+  white-space: pre-wrap;
+}
+
+/* ukuran compact (untuk kartu/list atau modal sempit) */
+.rejectMini {
+  margin-top: 8px;
+  background: #fff5f5;
+  border: 1px solid #f2b7b3;
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+.rejectMiniTitle {
+  font-size: 12px;
+  font-weight: 800;
+  color: #c82b2b;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.rejectMiniText {
+  font-size: 13.5px;
+  color: #2b1e1e;
+  font-weight: 600;
+  line-height: 1.45;
+  white-space: pre-wrap;
+}
