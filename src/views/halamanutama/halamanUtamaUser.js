@@ -74,12 +74,6 @@ export default function HalamanUtamaUser({ initialName = 'User' }) {
       bookingLink: "/User/FiturBimeet/hal-bimeet",
       ongoingLink: "/User/OngoingBooking/bimeet/hal-orders",
     },
-    // {
-    //   logo: "/assets/D'TRACK.svg",
-    //   title: 'Docs Numbering System',
-    //   bookingLink: "/User/FiturBImail/hal-BImail",
-    //   ongoingLink: "/User/OngoingBooking/bimail/hal-orders",
-    // },
     {
       logo: "/assets/D'REST.svg",
       title: 'Wisma Booking System',
@@ -131,25 +125,6 @@ export default function HalamanUtamaUser({ initialName = 'User' }) {
                   <div className={styles.cardTitle}>{fitur.title}</div>
                   <div className={styles.cardDesc}>{fitur.desc}</div>
 
-                  {/* 🔹 Dua tombol sejajar */}
-                    <div className={styles.actionsRow}>
-                      <Link
-                        href="#"
-                        onClick={(e) => e.preventDefault()}
-                        className={`${styles.btn} ${styles.btnSecondary}`}
-                      >
-                        On Going
-                      </Link>
-                      <Link
-                        href="#"
-                        onClick={(e) => e.preventDefault()}
-                        className={`${styles.btn} ${styles.btnPrimary}`}
-                      >
-                        Booking
-                      </Link>
-                    </div>
-
-                  {/* 🔹 Dua tombol sejajar
                   <div className={styles.actionsRow}>
                     {fitur.ongoingLink ? (
                       <Link
@@ -172,7 +147,7 @@ export default function HalamanUtamaUser({ initialName = 'User' }) {
                     ) : (
                       <button className={`${styles.btn} ${styles.btnPrimary}`} disabled>Booking</button>
                     )}
-                  </div> */}
+                  </div>
                 </div>
               ))}
             </div>
