@@ -1,0 +1,649 @@
+/* Background & overlay */
+.background {
+  min-height: 100vh;
+  position: relative;
+  background: linear-gradient(140deg, #e7ebf5 0%, #b5c3e8 100%);
+  overflow: hidden;
+}
+.background::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: url('/assets/bankindonesia.png') center/cover no-repeat;
+  opacity: .35;
+  pointer-events: none;
+  z-index: -2;
+}
+.background::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(140deg, #e7ebf5 0%, #b5c3e8 100%);
+  opacity: .7;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Layout */
+.mainContent {
+  margin-left: 255px;
+  min-height: 100vh;
+  background: #2f4d8e;
+  display: flex;
+  flex-direction: column;
+}
+.formBox {
+  background: #fff;
+  border-radius: 22px;
+  box-shadow: 0 4px 20px rgba(47,77,142,.11);
+  width: 93%;
+  max-width: 1050px;
+  margin: 20px auto 32px;
+  padding: 38px 42px 34px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Top row -> grid 3 kolom agar logo center */
+.topRow {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 20px;
+}
+.backBtn {
+  justify-self: start;
+  background: #f5f8ff;
+  color: #2F4D8E;
+  border: none;
+  font-weight: 600;
+  font-size: 17px;
+  border-radius: 21px;
+  padding: 8px 27px 8px 17px;
+  cursor: pointer;
+  box-shadow: 0 1px 6px rgba(47,77,142,.10);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: background .14s, color .14s;
+}
+.backBtn:hover {
+  background: #d8e2fc;
+  color: #233969;
+}
+.logoCareWrapper {
+  justify-self: center;
+  display: flex;
+  align-items: center;
+}
+
+/* FORM GRID */
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px 32px;
+  width: 100%;
+}
+.colFull {
+  grid-column: 1 / -1;
+}
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.formGroup label {
+  font-size: 16px;
+  font-weight: 700;
+  color: #23263b;
+  margin-bottom: 3px;
+}
+.formGroup textarea {
+  min-height: 48px;
+  max-height: 120px;
+  resize: vertical;
+}
+
+.formGroup input[type="text"],
+.formGroup textarea {
+  width: 100%;
+  border: 1.5px solid #cfd4dc;
+  border-radius: 8px;
+  background: #fff;
+  padding: 11px 12px;
+  font-size: 16px;
+  color: #23263b;
+  font-family: inherit;
+  outline: none;
+  transition: border-color .18s;
+  box-sizing: border-box;
+}
+.formGroup input[type="text"]:focus,
+.formGroup textarea:focus {
+  border-color: #2f4d8e;
+}
+
+/* === Dropdown kustom (rounded + caret) === */
+.selectWrap {
+  position: relative;
+}
+.selectBtn {
+  width: 100%;
+  border: 1.5px solid #cfd4dc;
+  border-radius: 8px;
+  background: #fff;
+  padding: 11px 12px;
+  font-size: 16px;
+  color: #23263b;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: border-color .18s, box-shadow .18s;
+}
+.selectBtn:focus {
+  outline: none;
+  border-color: #2f4d8e;
+  box-shadow: 0 2px 10px rgba(47,77,142,.08);
+}
+.selectPlaceholder {
+  color: #9aa3b5;
+}
+.selectText {
+  color: #23263b;
+}
+.selectCaret {
+  margin-left: 10px;
+  color: #7a7da8;
+}
+
+.selectPopover {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 6px);
+  background: #fff;
+  border: 1.2px solid #cfd4dc;
+  border-radius: 8px;
+  box-shadow: 0 5px 18px rgba(47,77,142,.12);
+  z-index: 30;
+  overflow: hidden;
+  animation: fadein .14s ease-out;
+}
+
+@keyframes fadein {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.selectOption {
+  padding: 10px 12px;
+  font-size: 16px;
+  color: #23263b;
+  cursor: pointer;
+  transition: background .12s;
+}
+.selectOption:hover {
+  background: #f3f6ff;
+}
+.selectOptionActive {
+  background: #e9f0ff;
+  font-weight: 700;
+}
+
+/* react-datepicker input ikut style input */
+.formGroup :global(.react-datepicker-wrapper) input {
+  width: 100%;
+  border: 1.5px solid #cfd4dc;
+  border-radius: 8px;
+  background: #fff;
+  padding: 11px 12px;
+  font-size: 16px;
+  color: #23263b;
+  font-family: inherit;
+  outline: none;
+  transition: border-color .18s;
+  box-sizing: border-box;
+}
+.formGroup :global(.react-datepicker-wrapper) input:focus {
+  border-color: #2f4d8e;
+}
+/* ======== Tambahan styling untuk header DatePicker (dropdown Bulan & Tahun) ======== */
+.dpHeader {
+  position: relative;              /* supaya panel tahun bisa absolute di dalam header */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 10px 8px;
+  border-bottom: 1px solid #e6ebf7;
+}
+
+.dpSelectors {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dpNavBtn {
+  border: 1px solid #cfd7ee;
+  background: #f7f9ff;
+  border-radius: 8px;
+  padding: 4px 10px;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  color: #2f4d8e;
+}
+.dpNavBtn:hover { background: #e9efff; }
+
+/* === Dropdown Bulan (pakai style customSelect yang sudah ada) === */
+.dpSelectors .selectWrap {
+  min-width: 120px;
+}
+.dpSelectors .selectBtn {
+  font-size: 14px;
+  padding: 8px 12px;
+}
+.dpSelectors .selectPopover {
+  max-height: 250px;
+  overflow-y: auto;
+}
+/* Bulan: tampilkan semua opsi (12) tanpa scroll) */
+.monthSelectWrap { min-width: 140px; }
+
+/* Override popover dropdown khusus bulan agar tidak ada scrollbar */
+.monthSelectWrap .selectPopover {
+  max-height: none;        /* hilangkan batas tinggi */
+  overflow: visible;       /* jangan scroll */
+}
+
+/* (Opsional) Sedikit rapat biar muat enak */
+.monthSelectWrap .selectOption {
+  padding: 8px 12px;
+}
+
+
+/* Tombol Tahun (rounded, konsisten) */
+.dpYearBtn {
+  border: 1.5px solid #cfd4dc;
+  background: #fff;
+  color: #23263b;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  font-family: inherit;
+}
+.dpYearBtn:hover {
+  background: #f3f6ff;
+}
+.dpYearBtn:focus {
+  outline: none;
+  border-color: #2f4d8e;
+  box-shadow: 0 2px 10px rgba(47,77,142,.08);
+}
+
+/* Panel Grid Tahun */
+.yearPanel {
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 8px);
+  transform: translateX(-50%);
+  background: #fff;
+  border: 1px solid #e1e6f3;
+  border-radius: 12px;
+  box-shadow: 0 10px 26px rgba(47,77,142,.14);
+  padding: 10px;
+  width: 320px;            /* cukup untuk 5 kolom */
+  z-index: 50;
+}
+
+.yearPanelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.yearRange {
+  font-weight: 800;
+  color: #233969;
+  font-size: 14px;
+}
+
+/* Grid 5 kolom × 3 baris (15 tahun) */
+.yearGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+}
+
+.yearBtn {
+  border: 1px solid #cfd7ee;
+  background: #f7f9ff;
+  border-radius: 10px;
+  padding: 8px 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: #2f4d8e;
+  cursor: pointer;
+}
+.yearBtn:hover {
+  background: #e9efff;
+}
+.yearBtnActive {
+  background: #e6f7ea !important;
+  border-color: #bfe8c6 !important;
+  color: #2b6c2f !important;
+}
+
+/* DatePicker popup agar konsisten */
+.formGroup :global(.react-datepicker) {
+  border-radius: 10px;
+  border: 1px solid #e6ebf7;
+  box-shadow: 0 8px 24px rgba(47,77,142,.12);
+}
+.formGroup :global(.react-datepicker__header) {
+  background: #fff;
+  border-bottom: none;
+  padding: 0;
+}
+
+/* Input DatePicker tetap ikut style umum */
+.formGroup :global(.react-datepicker-wrapper) input {
+  width: 100%;
+  border: 1.5px solid #cfd4dc;
+  border-radius: 8px;
+  background: #fff;
+  padding: 11px 12px;
+  font-size: 16px;
+  color: #23263b;
+  font-family: inherit;
+  outline: none;
+  transition: border-color .18s;
+  box-sizing: border-box;
+}
+.formGroup :global(.react-datepicker-wrapper) input:focus {
+  border-color: #2f4d8e;
+}
+
+/* errors */
+.errorInput {
+  border-color: #e74c3c !important;
+  background: #fff9f8 !important;
+}
+.errorMsg {
+  font-size: 13px;
+  color: #e74c3c;
+  margin-top: 1px;
+  font-weight: 500;
+  min-height: 18px;
+  line-height: 1.2;
+}
+
+/* Button */
+.buttonWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 6px;
+}
+.bookingBtn {
+  background: #2f4d8e;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 12px 70px;
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .18s;
+  box-shadow: 0 1px 8px rgba(47,77,142,.10);
+}
+.bookingBtn:hover {
+  background: #233969;
+}
+
+/* Popup */
+.popupOverlay {
+  position: fixed;
+  z-index: 1400;
+  inset: 0;
+  background: rgba(40,54,82,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(2.2px);
+  animation: popupfade .19s;
+}
+@keyframes popupfade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.popupBox {
+  background: #fff;
+  border-radius: 22px;
+  box-shadow: 0 4px 32px rgba(60,60,60,0.10), 0 1.5px 6px rgba(70,90,150,0.05);
+  text-align: center;
+  width: 97vw;
+  max-width: 370px;
+  padding: 36px 22px 28px;
+  position: relative;
+  animation: fadeinpop .23s cubic-bezier(0.23,1,0.32,1);
+}
+@keyframes fadeinpop {
+  from { transform: scale(.92); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+.popupIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 13px;
+  margin-top: 2px;
+}
+.popupIcon svg {
+  filter: drop-shadow(0 2px 12px #ffe4807a);
+}
+.popupMsg {
+  font-size: 1.13rem;
+  color: #253e70;
+  margin-bottom: 25px;
+  margin-top: 5px;
+  font-weight: 500;
+  letter-spacing: .01em;
+}
+.popupClose {
+  position: absolute;
+  right: 13px;
+  top: 11px;
+  border: none;
+  background: none;
+  color: #888;
+  font-size: 23px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.popupClose:hover {
+  color: #f05a5a;
+}
+
+/* Kalender */
+.calendarBlockLarge {
+  margin: 8px 0 20px;
+}
+.calendarTitle {
+  font-size: 18px;
+  font-weight: 800;
+  color: #233969;
+  margin: 4px 2px 10px;
+}
+.calendarHint {
+  font-size: 13px;
+  color: #5b6b91;
+  margin-top: 6px;
+}
+
+.calWrap {
+  background: #fff;
+  border: 1px solid #e1e6f3;
+  border-radius: 14px;
+  padding: 14px;
+}
+.calHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.calTitle {
+  font-weight: 800;
+  color: #233969;
+}
+.calNavBtn {
+  border: 1px solid #cfd7ee;
+  background: #f7f9ff;
+  border-radius: 8px;
+  padding: 4px 10px;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  color: #2f4d8e;
+}
+.calNavBtn:hover {
+  background: #e9efff;
+}
+
+.calDayNames {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  margin: 6px 0 8px;
+}
+.calDayName {
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: #7b88aa;
+  letter-spacing: .02em;
+}
+.calGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+.calCell {
+  background: #fbfcff;
+  border: 1px solid #e6ebf7;
+  border-radius: 10px;
+  min-height: 120px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+}
+.calCellMuted {
+  opacity: .45;
+  background: #f6f7fb;
+}
+.calCellHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+.calDateNum {
+  font-weight: 800;
+  color: #233969;
+}
+.calBadgeOpen {
+  font-size: 11px;
+  font-weight: 800;
+  color: #2b6c2f;
+  background: #e6f7ea;
+  border: 1px solid #bfe8c6;
+  padding: 2px 6px;
+  border-radius: 999px;
+}
+
+.sessionList {
+  display: grid;
+  grid-auto-rows: minmax(28px, auto);
+  gap: 6px;
+  margin-top: 4px;
+}
+.sessionListOff {
+  margin-top: auto;
+  font-size: 12px;
+  color: #8b93b0;
+}
+.sessionBtn {
+  width: 100%;
+  border-radius: 8px;
+  padding: 6px;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  text-align: center;
+}
+.sessionAvail {
+  background: #f2f7ff;
+  border-color: #cddaf6;
+  color: #20427f;
+}
+.sessionAvail:hover {
+  background: #e6f0ff;
+}
+.sessionBooked {
+  background: #f9e9ea;
+  border-color: #f0c9cd;
+  color: #9a2b2f;
+  cursor: not-allowed;
+}
+
+/* Field read-only */
+.readonlyField {
+  width: 100%;
+  border: 1.5px solid #cfd4dc;
+  border-radius: 8px;
+  background: #f6f8fd;
+  padding: 11px 12px;
+  font-size: 16px;
+  color: #23263b;
+  box-sizing: border-box;
+  cursor: not-allowed;
+}
+.readonlyField::placeholder {
+  color: #8ea0bf;
+}
+
+/* Responsive */
+@media (max-width: 720px) {
+  .mainContent { margin-left: 0; }
+  .formBox { padding: 12px 2vw; border-radius: 10px; margin: 12px 0; }
+  .formGrid { grid-template-columns: 1fr; gap: 14px; }
+  .bookingBtn { width: 100%; padding: 11px 0; font-size: 18px; }
+}
+@media (max-width: 860px) {
+  .calCell { min-height: 110px; }
+}
+@media (max-width: 640px) {
+  .calDayNames, .calGrid { gap: 4px; }
+  .sessionBtn { font-size: 12px; padding: 5px; }
+}
+
+/* Pastikan gaya booked/admin menang walau button disabled */
+.sessionBtn.sessionBooked,
+.sessionBtn.sessionBooked:disabled {
+  background: #f9e9ea !important;
+  border-color: #f0c9cd !important;
+  color: #9a2b2f !important;
+  opacity: 1 !important;
+}
+
+.sessionBtn.sessionAvail:disabled {
+  background: #f2f7ff !important;
+  border-color: #cddaf6 !important;
+  color: #20427f !important;
+  opacity: 1 !important;
+}
