@@ -1,0 +1,809 @@
+.background {
+  min-height: 100vh;
+  position: relative;
+  z-index: 0;
+  background: linear-gradient(140deg, #e7ebf5 0%, #b5c3e8 100%);
+  overflow: hidden;
+}
+.background::before {
+  content: "";
+  position: fixed;
+  left: 0; top: 0; right: 0; bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -2;
+  background: url('/assets/bankindonesia.png') center center / cover no-repeat;
+  opacity: 0.35;
+  pointer-events: none;
+}
+.background::after {
+  content: "";
+  position: fixed;
+  left: 0; top: 0; right: 0; bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  background: linear-gradient(140deg, #e7ebf5 0%, #b5c3e8 100%);
+  opacity: 0.7;
+  pointer-events: none;
+}
+.sidebar {
+  width: 255px;
+  background: #fff;
+  border-right: 1px solid #ececec;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 99;
+}
+.logoSidebar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 92px;
+  padding-left: 28px;
+  padding-top: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #ececec;
+}
+.logoDone {
+  width: 110px !important;
+  height: 36px !important;
+  object-fit: contain;
+}
+.navMenu {
+  flex: 1;
+  width: 100%;
+  margin-top: 10px;
+}
+.navMenu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.navMenu li {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 30px 14px 28px;
+  font-size: 17px;
+  color: #888b96;
+  cursor: pointer;
+  border-radius: 0 28px 28px 0;
+  transition: background .15s, color .15s;
+  margin-bottom: 2px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+.menuIcon {
+  font-size: 20px;
+}
+.navMenu li.active,
+.navMenu li:hover {
+  background: #2f4d8e;
+  color: #fff;
+}
+.logout {
+  margin: 20px 0 28px 28px;
+  color: #ed6257;
+  font-weight: 600;
+  font-size: 17px;
+  cursor: pointer;
+  letter-spacing: 0.01em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.logoutIcon {
+  font-size: 20px;
+}
+.header {
+  position: fixed;
+  top: 0;
+  left: 255px;
+  right: 0;
+  height: 92px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 60px 0 38px;
+  box-sizing: border-box;
+  box-shadow: 0 1px 4px 0 rgba(47,77,142,0.04);
+  z-index: 12;
+}
+.logoBIWrapper {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.logoBI {
+  width: 170px !important;
+  height: 34px !important;
+  object-fit: contain;
+}
+.mainContent {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  background: #2f4d8e;
+  min-height: 100vh;
+  margin-left: 255px;
+  /* padding-top: 92px; */
+}
+.formBox {
+  background: #fff;
+  border-radius: 22px;
+  box-shadow: 0 4px 20px 0 rgba(47,77,142,0.11);
+  width: 93%;
+  max-width: 1050px;
+  margin: 20px auto 32px auto;
+  padding: 38px 42px 34px 42px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* ====== RESPONSIVE ROW BARU ====== */
+.topRow {
+  display: flex;
+  align-items: center;  /* was flex-start */
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+.logoDmoveWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1 1 160px;
+  min-width: 140px;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.availabilitySection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  min-width: 180px;
+  margin-left: 0;
+  position: relative;
+  z-index: 11;
+}
+.backBtn {
+  flex-shrink: 0;
+  background: #fff;
+  color: #2F4D8E;
+  border: none;
+  font-weight: 600;
+  font-size: 17px;
+  border-radius: 21px;
+  padding: 8px 20px;
+  cursor: pointer;
+  box-shadow: 0 1px 6px rgba(47, 77, 142, 0.10);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.14s, color 0.14s;
+  max-width: 20%;
+}
+
+.backBtn:hover {
+  background: #e8f0fe;
+  color: #1c295a;
+}
+
+/* ================================= */
+
+.availabilityLabel {
+  font-size: 15px;
+  font-weight: 600;
+  color: #23263b;
+  margin-bottom: 3px;
+  text-align: right;
+  opacity: 0.85;
+}
+.availabilityDropdownWrap {
+  position: relative;
+  width: 100%;
+}
+.availabilityDropdownBtn {
+  width: 100%;
+  min-width: 170px;
+  padding: 8px 16px 8px 16px;
+  border: 1.5px solid #bbbfd8;
+  border-radius: 8px;
+  background: #fff;
+  font-size: 16px;
+  color: #2f4d8e;
+  font-weight: 600;
+  font-family: inherit;   /* konsistensi font */
+  cursor: pointer;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 11px;
+  transition: border-color 0.16s, box-shadow 0.18s;
+}
+.availabilityDropdownBtn:hover,
+.availabilityDropdownBtn:focus {
+  border-color: #2f4d8e;
+  box-shadow: 0 2px 10px 0 rgba(47,77,142,0.09);
+  outline: none;
+}
+.availChevron {
+  font-size: 16px;
+  color: #7a7da8;
+  margin-left: 10px;
+}
+.availabilityDropdown {
+  position: absolute;
+  right: 0;
+  top: 42px;
+  background: #fff;
+  border: 1.2px solid #b5bddb;
+  border-radius: 8px;
+  min-width: 178px;
+  box-shadow: 0 5px 18px 0 rgba(47,77,142,0.12);
+  padding: 14px 16px 12px 16px;
+  z-index: 100;
+  animation: fadein .19s;
+}
+@keyframes fadein {
+  from { opacity: 0; transform: translateY(-7px);}
+  to   { opacity: 1; transform: translateY(0);}
+}
+.availabilityDropdown table {
+  border-collapse: collapse;
+  width: 100%;
+}
+.availabilityDropdown th,
+.availabilityDropdown td {
+  border: 1px solid #b5bddb;
+  font-size: 15px;
+  padding: 5px 12px;
+  text-align: left;
+  color: #2f4d8e;
+}
+.availabilityDropdown th {
+  background: #9aa8c4;
+  font-weight: bold;
+}
+.availabilityDropdown tr:nth-child(even) {
+  background: #f8fafd;
+}
+
+.formGrid {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.formRow {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+}
+.formGroup {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.formGroup label {
+  font-size: 16px;
+  font-weight: 700;
+  color: #23263b;
+  margin-bottom: 3px;
+}
+.formGroup textarea {
+  min-height: 48px;
+  max-height: 120px;
+  resize: vertical;
+}
+.formGroup input[type="text"],
+.formGroup input[type="number"],
+.formGroup select,
+.formGroup textarea {
+  width: 100%;
+  border: 1.5px solid #cfd4dc;
+  border-radius: 8px;
+  background: #fff;
+  padding: 11px 12px;
+  font-size: 16px;
+  color: #23263b;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.18s;
+  box-sizing: border-box;
+}
+.formGroup input[type="text"]:focus,
+.formGroup input[type="number"]:focus,
+.formGroup select:focus,
+.formGroup textarea:focus {
+  border-color: #2f4d8e;
+}
+.formGroup select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='gray' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position-x: 98%;
+  background-position-y: 13px;
+}
+.inputFileWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.inputFile {
+  width: 100%;
+  padding-right: 32px;
+}
+.fileIcon {
+  position: absolute;
+  right: 10px;
+  font-size: 20px;
+  color: #2f4d8e;
+  pointer-events: none;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.buttonWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+.bookingBtn {
+  background: #2f4d8e;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 12px 70px;
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.18s;
+  box-shadow: 0 1px 8px 0 rgba(47,77,142,0.10);
+}
+.bookingBtn:hover {
+  background: #233969;
+}
+.errorInput {
+  border-color: #e74c3c !important;
+  background: #fff9f8 !important;
+}
+.errorMsg {
+  font-size: 13px;
+  color: #e74c3c;
+  margin-top: 1px;
+  font-weight: 500;
+  min-height: 18px;
+  line-height: 1.2;
+}
+.formGroup .rdrCalendarWrapper {
+  box-shadow: 0 4px 18px 0 rgba(47,77,142,0.15);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.multiSelectBox {
+  position: relative;
+  border: 1.5px solid #cfd4dc;
+  border-radius: 8px;
+  background: #fff;
+  padding: 11px 12px;
+  font-size: 16px;
+  color: #23263b;
+  cursor: pointer;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: border-color 0.18s;
+  box-sizing: border-box;
+}
+.multiSelectBox:focus-within,
+.multiSelectBox:focus {
+  border-color: #2f4d8e;
+  outline: none;
+}
+.selectedText {
+  color: #23263b;
+}
+.placeholder {
+  color: #a0a0a0;
+}
+.chevron {
+  font-size: 16px;
+  margin-left: 10px;
+}
+.multiSelectDropdown {
+  position: absolute;
+  top: 105%;
+  left: 0;
+  background: #fff;
+  border: 1.2px solid #cfd4dc;
+  border-radius: 8px;
+  box-shadow: 0 3px 14px 0 rgba(47,77,142,0.11);
+  min-width: 210px;
+  z-index: 10;
+  padding: 8px 0;
+}
+.multiSelectOption {
+  display: flex;
+  align-items: center;
+  padding: 7px 16px 7px 14px;
+  font-size: 16px;
+  gap: 7px;
+  cursor: pointer;
+  user-select: none;
+}
+.multiSelectOption:hover {
+  background: #f3f5fb;
+}
+.multiSelectDropdown input[type="checkbox"] {
+  accent-color: #2f4d8e;
+  width: 17px;
+  height: 17px;
+  margin-right: 6px;
+}
+.popupOverlay {
+  position: fixed;
+  z-index: 1001;
+  left: 0; top: 0; right: 0; bottom: 0;
+  background: rgba(20,30,50,0.09);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.popupBox {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 26px 0 rgba(80,80,120,0.16);
+  padding: 44px 38px 32px 38px;
+  min-width: 340px;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  animation: popupIn .18s cubic-bezier(.27,.8,.51,1.22);
+}
+@keyframes popupIn {
+  from { transform: scale(.92) translateY(20px); opacity:0;}
+  to {transform: scale(1) translateY(0); opacity:1;}
+}
+.popupIcon {
+  margin-bottom: 13px;
+}
+.popupMsg {
+  font-size: 20px;
+  color: #222547;
+  text-align: center;
+  font-family: inherit;
+}
+.popupClose {
+  position: absolute;
+  right: 13px; top: 11px;
+  border: none;
+  background: none;
+  color: #888;
+  font-size: 23px;
+  cursor: pointer;
+  font-weight: 600;
+  z-index: 1;
+  transition: color 0.18s;
+}
+.popupClose:hover {
+  color: #f05a5a;
+}
+.formGroup .react-datepicker-wrapper input {
+  width: 100%;
+  border: 1.5px solid #cfd4dc;
+  border-radius: 8px;
+  background: #fff;
+  padding: 11px 12px;
+  font-size: 16px;
+  color: #23263b;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.18s;
+  box-sizing: border-box;
+}
+.formGroup .react-datepicker-wrapper input:focus {
+  border-color: #2f4d8e;
+}
+.popupOverlay {
+  position: fixed;
+  z-index: 1400;
+  left: 0; top: 0; width: 100vw; height: 100vh;
+  background: rgba(40, 54, 82, 0.15);
+  display: flex; align-items: center; justify-content: center;
+  backdrop-filter: blur(2.2px);
+  animation: popupfade 0.19s;
+}
+.quantityOption {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  cursor: default; /* Ubah cursor agar tidak membingungkan */
+}
+
+.quantityOption:hover {
+  background-color: #f0f0f0;
+}
+
+.quantityControl {
+  display: flex;
+  align-items: center;
+}
+
+/* --- PERBAIKAN UTAMA DI SINI --- */
+/* Menambahkan style untuk tombol +/- */
+.quantityControl button {
+  width: 28px;
+  height: 28px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  color: #333;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 1;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.quantityControl button:hover:not(:disabled) {
+  background-color: #e9e9e9;
+}
+
+.quantityControl button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.quantityControl span {
+  margin: 0 12px;
+  font-weight: bold;
+  min-width: 16px;
+  text-align: center;
+}
+@keyframes popupfade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.popupBox {
+  background: #fff;
+  border-radius: 22px;
+  box-shadow: 0 4px 32px 0 rgba(60,60,60,0.10), 0 1.5px 6px 0 rgba(70,90,150,0.05);
+  text-align: center;
+  width: 97vw;
+  max-width: 370px;
+  padding: 36px 22px 28px 22px;
+  box-sizing: border-box;
+  animation: fadeinpop .23s cubic-bezier(0.23,1,0.32,1);
+  position: relative;
+}
+
+@keyframes fadeinpop {
+  from { transform: scale(0.92); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+.popupIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 13px;
+  margin-top: 2px;
+}
+.popupIcon svg {
+  filter: drop-shadow(0 2px 12px #ffe4807a);
+}
+.popupMsg {
+  font-size: 1.13rem;
+  color: #253e70;
+  margin-bottom: 25px;
+  margin-top: 5px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.popupButtonRow {
+  display: flex;
+  gap: 18px;
+  justify-content: center;
+  margin-top: 2px;
+}
+.cancelButton, .logoutButton {
+  border: none; outline: none;
+  border-radius: 18px;
+  padding: 10px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  min-width: 110px;
+  box-shadow: 0 1.5px 6px 0 rgba(70,90,150,0.06);
+  transition: background 0.17s, color 0.14s, box-shadow 0.18s;
+}
+.cancelButton {
+  background: #f6f8fd;
+  color: #2F4D8E;
+  border: 1.7px solid #e4e6ef;
+}
+.cancelButton:hover {
+  background: #edf2fa;
+  color: #16336c;
+}
+.logoutButton {
+  background: linear-gradient(90deg, #2F4D8E 70%, #3f65b7 100%);
+  color: #fff;
+  border: none;
+}
+.logoutButton:hover {
+  background: linear-gradient(90deg, #244073 70%, #3f65b7 100%);
+  color: #fff;
+  box-shadow: 0 2px 16px #d1e0ff3b;
+}
+
+/* Responsive */
+/* RESPONSIVE */
+@media (max-width: 1200px) {
+  .header {
+    padding: 0 16px 0 255px;
+  }
+  .mainContent {
+    margin-left: 0;
+    padding-top: 60px;
+  }
+  .backBtn {
+    top: 50%;
+    left: 0px;
+  }
+  .formBox {
+    padding: 20px 8vw 16px 8vw;
+    margin: 26px auto;
+  }
+  .formRow, .formRow3 {
+    gap: 12px;
+  }
+}
+@media (max-width: 900px) {
+  .topRow {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+  .logoDmoveWrapper {
+    justify-content: center;
+    margin-bottom: 7px;
+    min-width: 0;
+  }
+  .availabilitySection {
+    align-items: flex-end;
+    width: 100%;
+    margin-top: 6px;
+    margin-left: 0;
+    min-width: 0;
+  }
+  .formRow {
+    flex-direction: column;
+  }
+  .backBtn {
+    max-width: 15%;
+  }
+
+}
+@media (max-width: 600px) {
+  .backBtn {
+    font-size: 15px;
+    padding: 6px 14px;
+    max-width: 15%;
+  }
+  .availabilityLabel {
+    font-size: 12px;
+  }
+  .availabilitySection {
+    width: 100%;
+    min-width: 0;
+    align-items: stretch;
+    text-align: right;
+  }
+  .availabilityDropdownBtn {
+    font-size: 12px;
+    height: 35px;
+  }
+  .availChevron {
+    font-size: 14px;
+  }
+  .logoDmoveWrapper {
+    min-width: 0;
+  }
+  .popupBox {
+    max-width: 99vw;
+    padding: 16px 8px 18px 8px;
+    font-size: 0.99rem;
+  }
+  .popupMsg {
+    font-size: 1.03rem;
+  }
+  .popupIcon svg {
+    width: 44px !important; height: 44px !important;
+  }
+  .cancelButton, .logoutButton {
+    padding: 9px 0;
+    min-width: 90px;
+    font-size: .95rem;
+  }
+
+  .formGroup label, 
+  .formGroup input[type="text"],
+  .formGroup input[type="number"],
+  .formGroup select, 
+  .formGroup textarea {
+    font-size: 12px;
+  }
+  .multiSelectBox {
+    font-size: 14px;
+  }
+
+  .bookingBtn {
+    font-size: 14px;
+    padding: 10px 50px;
+  }
+  
+}
+
+.myPhoneBtn{
+  padding:6px 10px;
+  border-radius:8px;
+  border:1px solid #d9e1ff;
+  background:#f5f8ff;
+  color:#2F4D8E;
+  font-weight:700;
+  font-size:12px;
+  line-height:1;
+  cursor:pointer;
+  transition:background .15s, color .15s, border-color .15s, box-shadow .15s, transform .02s;
+}
+
+.myPhoneBtn:hover{
+  background:#2f4d8e;
+  color:#fff;
+  border-color:#2f4d8e;
+  box-shadow:0 2px 10px rgba(47,77,142,.18);
+}
+
+.myPhoneBtn:active{
+  transform:translateY(1px);
+}
+
+.myPhoneBtn:focus-visible{
+  outline:2px solid #2f4d8e;
+  outline-offset:2px;
+}
+
+.myPhoneBtn:disabled{
+  opacity:.5;
+  cursor:not-allowed;
+  background:#f1f4fb;
+  color:#8aa0d1;
+  border-color:#e3e9ff;
+  box-shadow:none;
+}
