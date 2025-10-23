@@ -1,0 +1,359 @@
+/* ====== Background sama seperti halaman utama admin ====== */
+.background {
+  display: flex;
+  min-height: 100vh;
+  position: relative;
+  z-index: 0;
+  background: linear-gradient(140deg, #e7ebf5 0%, #b5c3e8 100%);
+  overflow: hidden;
+}
+.background::before {
+  content: "";
+  position: fixed;
+  left: 0; top: 0; right: 0; bottom: 0;
+  width: 100vw; height: 100vh;
+  z-index: -2;
+  background: url('/assets/bankindonesia.png') center center / cover no-repeat;
+  opacity: 0.35;
+  pointer-events: none;
+}
+.background::after {
+  content: "";
+  position: fixed;
+  left: 0; top: 0; right: 0; bottom: 0;
+  width: 100vw; height: 100vh;
+  z-index: -1;
+  background: linear-gradient(140deg, #e7ebf5 0%, #b5c3e8 100%);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.mainContent {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #2f4d8e;
+  margin-left: 255px;
+}
+
+/* ====== Header greeting ====== */
+.greeting {
+  color: #fff;
+  font-weight: 700;
+  font-size: 32px;
+  text-align: center;
+  margin-top: 50px;
+  letter-spacing: 0.02em;
+  margin-bottom: 6px;
+  text-shadow: 0 2px 6px rgba(60,60,120,0.07);
+}
+.adminText {
+  color: #fff;
+  font-size: 17px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  margin-top: 15px;
+}
+
+/* ====== Box putih tengah ====== */
+.boxLayanan {
+  width: 90%;
+  max-width: 900px;
+  margin: 36px auto 0 auto;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 2px 12px rgba(47,77,142,0.08);
+  padding: 38px 28px 34px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* ====== Header bar dalam box: back button + centered title ====== */
+.headerRow {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr; /* kiri tombol, tengah judul, kanan spacer */
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+.backBtn {
+  justify-self: start;
+  background: #f5f8ff;
+  color: #2F4D8E;
+  border: none;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 15px;
+  border-radius: 20px;
+  padding: 8px 22px 8px 14px;
+  cursor: pointer;
+  box-shadow: 0 1px 6px 0 rgba(47,77,142,0.10);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.14s, color 0.14s;
+}
+.backBtn:hover {
+  background: #d8e2fc;
+  color: #233969;
+}
+
+.bookingCard {
+  display: flex;
+  align-items: flex-start;
+  background: #fff;
+  border: 1.2px solid #e7e9f2;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(47, 77, 142, 0.03);
+  padding: 24px 32px 18px 22px;
+  min-height: 90px;
+  gap: 22px;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  transition: box-shadow .18s ease, transform .12s ease, border-color .18s ease, background-color .18s ease;
+}
+
+.bookingCard:hover {
+  background: #f9fbff;
+  border-color: #2F4D8E;
+  box-shadow: 0 8px 24px rgba(47, 77, 142, .10);
+  transform: translateY(-2px);
+}
+
+.bookingCard:hover .cardTitle {
+  color: #1e3163;
+}
+
+.bookingCard:hover .cardSub {
+  color: #6b7280;
+}
+
+.bookingCard:active {
+  transform: translateY(-1px) scale(.998);
+}
+
+.bookingCard:focus-visible {
+  outline: 3px solid rgba(47, 77, 142, .35);
+  outline-offset: 2px;
+  border-color: #cfdcff;
+}
+
+.titleLayanan {
+  color: #2F4D8E;
+  font-size: 23px;
+  font-weight: 700;
+  text-align: center;     /* pastikan selalu di tengah */
+  letter-spacing: 0.05em;
+  margin: 0;              /* diatur oleh .headerRow */
+}
+
+/* ====== List card ====== */
+.cardList {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+.loadingText, .errorText, .emptyText {
+  color: #7a7e8e;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  margin-top: 15px;
+}
+
+/* ====== Card item ====== */
+.cardLayanan {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border: 1.4px solid #e0e6f2;
+  border-radius: 13px;
+  box-shadow: 0 1px 7px 0 rgba(47,77,142,0.05);
+  padding: 18px 20px;
+  gap: 22px;
+  min-height: 88px;
+  transition: box-shadow 0.13s, border 0.13s, background 0.16s;
+  cursor: pointer;
+}
+.cardLayanan:hover {
+  border: 1.8px solid #3450a7;
+  background: #f3f7ff;
+  box-shadow: 0 4px 14px 0 rgba(70,90,150,0.13);
+}
+
+.cardLogo {
+  width: 72px !important;
+  height: 72px !important;
+  object-fit: contain;
+}
+.cardContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1px;
+}
+.layananTitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 4px;
+  letter-spacing: 0.04em;
+}
+.layananSub {
+  font-size: 15px;
+  color: #7a7e8e;
+  margin-bottom: 1px;
+}
+.layananStatus {
+  font-size: 15px;
+  color: #7a7e8e;
+  font-weight: 600;
+  margin-top: 3px;
+}
+.layananStatusProcess {
+  color: #244073;
+}
+.layananStatusApproved {
+  color: #00cb36;
+}
+
+/* ===== Pagination ===== */
+.paginationContainer {
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid #e7e9f2;
+}
+.paginationControls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding: 0 4px;
+}
+.resultsText {
+  font-size: 14px;
+  color: #555;
+  font-weight: 600;
+}
+.label {
+  margin-right: 8px;
+  color: #22335e;
+  font-weight: 400;
+}
+.itemsPerPageDropdown {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1.5px solid #e0e0e0;
+  background-color: #fff;
+  color: #000000;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+  .mainContent {
+    margin-left: 0;
+    padding-top: 92px;
+  }
+  .boxLayanan {
+    width: 98vw;
+    padding: 18px 4vw 14px 4vw;
+    border-radius: 12px;
+  }
+  .headerRow {
+    grid-template-columns: auto 1fr auto;
+    gap: 10px;
+  }
+  .titleLayanan { font-size: 18px; }
+}
+@media (max-width: 600px) {
+  .greeting { font-size: 18px; margin-top: 13px; }
+  .adminText { font-size: 14px; }
+  .boxLayanan { padding: 7vw 2vw 8vw 2vw; }
+  .cardLayanan { flex-direction: column; align-items: flex-start; gap: 7px; padding: 11px 7px; }
+  .cardLogo { width: 54px !important; height: 54px !important; }
+  .layananTitle { font-size: 14px; }
+  .layananSub, .layananStatus { font-size: 12px; }
+  .backBtn { padding: 7px 16px 7px 12px; font-size: 14px; }
+}
+
+/* ==== Sidebar integration (desktop vs mobile) ==== */
+@media (min-width: 901px) {
+  .mainContent { margin-left: 255px; } /* sidebar 255px di desktop */
+}
+
+/* Sidebar fixed agar selalu di atas konten */
+.background :global(.sidebar),
+.background :global(.sidebar header),
+.background :global(.sidebar .topbar),
+.background :global(.sidebar .header) {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 2000 !important;
+}
+
+/* Tablet: konten turun sedikit karena header sidebar */
+@media (max-width: 1200px) {
+  .mainContent { margin-left: 0; padding-top: 82px; } /* tinggi header sidebar ~82px */
+}
+
+/* HP: sembunyikan sidebar & turunkan konten sesuai header mobile */
+@media (max-width: 750px) {
+  .background :global(.sidebar) { display: none !important; }
+  .mainContent { padding-top: 70px; }
+}
+
+/* ==== Card container: grid di tablet, single column di HP ==== */
+@media (min-width: 700px) and (max-width: 1100px) {
+  .cardList {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .cardLayanan { height: 100%; }
+}
+
+/* ==== Box putih: mobile gutters biar tidak mepet tepi ==== */
+@media (max-width: 780px) {
+  .boxLayanan {
+    width: auto;
+    max-width: 100%;
+    margin: 12px 16px 20px;  /* gutter kiri/kanan */
+    padding: 16px 14px;
+    border-radius: 14px;
+  }
+}
+
+/* ==== Back button: di HP hanya ikon (bukan full width) ==== */
+@media (max-width: 780px) {
+  .backBtn{
+    width: 44px; height: 44px;
+    padding: 0;
+    border-radius: 12px;
+    justify-content: center;
+    gap: 0;
+    font-size: 0;              /* sembunyikan teks "Kembali" */
+  }
+  .backBtn svg{ margin: 0; }   /* rapikan ikon */
+}
+
+/* Title selalu di tengah */
+.headerRow{ grid-template-columns: 1fr auto 1fr; }
+.titleLayanan{ text-align: center; }
+
+/* Elemen kecil disesuaikan untuk HP */
+@media (max-width: 600px) {
+  .greeting { font-size: 18px; margin-top: 13px; }
+  .cardLayanan { flex-direction: column; align-items: flex-start; gap: 7px; padding: 11px 10px; }
+  .cardLogo { width: 54px !important; height: 54px !important; }
+  .layananTitle { font-size: 14px; }
+  .layananSub, .layananStatus { font-size: 12px; }
+  .paginationControls { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .itemsPerPageDropdown { padding: 7px 10px; font-size: 14px; }
+}

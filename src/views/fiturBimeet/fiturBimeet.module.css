@@ -1,0 +1,701 @@
+/* LATAR & LAYOUT UMUM */
+.background {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background: #2f4d8e; /* fallback warna solid */
+}
+
+/* Satu layer saja: gabung gradient & image */
+.background::before {
+  content: "";
+  position: fixed;
+  inset: -1px; /* overscan 1px untuk cegah seam */
+  z-index: -1;
+
+  background-image: 
+    linear-gradient(
+      140deg,
+      rgba(231, 235, 245, 0.70) 0%,
+      rgba(181, 195, 232, 0.70) 100%
+    ),
+    url('/assets/bankindonesia.png');
+    
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  transform: translateZ(0); /* cegah subpixel seam */
+}
+
+.mainContent {
+  min-height: 100vh;
+  background: transparent;
+  margin-left: 255px; /* lebar sidebar */
+}
+
+.formBox {
+  background: #fff;
+  border-radius: 22px;
+  box-shadow: 0 4px 20px rgba(47, 77, 142, .11);
+  width: 93%;
+  max-width: 1050px;
+  margin: 0px;
+  padding: 38px 42px 34px;
+}
+
+/* TOP BAR */
+.topRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.backBtn {
+  background: #f5f8ff;
+  color: #2F4D8E;
+  border: none;
+  font-weight: 600;
+  font-size: 16.5px;
+  border-radius: 21px;
+  padding: 8px 27px 8px 17px;
+  cursor: pointer;
+  box-shadow: 0 1px 6px rgba(47, 77, 142, .10);
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.backBtn:hover {
+  background: #d8e2fc;
+  color: #233969;
+}
+
+.logoWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1 1 160px;
+  min-width: 140px;
+}
+
+.availabilitySection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  min-width: 200px;
+  position: relative;
+  z-index: 11;
+}
+
+.availabilityLabel {
+  font-size: 15px;
+  font-weight: 600;
+  color: #23263b;
+  margin-bottom: 4px;
+  text-align: right;
+  opacity: .85;
+}
+
+.availabilityDropdownWrap {
+  position: relative;
+  width: 100%;
+}
+
+.availabilityDropdownBtn {
+  width: 100%;
+  min-width: 200px;
+  padding: 8px 14px;
+  border: 1.5px solid #bbbfd8;
+  border-radius: 8px;
+  background: #fff;
+  font-size: 16px;
+  color: #2f4d8e;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.availChevron {
+  color: #7a7da8;
+}
+
+.availabilityDropdown {
+  position: absolute;
+  right: 0;
+  top: 42px;
+  background: #fff;
+  border: 1.2px solid #b5bddb;
+  border-radius: 8px;
+  min-width: 240px;
+  padding: 12px;
+  box-shadow: 0 5px 18px rgba(47, 77, 142, .12);
+  z-index: 100;
+}
+
+.availabilityDropdown table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.availabilityDropdown th,
+.availabilityDropdown td {
+  border: 1px solid #b5bddb;
+  font-size: 15px;
+  padding: 6px 10px;
+  text-align: left;
+  color: #2f4d8e;
+}
+
+.availabilityDropdown th {
+  background: #9aa8c4;
+  color: #fff;
+}
+
+/* FORM */
+.formGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.formRow {
+  display: flex;
+  gap: 28px;
+}
+
+.formGroup {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.formGroup label {
+  font-size: 16px;
+  font-weight: 700;
+  color: #23263b;
+}
+
+.formGroup input[type="text"],
+.formGroup input[type="number"],
+.formGroup input[type="datetime-local"],
+.formGroup select,
+.formGroup textarea {
+  width: 100%;
+  border: 1.5px solid #cfd4dc;
+  border-radius: 8px;
+  background: #fff;
+  padding: 11px 12px;
+  font-size: 15.5px;
+  color: #23263b;
+  outline: none;
+}
+
+.formGroup input:focus,
+.formGroup select:focus,
+.formGroup textarea:focus {
+  border-color: #2f4d8e;
+}
+
+.readOnlyInput {
+  background: #f4f6fb;
+  border: 1.5px solid #cfd4dc;
+  border-radius: 8px;
+  padding: 11px 12px;
+}
+
+/* BUTTON */
+.buttonWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.bookingBtn {
+  background: #2f4d8e;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 12px 70px;
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 1px 8px rgba(47, 77, 142, .10);
+}
+
+.bookingBtn:hover {
+  background: #233969;
+}
+
+/* ERROR UI */
+.errorInput {
+  border-color: #e74c3c !important;
+  background: #fff9f8 !important;
+}
+
+.errorMsg {
+  font-size: 13px;
+  color: #e74c3c;
+  font-weight: 500;
+}
+
+/* POPUP */
+.popupOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1400;
+  background: rgba(40, 54, 82, .15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popupBox {
+  background: #fff;
+  border-radius: 22px;
+  box-shadow: 0 4px 32px rgba(60, 60, 60, .10),
+              0 1.5px 6px rgba(70, 90, 150, .05);
+  width: 97vw;
+  max-width: 370px;
+  padding: 30px 22px;
+  text-align: center;
+  position: relative;
+}
+
+.popupClose {
+  position: absolute;
+  right: 12px;
+  top: 8px;
+  border: none;
+  background: none;
+  color: #888;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.popupClose:hover {
+  color: #f05a5a;
+}
+
+.popupIcon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.popupMsg {
+  font-size: 18px;
+  color: #253e70;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .topRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .formRow {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 720px) {
+  .mainContent {
+    margin-left: 0;
+  }
+  .formBox {
+    padding: 16px;
+    border-radius: 12px;
+  }
+}
+.badge {
+  display:inline-block;
+  padding:4px 10px;
+  border-radius:12px;
+  font-size:13px;
+  font-weight:600;
+}
+.badgeGreen { background:#e8fff0; color:#119a40; }
+.badgeRed { background:#fff0f0; color:#d93025; }
+.badgeGray { background:#f1f3f8; color:#6b7280; }
+/* ===== KALENDER (seragam BI.CARE) ===== */
+.calWrap {
+  background: #fff;
+  border: 1px solid #e1e6f3;
+  border-radius: 14px;
+  padding: 14px;
+  margin-top: 8px;
+  overflow: auto;
+}
+.calHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.calTitle {
+  font-weight: 800;
+  color: #233969;
+}
+.calNavBtn {
+  border: 1px solid #cfd7ee;
+  background: #f7f9ff;
+  border-radius: 8px;
+  padding: 4px 10px;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  color: #2f4d8e;
+}
+.calNavBtn:hover {
+  background: #e9efff;
+}
+
+.calDayNames {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  margin: 6px 0 8px;
+}
+.calDayName {
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: #7b88aa;
+  letter-spacing: .02em;
+}
+
+.calGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+.calCell {
+  background: #fbfcff;
+  border: 1px solid #e6ebf7;
+  border-radius: 10px;
+  min-height: 120px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+}
+.calCellMuted {
+  opacity: .45;
+  background: #f6f7fb;
+}
+.calCellHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+.calDateNum {
+  font-weight: 800;
+  color: #233969;
+}
+.calBadgeOpen {
+  font-size: 11px;
+  font-weight: 800;
+  color: #2b6c2f;
+  background: #e6f7ea;
+  border: 1px solid #bfe8c6;
+  padding: 2px 6px;
+  border-radius: 999px;
+}
+
+.sessionList {
+  display: grid;
+  grid-auto-rows: minmax(28px, auto);
+  gap: 6px;
+  margin-top: 4px;
+}
+.sessionListOff {
+  margin-top: auto;
+  font-size: 12px;
+  color: #8b93b0;
+}
+.sessionBtn {
+  width: 100%;
+  border-radius: 8px;
+  padding: 6px;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  text-align: center;
+}
+.sessionAvail {
+  background: #f2f7ff;
+  border-color: #cddaf6;
+  color: #20427f;
+}
+.sessionAvail:hover {
+  background: #e6f0ff;
+}
+.sessionBooked {
+  background: #f9e9ea;
+  border-color: #f0c9cd;
+  color: #9a2b2f;
+  cursor: not-allowed;
+}
+
+/* booked/admin tetap terlihat walau disabled */
+.sessionBtn.sessionBooked,
+.sessionBtn.sessionBooked:disabled {
+  background: #f9e9ea !important;
+  border-color: #f0c9cd !important;
+  color: #9a2b2f !important;
+  opacity: 1 !important;
+}
+.sessionBtn.sessionAvail:disabled {
+  background: #f2f7ff !important;
+  border-color: #cddaf6 !important;
+  color: #20427f !important;
+  opacity: 1 !important;
+}
+
+/* Responsive kalender */
+@media (max-width: 860px) {
+  .calCell { min-height: 110px; }
+}
+@media (max-width: 640px) {
+  .calDayNames, .calGrid { gap: 4px; }
+  .sessionBtn { font-size: 12px; padding: 5px; }
+}
+
+/* Tambahkan blok ini di akhir file CSS Anda */
+
+@media (max-width: 480px) {
+  .formBox {
+    padding: 24px 16px; /* Kurangi padding di layar sangat kecil */
+  }
+  
+  /* Buat dropdown ketersediaan lebih ramah mobile */
+  .availabilityDropdown {
+    min-width: 100%; /* Dropdown memenuhi lebar */
+    padding: 8px;
+  }
+  .availabilityDropdown th,
+  .availabilityDropdown td {
+    padding: 8px 6px; /* Sesuaikan padding tabel */
+    font-size: 14px;
+  }
+  
+  /* Perkecil ukuran font dan padding pada form */
+  .formGroup label {
+    font-size: 15px;
+  }
+  .formGroup input[type="text"],
+  .formGroup input[type="number"],
+  .formGroup input[type="datetime-local"],
+  .formGroup select,
+  .formGroup textarea {
+    padding: 10px 12px;
+    font-size: 15px;
+  }
+
+  .bookingBtn {
+    width: 100%;
+    padding: 14px;
+    font-size: 18px;
+  }
+
+  /*
+   * Buat kalender menjadi 1 kolom yang bisa di-scroll horizontal,
+   * sama seperti solusi di halaman BI.Care
+  */
+  .calGrid {
+    display: grid;
+    grid-template-columns: repeat(7, 80px); /* Setiap kolom punya lebar tetap */
+    overflow-x: auto;
+    padding-bottom: 8px; /* Ruang untuk scrollbar */
+    -webkit-overflow-scrolling: touch;
+  }
+  .calDayName::first-letter {
+    font-size: 12px;
+  }
+  .calDayName {
+    font-size: 0;
+  }
+  .calCell {
+    min-height: 90px;
+  }
+  .sessionBtn {
+    font-size: 11px;
+    padding: 4px;
+  }
+}
+
+/* MOBILE-FIRST: sidebar overlay ⇒ tak ada gutter kiri */
+.background {
+  --header-h: 56px;        /* tinggi header mobile, sesuaikan kalau beda */
+}
+
+.mainContent {
+  min-height: 100vh;
+  background: transparent;
+  margin-left: 0;                               /* ⬅️ buang offset 255px */
+  padding: calc(var(--header-h) + 8px) 0 24px;  /* nempel ke bawah header */
+}
+
+/* Card putih full-bleed (gutter diatur via margin card, bukan offset main) */
+.formBox {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(47,77,142,.11);
+  width: auto;
+  max-width: 100%;
+  margin: 12px 16px 20px;   /* gutter kiri/kanan 16px seperti BI.MEAL */
+  padding: 20px 16px 24px;
+}
+
+@media (max-width: 1200px) {
+  .mainContent { margin-left: 0 !important; }   /* pastikan tak ada sisa offset */
+}
+
+@media (min-width: 1201px) {
+  .background { --header-h: 64px; }             /* tinggi header desktop */
+  .mainContent {
+    margin-left: 255px;                         /* ⬅️ offset saat sidebar docked */
+  }
+  .formBox {
+    border-radius: 22px;
+    width: 93%;
+    max-width: 1050px;
+    margin: 20px auto 32px;                     /* kembali centered */
+    padding: 38px 42px 34px;
+  }
+}
+
+/* base */
+.backBtn {
+  display: inline-flex;          /* biar tidak ikut melebar */
+  align-items: center;
+  gap: 10px;
+  background: #f5f8ff;
+  color: #2F4D8E;
+  border: none;
+  font-weight: 600;
+  font-size: 16.5px;
+  border-radius: 21px;
+  padding: 8px 27px 8px 17px;
+  cursor: pointer;
+  box-shadow: 0 1px 6px rgba(47, 77, 142, .10);
+  flex: 0 0 auto;                /* jangan grow */
+  width: auto;                   /* pastikan tidak full width */
+  align-self: flex-start;        /* kalau parent align-items: stretch */
+}
+
+.backBtn:hover { background:#d8e2fc; color:#233969; }
+
+/* sembunyikan teks di mobile + buat tombol kotak kecil */
+@media (max-width: 780px) {
+  .backBtn {
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border-radius: 12px;
+    justify-content: center;
+    gap: 0;
+  }
+  .backBtn svg { font-size: 18px; }
+
+  /* teks disembunyikan tapi tetap ada buat screen reader */
+  .backText {
+    position: absolute !important;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0, 0, 0, 0);
+    white-space: nowrap; border: 0;
+  }
+}
+
+/* BASE (desktop): tanpa padding-top */
+.mainContent {
+  min-height: 100vh;
+  background: transparent;
+  margin-left: 255px;       /* kalau desktop sidebar docked */
+  padding: 0 16px 28px;     /* ⬅️ no top padding di desktop */
+}
+
+/* Mobile/Tablet: sidebar overlay → butuh ruang untuk header fixed */
+@media (max-width: 1200px) {
+  .mainContent {
+    margin-left: 0;                               /* buang offset 255px */
+    padding: calc(var(--header-h) + 8px) 0 24px;  /* top padding hanya di responsif */
+  }
+}
+
+/* Active state untuk slot terpilih */
+.sessionActive {
+  outline: 0;                    /* hilangkan outline default */
+  background: #6bf3b8 !important;
+  border-color: #098851 !important;
+  color: #098851 !important;     /* biru lebih gelap */
+  box-shadow: 0 0 0 2px rgba(152,179,255,.35);
+  transform: translateY(-1px);
+}
+
+/* Saat hover di state aktif (opsional konsisten gaya BI) */
+.sessionActive:hover {
+  background: #d3e1ff !important;
+  box-shadow: 0 2px 10px rgba(47,77,142,.15);
+}
+
+/* Jaga prioritas dibanding .sessionBooked */
+.sessionBooked.sessionActive {
+  /* booked tak boleh jadi aktif, jadi no-op untuk jaga2 */
+  background: #f9e9ea !important;
+  border-color: #f0c9cd !important;
+  color: #9a2b2f !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+/* baris label + tombol kecil di kanan */
+.labelRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+/* tombol kecil "Gunakan data saya" – seragam gaya BI */
+.useMineBtn {
+  flex: 0 0 auto;
+  border: 1px solid #cfd4dc;
+  background: #f5f8ff;
+  color: #2F4D8E;
+  font-weight: 700;
+  font-size: 10px;
+  padding: 3px 5px;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(47,77,142,.08);
+  transition: background .15s ease, color .15s ease, box-shadow .15s ease, border-color .15s ease, transform .05s ease;
+}
+
+.useMineBtn:hover {
+  background: #e9f0ff;
+  color: #233969;
+  border-color: #b8c4e6;
+  box-shadow: 0 2px 10px rgba(47,77,142,.12);
+}
+
+.useMineBtn:active {
+  transform: translateY(1px);
+}
+
+.useMineBtn:disabled {
+  cursor: not-allowed;
+  opacity: .55;
+  background: #f3f5f9;
+  color: #95a0c0;
+  border-color: #d7dbe7;
+  box-shadow: none;
+}
