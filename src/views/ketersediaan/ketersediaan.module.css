@@ -1,0 +1,851 @@
+/* --- Background & Layout --- */
+.background {
+  min-height: 100vh;
+  position: relative;
+  z-index: 0;
+  background: linear-gradient(140deg, #e7ebf5 0%, #b5c3e8 100%);
+  overflow: hidden;
+}
+.background::before {
+  content: "";
+  position: fixed;
+  left: 0; top: 0; right: 0; bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -2;
+  background: url('/assets/bankindonesia.png') center center / cover no-repeat;
+  opacity: 0.35;
+  pointer-events: none;
+}
+.background::after {
+  content: "";
+  position: fixed;
+  left: 0; top: 0; right: 0; bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  background: linear-gradient(140deg, #e7ebf5 0%, #b5c3e8 100%);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* --- Main Content --- */
+.mainContent {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  background: #2f4d8e;
+  min-height: 100vh;
+  margin-left: 255px;
+}
+
+.cardContainer {
+  width: 90%;
+  max-width: 1200px;
+  margin: 40px auto 0 auto;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 4px 24px 0 rgba(47,77,142,0.13);
+  min-height: 72vh;
+  padding: 36px 30px 32px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* --- Main Tabs --- */
+.mainTabs {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+.mainTabBtn {
+  background: #f3f7ff;
+  color: #2F4D8E;
+  border: 1.6px solid #bcd0f0;
+  padding: 10px 26px;
+  font-size: 16px;
+  font-weight: 800;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all .14s;
+  display: inline-flex;
+  align-items: center;
+}
+.mainTabActive {
+  background: #2F4D8E;
+  color: #fff;
+  border-color: #2F4D8E;
+}
+
+/* --- Sub Tabs --- */
+.subTabs {
+  display: flex;
+  gap: 10px;
+  margin: 8px 0 14px 0;
+}
+.subTabBtn {
+  background: #eef3ff;
+  color: #34a142;
+  border: 1.5px solid #c9d8fa;
+  padding: 9px 18px;
+  font-size: 15px;
+  font-weight: 800;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all .14s;
+  display: inline-flex;
+  align-items: center;
+}
+.subTabActive {
+  background: #34a142;
+  color: #fff;
+  border-color: #34a142;
+}
+
+/* --- Table Wrapper --- */
+.tableWrapper {
+  width: 100%;
+  overflow-x: auto;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(47,77,142,0.03);
+  padding: 0;
+}
+
+/* --- Table --- */
+.dataTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0;
+  font-size: 16px;
+  color: #2F4D8E;
+  font-weight: 600;
+}
+.dataTable th, .dataTable td {
+  padding: 12px 18px;
+  border-bottom: 1.3px solid #e0e6f2;
+  text-align: left;
+}
+.dataTable th {
+  background: #f4f7fb;
+  color: #2F4D8E;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+.dataTable tbody tr:hover {
+  background: #f7faff;
+}
+
+/* --- Buttons --- */
+.addRow {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin: 8px 0 10px 0;
+}
+.btnCreate {
+  background: #2F4D8E;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 9px 18px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: background 0.14s;
+}
+.btnCreate:hover { background: #233969; }
+.btnAction,
+.btnActionDelete {
+  background: none;
+  border: none;
+  font-size: 18px;
+  margin-right: 5px;
+  cursor: pointer;
+  color: #2f4d8e;
+  padding: 2px 4px;
+  border-radius: 6px;
+  transition: background 0.13s;
+}
+.btnAction:hover { background: #e8f0fe; }
+.btnActionDelete { color: #e64b3b; }
+.btnActionDelete:hover { background: #ffeaea; }
+
+/* --- Modal --- */
+.modalBackdrop {
+  position: fixed;
+  z-index: 9000;
+  left: 0; top: 0; right: 0; bottom: 0;
+  background: rgba(48,58,92,0.23);
+  display: flex; align-items: center; justify-content: center;
+}
+.modalContent {
+  width: 420px;
+  background: #fff;
+  border-radius: 16px;
+  padding: 32px 26px 22px 26px;
+  box-shadow: 0 8px 42px 0 rgba(47,77,142,0.14);
+  position: relative;
+  animation: modalpop .19s cubic-bezier(.42,0,.58,1.0);
+}
+@keyframes modalpop {
+  0% { transform: translateY(60px) scale(.96); opacity: 0; }
+  100% { transform: none; opacity: 1; }
+}
+.formGroup { 
+  margin-bottom: 18px; 
+  display: flex; 
+  flex-direction: column; 
+}
+.formGroup label { 
+  font-size: 15px; 
+  color: #555; 
+  font-weight: 700; 
+  margin-bottom: 6px; 
+}
+.input {
+  border: 1.2px solid #bcd0f0;
+  border-radius: 7px;
+  padding: 8px 12px;
+  font-size: 15px;
+  font-weight: 600;
+  outline: none;
+  color: #22335e;
+  transition: border .14s;
+  background: #f4f7fb;
+}
+.input:focus { 
+  border: 1.7px solid #2F4D8E; 
+  background: #f0f7ff; 
+}
+.label { 
+  margin-right: 8px; 
+  color: #555; 
+  font-weight: 600; 
+}
+
+.modalBtnGroup { 
+  display: flex; 
+  gap: 16px; 
+  margin-top: 12px; 
+  justify-content: flex-end; 
+}
+.btnCancel {
+  background: #e4e7f5; 
+  color: #22335e; 
+  border: none; 
+  border-radius: 6px;
+  padding: 7px 18px; 
+  font-size: 14px; 
+  font-weight: 700; 
+  cursor: pointer; 
+  transition: background .14s;
+}
+.btnCancel:hover { 
+  background: #d3d8ea; 
+}
+.btnSave {
+  background: #2F4D8E; 
+  color: #fff; 
+  border: none; 
+  border-radius: 6px;
+  padding: 7px 18px; 
+  font-size: 14px; 
+  font-weight: 700; 
+  cursor: pointer; 
+  transition: background .14s;
+}
+.btnSave:hover { background: #233969; }
+.modalTitle {
+  color: #2F4D8E;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  letter-spacing: 0.04em;
+}
+
+/* ===== Pagination ===== */
+.paginateArea { 
+  padding: 16px 14px 22px 14px; 
+  border-top: 1px solid #e7e9f2; 
+}
+.paginateControls { 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  margin: 8px 0 16px 0; 
+  padding: 0 6px; 
+}
+.resultsText { 
+  color: #555; 
+  font-weight: 600; 
+}
+.itemsPerPageDropdown {
+  padding: 8px 12px; 
+  border-radius: 8px; 
+  border: 1.5px solid #e0e0e0;
+  background-color: #fff; 
+  color: #000; 
+  font-size: 15px; 
+  font-weight: 500; 
+  cursor: pointer;
+}
+
+/* ======== Kalender (Admin BI.CARE) ======== */
+.calendarBlock { 
+  padding: 8px 6px; 
+}
+.calendarHintAdmin { 
+  font-size: 13px; 
+  color: #5b6b91; 
+  margin-top: 8px; 
+}
+
+.calWrap {
+  background: #fff;
+  border: 1px solid #e1e6f3;
+  border-radius: 14px;
+  padding: 14px;
+}
+.calHeader { 
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between; 
+  margin-bottom: 8px; 
+}
+.calTitle { 
+  font-weight: 800; 
+  color: #233969; 
+}
+.calLoading { 
+  font-weight: 600; 
+  color: #7d89a9; 
+  margin-left: 8px; 
+}
+.calNavBtn {
+  border: 1px solid #cfd7ee; 
+  background: #f7f9ff; 
+  border-radius: 8px; 
+  padding: 4px 10px;
+  cursor: pointer; 
+  font-size: 18px; 
+  line-height: 1; 
+  color: #2f4d8e;
+}
+.calNavBtn:hover { 
+  background: #e9efff; 
+}
+
+.calDayNames {
+  display: grid; 
+  grid-template-columns: repeat(7, 1fr); 
+  gap: 6px; 
+  margin: 6px 0 8px;
+}
+.calDayName { 
+  text-align: center; 
+  font-size: 12px; 
+  font-weight: 700; 
+  color: #7b88aa; 
+  letter-spacing: .02em; 
+}
+
+.calGrid { 
+  display: grid; 
+  grid-template-columns: repeat(7, 1fr); 
+  gap: 6px; 
+}
+.calCell {
+  background: #fbfcff; 
+  border: 1px solid #e6ebf7; 
+  border-radius: 10px; 
+  min-height: 120px;
+  padding: 8px; 
+  display: flex; 
+  flex-direction: column;
+}
+.calCellMuted { 
+  opacity: .45; 
+  background: #f6f7fb; 
+}
+.calCellHeader { 
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between; 
+  margin-bottom: 4px; 
+}
+.calDateNum { 
+  font-weight: 800; 
+  color: #233969; 
+}
+.calBadgeOpen {
+  font-size: 11px; 
+  font-weight: 800; 
+  color: #2b6c2f; 
+  background: #e6f7ea; 
+  border: 1px solid #bfe8c6;
+  padding: 2px 6px; 
+  border-radius: 999px;
+}
+
+.sessionList { 
+  display: grid; 
+  grid-auto-rows: minmax(28px, auto); 
+  gap: 6px; 
+  margin-top: 4px; 
+}
+.sessionListOff { 
+  margin-top: auto; 
+  font-size: 12px; 
+  color: #8b93b0; 
+}
+
+.sessionBtn { 
+  width: 100%; 
+  border-radius: 8px; 
+  padding: 6px; 
+  font-weight: 700; 
+  font-size: 13px; 
+  cursor: pointer; 
+  border: 1px solid transparent; 
+  text-align: center; 
+  transition: opacity .12s; 
+}
+.sessionAvail { 
+  background: #f2f7ff; 
+  border-color: #cddaf6; 
+  color: #20427f; 
+}
+.sessionAvail:hover { 
+  background: #e6f0ff; 
+}
+.sessionBooked { 
+  background: #f9e9ea; 
+  border-color: #f0c9cd; 
+  color: #9a2b2f; 
+}
+.sessionAdmin  { 
+  background: #fff4e2; 
+  border-color: #f3d49d; 
+  color: #996626; 
+}
+
+/* >>> State pending <<< */
+.sessionBtn[disabled] {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+/* === Dropdown kustom "Pilih Dokter" (rounded) === */
+.selectRow{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin:4px 0 12px;
+}
+.selectLabel{
+  font-weight:700;
+  color:#233969;
+}
+
+.selectWrap{
+  position:relative;
+  width:320px;              /* ubah ke 100% kalau mau full width */
+}
+
+.selectBtn{
+  width:100%;
+  border:1.5px solid #cfd4dc;
+  border-radius:12px;       /* rounded tombol */
+  background:#fff;
+  padding:11px 14px;
+  font-size:16px;
+  color:#23263b;
+  font-family:inherit;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  cursor:pointer;
+  transition:border-color .18s, box-shadow .18s, background .18s;
+}
+.selectBtn:focus{
+  outline:none;
+  border-color:#2f4d8e;
+  box-shadow:0 4px 16px rgba(47,77,142,.10);
+}
+
+.selectText{ color:#23263b; }
+.selectCaret{ width:18px; height:18px; color:#7a7da8; }
+
+.selectPopover{
+  position:absolute;
+  left:0; right:0;
+  top:calc(100% + 8px);
+  background:#fff;
+  border:1.2px solid #cfd4dc;
+  border-radius:12px;       /* rounded popover */
+  box-shadow:0 10px 26px rgba(47,77,142,.14);
+  z-index:50;
+  overflow:hidden;
+  animation:fadein .14s ease-out;
+}
+@keyframes fadein{ from{opacity:0; transform:translateY(-4px)} to{opacity:1; transform:none} }
+
+.selectOption{
+  padding:12px 14px;
+  font-size:16px;
+  color:#23263b;
+  cursor:pointer;
+  transition:background .12s;
+}
+.selectOption:hover{ background:#f3f6ff; }
+.selectOptionActive{ background:#e9f0ff; font-weight:700; }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .mainContent { margin-left: 0; }
+  /* HAPUS width: 98vw di sini juga */
+  .cardContainer {
+    width: 100%;
+    padding: 18px 16px 14px 16px;
+    border-radius: 12px;
+  }
+}
+
+@media (max-width: 600px) {
+    .cardContainer {
+    /* HAPUS: padding: 7vw 2vw 8vw 2vw; */
+    padding: 16px; /* atau 14–18px terserah selera */
+  }
+
+  .dataTable th, .dataTable td { 
+    padding: 7px 5px; 
+    font-size: 12px; 
+  }
+
+  .modalContent { 
+    width: 96vw; 
+    min-width: unset; 
+    padding: 18px 8px 14px 8px; 
+  }
+
+  .selectWrap{ 
+    width:100%; 
+  }
+}
+
+/* booked oleh user -> tidak bisa diklik */
+.sessionBtn:disabled,
+.sessionBtn[data-state="booked"] {
+  cursor: not-allowed !important;
+}
+
+/* ditutup admin (masih bisa diklik untuk buka kembali) & open */
+.sessionBtn[data-state="admin"],
+.sessionBtn[data-state="open"] {
+  cursor: pointer;
+}
+
+/* ====== RESPONSIVE TABS & TABLE CONTROLS ====== */
+
+/* Tablet ↓ : pusatkan & izinkan wrapping */
+@media (max-width: 1024px) {
+  .mainTabs {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px 12px;
+  }
+  .mainTabBtn {
+    flex: 0 1 220px;        /* dua kolom kalau sempit */
+    justify-content: center;
+  }
+
+  .subTabs {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 10px;
+  }
+  .subTabBtn {
+    flex: 0 1 200px;
+    justify-content: center;
+  }
+
+  .paginateControls {
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+}
+
+/* Mobile ↓ : grid rapi & benar-benar di tengah */
+@media (max-width: 700px) {
+  /* Main tab: 2×2 grid */
+  .mainTabs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    justify-items: center;
+  }
+  .mainTabBtn {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+
+  /* Sub tab: auto-fit, selalu center */
+  .subTabs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(130px, 1fr));
+    gap: 8px;
+    justify-items: center;
+  }
+  .subTabBtn {
+    width: 100%;
+    padding: 9px 10px;
+    font-size: 13.5px;
+  }
+
+  /* Dropdown & kalender */
+  .selectRow { justify-content: stretch; }
+  .selectWrap { width: 100%; }
+
+  /* Table wrapper: padding lebih kecil & scroll mulus */
+  .tableWrapper { padding: 0; }
+  .dataTable th, .dataTable td { padding: 10px 12px; font-size: 13px; }
+
+  /* Tombol aksi */
+  .addRow { justify-content: center; }
+  .btnCreate { width: 100%; max-width: 420px; }
+
+  /* Pagination kolom */
+  .paginateControls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .resultsText { text-align: center; margin-bottom: 6px; }
+  .itemsPerPageDropdown { width: 100%; }
+}
+
+/* Extra small ↓ : sedikit kecilkan tipografi */
+@media (max-width: 420px) {
+  .mainTabBtn { font-size: 13px; }
+  .subTabBtn  { font-size: 12.5px; }
+  .dataTable th, .dataTable td { font-size: 12px; padding: 8px 10px; }
+}
+
+/* ====== Fix penataan tab di mobile/tablet: seragam & center ====== */
+
+/* Tablet ↓: jadikan grid 2 kolom dan samakan lebar tombol */
+@media (max-width: 1024px) {
+  .mainTabs {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(180px, 1fr));
+    gap: 12px;
+    justify-items: center;         /* grid-nya berada di tengah */
+  }
+  .mainTabBtn {
+    width: 100%;
+    max-width: 260px;              /* semua tombol lebar sama */
+    min-height: 44px;
+    padding: 12px 14px;
+    justify-content: center;       /* ikon + teks benar2 center */
+    text-align: center;
+    gap: 8px;
+  }
+
+  /* Sub tabs (Driver/Vehicle, dst) juga center & seragam */
+  .subTabs {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(140px, 1fr));
+    gap: 10px 12px;
+    justify-items: center;
+  }
+  .subTabBtn {
+    width: 100%;
+    max-width: 220px;
+    min-height: 40px;
+    justify-content: center;
+    text-align: center;
+  }
+
+  /* Tombol tambah biar tidak “menggantung” di kiri saat layar sempit */
+  .addRow { justify-content: center; }
+  .btnCreate { width: 100%; max-width: 480px; }
+}
+
+/* Phone ↓: kecilkan tipografi & padding agar tidak turun baris */
+@media (max-width: 480px) {
+  .mainTabs {
+    grid-template-columns: repeat(2, minmax(140px, 1fr));
+    gap: 10px;
+  }
+  .mainTabBtn { font-size: 14px; padding: 10px 12px; }
+  .subTabBtn  { font-size: 13px; padding: 8px 10px; }
+}
+
+/* ===== Tablet & small laptop (samakan dengan page lain) ===== */
+@media (max-width: 1200px) {
+  .mainContent {
+    margin-left: 0 !important;
+    /* kasih jarak seragam kiri-kanan */
+    padding: 24px 16px;
+    padding-top: 72px; /* ruang header */
+  }
+
+  .cardContainer {
+    /* HAPUS width: 98vw; */
+    width: 100%;
+    margin: 16px auto;
+    /* padding dalam card, bebas kamu atur */
+    padding: 18px 16px;
+    border-radius: 12px;
+  }
+
+  /* tabs biar rapi saat melipat */
+  .mainTabs,
+  .subTabs {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+/* === Fix overlay & header di mobile === */
+@media (max-width: 1200px) {
+  /* pastikan header di atas overlay */
+  .background :global(.mobileHeader) {
+    position: fixed !important;
+    top: 0; left: 0; right: 0;
+    z-index: 1201 !important;   /* > overlay */
+  }
+
+  /* overlay jangan menutupi header */
+  .background :global(.overlay) {
+    position: fixed !important;
+    top: 60px !important;        /* tinggi header mobileHeader */
+    left: 0; right: 0; bottom: 0;
+    z-index: 1200 !important;
+  }
+
+  /* drawer/aside tetap dari atas di bawah header */
+  .background :global(.sidebar) {
+    top: 60px !important;
+    height: calc(100vh - 60px) !important;
+  }
+
+  /* konten kasih ruang di bawah header */
+  .mainContent {
+    margin-left: 0 !important;
+    padding: 24px 16px;
+    padding-top: 72px;           /* ruang untuk header */
+  }
+}
+
+/* === Responsif tab (rapih center, 2 kolom di mobile) === */
+@media (max-width: 700px) {
+  .mainTabs {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    justify-items: center;
+  }
+  .mainTabBtn {
+    width: 100%;
+    justify-content: center;
+    font-size: 14px;
+    padding: 10px 12px;
+  }
+
+  .subTabs {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(130px, 1fr));
+    gap: 8px;
+    justify-items: center;
+  }
+  .subTabBtn {
+    width: 100%;
+    justify-content: center;
+    font-size: 13.5px;
+    padding: 9px 10px;
+  }
+
+  /* form pilih dokter/room biar full */
+  .selectRow { justify-content: stretch; }
+  .selectWrap { width: 100%; }
+}
+
+/* Extra kecil */
+@media (max-width: 420px) {
+  .mainTabBtn { font-size: 13px; }
+  .subTabBtn  { font-size: 12.5px; }
+}
+
+@media (max-width: 1200px) {
+  .background :global(.sidebar) {
+    display: block !important;
+  }
+}
+
+/* Header mobile selalu di atas overlay */
+@media (max-width: 1200px) {
+  .background :global(.mobileHeader) {
+    position: fixed !important;
+    top: 0; left: 0; right: 0;
+    z-index: 1202 !important;
+  }
+
+  /* Overlay mulai di bawah header */
+  .background :global(.overlay) {
+    position: fixed !important;
+    top: 60px !important;              /* tinggi mobileHeader */
+    left: 0; right: 0; bottom: 0;
+    z-index: 1200 !important;
+  }
+
+  /* Drawer: off-canvas dari kiri, di bawah header, di atas overlay */
+  .background :global(.sidebar) {
+    position: fixed !important;
+    top: 60px !important;
+    left: 0;
+    height: calc(100vh - 60px) !important;
+    width: 70%;
+    max-width: 320px;
+    transform: translateX(-100%);      /* keadaan tertutup */
+    z-index: 1201 !important;
+  }
+  .background :global(.sidebar.open) {
+    transform: translateX(0) !important; /* buka */
+  }
+
+  /* Konten beri ruang untuk header */
+  .mainContent {
+    margin-left: 0 !important;
+    padding: 24px 16px;
+    padding-top: 72px;
+  }
+}
+
+/* status select di tabel */
+.statusSelect{
+  min-width: 140px;
+  padding: 8px 10px;
+  font-size: 14px;
+  border: 1.5px solid #cfd4dc;
+  border-radius: 8px;
+  background: #fff;
+  color: #23263b;
+  outline: none;
+  transition: border-color .18s, box-shadow .18s;
+}
+.statusSelect:focus{ border-color:#2f4d8e; box-shadow:0 2px 10px rgba(47,77,142,.08); }
+.statusSelect:disabled{ opacity:.6; cursor:not-allowed; }
+
+.badge {
+  display:inline-block; padding:4px 8px; border-radius:999px;
+  font-size:12px; font-weight:700;
+}
+.badgeAvailable { background:#e8f7ed; color:#1e7a35; border:1px solid #bee7c9; }
+.badgeUnavailable { background:#fff3f3; color:#a12a2a; border:1px solid #f0caca; }
