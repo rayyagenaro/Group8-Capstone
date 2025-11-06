@@ -1,0 +1,380 @@
+/* =========================
+   LAYER BACKGROUND
+   ========================= */
+.background {
+  min-height: 100dvh;
+  position: relative;
+  z-index: 0;
+  background: linear-gradient(140deg, #e7ebf5 0%, #b5c3e8 100%);
+  overflow: hidden;
+}
+
+.background::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: url('/assets/bankindonesia.png') center center / cover no-repeat;
+  opacity: 0.35;
+  z-index: -2;
+  pointer-events: none;
+}
+
+.background::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(140deg, #e7ebf5 0%, #b5c3e8 100%);
+  opacity: 0.7;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* =========================
+   MAIN LAYOUT
+   ========================= */
+.mainContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #2f4d8e;
+  min-height: 100dvh;
+  margin-left: 255px;           /* ruang sidebar desktop */
+  padding: 24px 28px;
+}
+
+/* =========================
+   CONTAINER / BOX
+   ========================= */
+.boxLayanan {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 2px 16px rgba(47, 77, 142, 0.09);
+  width: 95%;
+  max-width: 1050px;
+  margin: 48px auto 0;
+  padding: 26px 32px 32px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* =========================
+   TOP ROW: Back + Title
+   ========================= */
+.topRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+}
+
+.backBtn {
+  background: #fff;
+  color: #2F4D8E;
+  border: none;
+  font-weight: 600;
+  font-size: 17px;
+  font-family: inherit;
+  border-radius: 21px;
+  padding: 8px 27px 8px 17px;
+  cursor: pointer;
+  box-shadow: 0 1px 6px rgba(47, 77, 142, 0.10);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: background 0.14s, color 0.14s, box-shadow .14s;
+}
+.backBtn:hover { background: #e8f0fe; color: #1c295a; }
+
+.title {
+  flex: 1;
+  text-align: center;
+  color: #2F4D8E;
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  margin: 0;
+  text-shadow: 0 2px 7px rgba(245, 246, 250, 0.26);
+  user-select: none;
+}
+
+/* =========================
+   FILTER (dropdown Fitur)
+   ========================= */
+.filterRow {
+  margin: 6px 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.label {
+  color: #22335e;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.itemsPerPageDropdown {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1.5px solid #e0e0e0;
+  background: #fff;
+  color: #000;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  min-width: 160px;
+}
+
+/* =========================
+   TABS (status booking style)
+   ========================= */
+.tabRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin: 20px 0 28px;
+  flex-wrap: wrap;
+}
+
+.tabBtn {
+  position: relative;
+  padding: 10px 28px;
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+  background: #f5f5fa;
+  color: #777;
+  border-radius: 9999px;
+  box-shadow: 0 2px 9px rgba(100, 110, 150, 0.11);
+  cursor: pointer;
+  transition: background .12s, color .12s, box-shadow .12s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  white-space: nowrap;
+}
+.tabBtn:active { box-shadow: 0 0 0 rgba(0,0,0,0); }
+
+.tabActive {
+  background: #2F4D8E !important;
+  color: #fff !important;
+  box-shadow: 0 4px 12px rgba(47, 77, 142, 0.10);
+}
+
+.tabLabel { line-height: 1; }
+
+.tabBadge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  min-width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  top: 4px;
+  right: 4px;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 0 6px;
+}
+.tabBadgeActive {
+  background: #e53935;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(229,57,53,.25);
+}
+
+/* =========================
+   LIST & CARD
+   ========================= */
+.cardList {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 10px;
+}
+
+.cardLayanan {
+  display: flex;
+  align-items: flex-start;
+  background: #fff;
+  border: 1.2px solid #e7e9f2;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(47, 77, 142, 0.03);
+  padding: 24px 32px 18px 22px;
+  min-height: 90px;
+  gap: 22px;
+  cursor: pointer;
+  user-select: none;
+  transition: box-shadow .13s, border .13s, background .16s, transform .08s;
+}
+.cardLayanan:hover {
+  border: 1.8px solid #3450a7;
+  background: #f3f7ff;
+  box-shadow: 0 4px 14px rgba(70, 90, 150, 0.13);
+}
+.cardLayanan:active { transform: scale(.995); }
+
+.cardLogo {
+  width: 72px !important;
+  height: 72px !important;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  align-self: center;
+  margin-right: 4px;
+}
+
+.cardContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
+
+.layananTitle {
+  font-size: 1.18rem;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 4px;
+  letter-spacing: 0.02em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.layananSub {
+  font-size: 1rem;
+  color: #858ba1;
+  margin-bottom: 4px;
+}
+
+.layananStatus {
+  font-size: 15px;
+  font-weight: 700;
+  margin-top: 3px;
+  letter-spacing: 0.04em;
+}
+
+.statusApproved { color: #1ec877; }
+.statusRejected { color: #e74c3c; }
+.statusPending  { color: #727272; }
+.statusFinished { color: #6c63ff; }
+.statusCancelled { color: #f97316; }
+
+.emptyText {
+  color: #2F4D8E;
+  font-size: 1.05rem;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 24px;
+}
+
+/* =========================
+   PAGINATION
+   ========================= */
+.paginationContainer {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid #e7e9f2;
+}
+
+.paginationControls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding: 0 10px;
+  gap: 16px;
+}
+
+.resultsText {
+  font-size: 15px;
+  color: #555;
+  font-weight: 500;
+}
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+/* Tablet & small laptop */
+@media (max-width: 1200px) {
+  .mainContent {
+    margin-left: 0;
+    padding: 24px 16px;
+    padding-top: 72px;
+  }
+  .boxLayanan {
+    width: 100%;
+    padding: 20px 24px 24px 24px;
+    border-radius: 16px;
+  }
+  .title { font-size: 26px; }
+}
+
+/* Tabs scrollable */
+@media (max-width: 900px) {
+  .tabRow {
+    justify-content: flex-start;
+    overflow-x: auto;
+    gap: 12px;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .tabRow::-webkit-scrollbar { display: none; }
+
+  .tabBtn { padding: 9px 18px; font-size: 14px; }
+
+  .paginationControls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .resultsText { text-align: center; }
+}
+
+/* Phone */
+@media (max-width: 700px) {
+  .boxLayanan {
+    padding: 12px 12px 16px;
+    margin: 12px 0;
+  }
+
+  .backBtn {
+    font-size: 14px;
+    padding: 8px 14px 8px 12px;
+  }
+
+  .title { font-size: 22px; line-height: 1.25; }
+
+  .filterRow { gap: 8px; }
+  .itemsPerPageDropdown { min-width: 0; width: 100%; }
+
+  .cardLayanan {
+    flex-direction: column;
+    padding: 12px;
+    gap: 12px;
+  }
+  .cardLogo {
+    width: 64px !important;
+    height: 64px !important;
+    margin: 0 auto 6px;
+  }
+  .layananTitle { font-size: 1rem; white-space: normal; }
+  .layananSub,
+  .layananStatus { font-size: 0.9rem; }
+}
+
+/* Small phone */
+@media (max-width: 480px) {
+  .mainContent { padding-left: 12px; padding-right: 12px; }
+  .boxLayanan  { padding: 10px 10px 14px; border-radius: 12px; }
+  .tabBtn { padding: 8px 12px; font-size: 13px; }
+  .itemsPerPageDropdown { font-size: 14px; }
+}
