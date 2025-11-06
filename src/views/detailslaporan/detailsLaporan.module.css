@@ -1,0 +1,489 @@
+.background {
+  min-height: 100vh;
+  position: relative;
+  z-index: 0;
+  background: linear-gradient(140deg, #e7ebf5 0%, #b5c3e8 100%);
+  overflow: hidden;
+}
+.background::before {
+  content: "";
+  position: fixed;
+  left: 0; top: 0; right: 0; bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -2;
+  background: url('/assets/bankindonesia.png') center center / cover no-repeat;
+  opacity: 0.32;
+  pointer-events: none;
+}
+.background::after {
+  content: "";
+  position: fixed;
+  left: 0; top: 0; right: 0; bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  background: linear-gradient(140deg, #e7ebf5 0%, #b5c3e8 100%);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* ===== Sidebar & Header ===== */
+.sidebar {
+  width: 255px;
+  background: #fff;
+  border-right: 1px solid #ececec;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 99;
+}
+.logoSidebar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 92px;
+  padding-left: 28px;
+  padding-top: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #ececec;
+}
+.logoDone {
+  width: 110px !important;
+  height: 36px !important;
+  object-fit: contain;
+}
+.navMenu {
+  flex: 1;
+  width: 100%;
+  margin-top: 10px;
+}
+.navMenu ul { list-style: none; padding: 0; margin: 0; }
+.navMenu li {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 30px 14px 28px;
+  font-size: 17px;
+  color: #888b96;
+  cursor: pointer;
+  border-radius: 0 28px 28px 0;
+  transition: background .15s, color .15s;
+  margin-bottom: 2px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+.menuIcon { font-size: 20px; }
+.navMenu li.active, .navMenu li:hover { background: #2f4d8e; color: #fff; }
+
+.logout {
+  margin: 20px 0 28px 28px;
+  color: #ed6257;
+  font-weight: 600;
+  font-size: 17px;
+  cursor: pointer;
+  letter-spacing: 0.01em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.logoutIcon { font-size: 20px; }
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 255px;
+  right: 0;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 60px 0 38px;
+  box-sizing: border-box;
+  box-shadow: 0 1px 4px 0 rgba(47,77,142,0.04);
+  z-index: 10;
+}
+.logoBIWrapper { display: flex; align-items: center; gap: 20px; }
+.logoBI  { width: 170px !important; height: 34px !important; object-fit: contain; }
+.logoBank{ width: 130px !important; height: 40px !important; object-fit: contain; }
+
+.searchBar {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 36px;
+  border: 1px solid #ececec;
+  box-shadow: 0 1px 4px 0 rgba(47,77,142,0.03);
+  padding: 4px 28px;
+  min-width: 330px;
+  height: 48px;
+  gap: 14px;
+}
+.searchBar input {
+  border: none; background: transparent; outline: none;
+  flex: 1; font-size: 20px; color: #363958; padding: 8px 6px;
+}
+.searchBar button {
+  background: none; border: none; cursor: pointer; display: flex; align-items: center;
+}
+
+/* ===== Title area ===== */
+.title {
+  color: #fff; font-weight: 700; font-size: 32px; text-align: center;
+  margin-top: 0px; letter-spacing: 0.02em; margin-bottom: 6px;
+  text-shadow: 0 2px 6px rgba(60,60,120,0.07);
+}
+.mainContent {
+  flex: 1; min-width: 0; display: flex; flex-direction: column;
+  background: #2f4d8e; min-height: 100vh; margin-left: 255px;
+}
+.titleBox { display: flex; align-items: center; margin: 0 0 10px 0; gap: 18px; }
+.backBtn {
+  background: #fff; color: #2F4D8E; border: none; font-weight: 700; font-size: 19px;
+  font-family: inherit; border-radius: 21px; padding: 8px 27px 8px 17px;
+  cursor: pointer; box-shadow: 0 1px 6px 0 rgba(47,77,142,0.10);
+  display: flex; align-items: center; gap: 10px; transition: background 0.14s, color 0.14s;
+  margin-top: 20px; margin-bottom: 8px; margin-right: 120px; margin-left: 30px;
+}
+.backBtn:hover { background: #e8f0fe; color: #1c295a; }
+.pageTitle {
+  color: #ffffff; font-size: 32px; font-weight: 700; text-align: left;
+  margin-left: 120px; letter-spacing: 0.04em;
+  text-shadow: 0 2px 8px rgba(60,60,120,0.08);
+}
+
+/* ===== Card & Detail ===== */
+.detailCard {
+  background: #fff; border-radius: 20px; box-shadow: 0 4px 24px 0 rgba(47,77,142,0.13);
+  width: 93%; max-width: 1000px; margin: 18px auto 44px auto;
+  padding: 38px 42px 28px 42px; display: flex; flex-direction: column; align-items: stretch;
+}
+.topRow {
+  display: flex; align-items: flex-start; justify-content: flex-start;
+  border-bottom: 1.1px solid #e0e6f2; padding-bottom: 17px; margin-bottom: 16px;
+}
+.leftTitle { flex: 1; }
+.bookingTitle {
+  font-size: 23px; font-weight: 700; color: #253e70; margin-bottom: 10px; letter-spacing: 0.01em;
+}
+
+/* header meta */
+.headerMetaWrap { display: flex; align-items: center; gap: 16px; }
+.headerDates {
+  display: grid; grid-template-columns: 170px auto; column-gap: 12px; row-gap: 4px;
+}
+.metaRow { display: contents; }
+.headerStatus { margin-left: auto; white-space: nowrap; }
+
+.metaInfo { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
+.metaLabel { color: #888; font-size: 14px; font-weight: 600; margin-right: 4px; letter-spacing: 0.01em; }
+.metaValue { color: #222; font-size: 14px; font-weight: 500; margin-right: 14px; }
+
+/* status chips */
+.statusPending  { color: #338ef7; font-size: 15px; font-weight: 600; display: flex; align-items: center; gap: 4px; margin-left: 12px; }
+.statusApproved { color: #22a455; font-size: 15px; font-weight: 600; display: flex; align-items: center; gap: 4px; margin-left: 12px; }
+.statusRejected { color: #ed6257; font-size: 15px; font-weight: 600; display: flex; align-items: center; gap: 4px; margin-left: 12px; }
+.statusFinished { color: #6c63ff; font-size: 15px; font-weight: 600; display: flex; align-items: center; gap: 4px; margin-left: 12px; }
+.statusCancelled { color: #f97316; font-size: 15px; font-weight: 600; display: flex; align-items: center; gap: 4px; margin-left: 12px; }
+
+.dotPending  { width: 10px; height: 10px; background: #338ef7;  border-radius: 50%; display: inline-block; }
+.dotApproved { width: 10px; height: 10px; background: #22a455;  border-radius: 50%; display: inline-block; }
+.dotRejected { width: 10px; height: 10px; background: #ed6257;  border-radius: 50%; display: inline-block; }
+.dotFinished { width: 10px; height: 10px; background: #6c63ff;  border-radius: 50%; display: inline-block; }
+.dotCancelled { width: 10px; height: 10px; background: #f97316;  border-radius: 50%; display: inline-block; }
+
+.detailRow { display: flex; flex-direction: row; gap: 40px; margin-bottom: 26px; }
+.detailColLeft, .detailColRight { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+.detailColRight { border-left: 1.2px solid #e0e6f2; padding-left: 32px; margin-left: 20px; }
+
+.detailLabel {
+  font-size: 13px; color: #888; font-weight: 700; text-transform: uppercase;
+  margin-bottom: 1px; margin-top: 10px; letter-spacing: 0.03em;
+}
+.detailValue { font-size: 15px; color: #23263b; margin: 1px 0 0 0; font-weight: 600; }
+
+/* file */
+.fileBox {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: #ececec; border-radius: 8px; padding: 7px 14px 7px 11px; margin-top: 3px; font-size: 15px;
+}
+.fileIcon { color: #23263b; font-size: 21px; margin-right: 7px; }
+.fileName { color: #23263b; font-weight: 600; text-decoration: none; font-size: 14.5px; letter-spacing: 0.01em; }
+.fileName:hover { text-decoration: underline; }
+
+/* availability */
+.availWrapper { position: relative; display: flex; align-items: flex-start; justify-content: flex-end; min-width: 245px; }
+.viewAvailabilityBtn {
+  background: #fff; color: #23263b; border: 1.2px solid #bcbcbc; border-radius: 18px;
+  padding: 7px 22px; font-size: 15px; font-weight: 600; box-shadow: 0 1px 6px 0 rgba(47,77,142,0.07);
+  cursor: pointer; margin-left: 0; margin-top: 4px; transition: background .15s, color .15s, border .15s;
+}
+.viewAvailabilityBtn:hover { background: #e9effd; color: #253e70; border: 1.5px solid #2F4D8E; }
+
+.availabilityDropdown {
+  position: absolute; top: 44px; right: 0; min-width: 270px; max-width: 310px; background: #fff;
+  border: 1.2px solid #b5c3e8; box-shadow: 0 5px 16px 0 rgba(47,77,142,0.12);
+  border-radius: 14px; z-index: 40; padding: 16px 16px 16px 14px; display: flex; flex-direction: column; gap: 0;
+}
+.availabilityTables { display: flex; flex-direction: row; gap: 16px; min-width: 0; }
+.availabilityCol { min-width: 0; flex: 1 1 0; }
+.availabilityTitle {
+  color: #2F4D8E; font-size: 13px; font-weight: 700; margin-bottom: 6px; letter-spacing: 0.03em; text-align: left; padding-left: 2px;
+}
+.availabilityTable { width: 100%; border-collapse: collapse; font-size: 13px; background: transparent; }
+.availabilityTable td {
+  padding: 4px 7px; border-bottom: 1px solid #ecf1fa; color: #23263b; font-size: 13px; letter-spacing: 0.01em; background: transparent;
+}
+.availabilityTable tr:last-child td { border-bottom: none; }
+
+/* ===== Buttons (Tolak/Setujui/WA) ===== */
+.btnSetujui {
+  background: #2F4D8E; color: #fff; border: none; border-radius: 18px;
+  padding: 11px 56px; font-size: 18px; font-weight: 600; font-family: inherit;
+  box-shadow: 0 3px 12px 0 rgba(47,77,142,0.14); cursor: pointer; transition: background 0.17s;
+  margin-left: 8px;
+}
+.btnSetujui:hover { background: #253e70; }
+
+.btnTolak {
+  background: #fff; color: #DA3B3B; border: 1.7px solid #DA3B3B; border-radius: 18px;
+  padding: 11px 46px; font-size: 18px; font-weight: 600; font-family: inherit; cursor: pointer;
+  transition: background 0.15s, color 0.15s; margin-right: 8px;
+}
+.btnTolak:hover { background: #ffeaea; color: #c82b2b; }
+
+/* Tombol WhatsApp */
+.btnKirimPesan {
+  background: #25D366;        /* WhatsApp green */
+  color: #fff;
+  border: none;
+  border-radius: 18px;
+  padding: 11px 26px;
+  font-size: 18px;
+  font-weight: 700;
+  font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  box-shadow: 0 3px 12px rgba(37, 211, 102, 0.28);
+  transition: background .2s ease, box-shadow .2s ease, transform .06s ease;
+}
+.btnKirimPesan:hover { background: #1EBE57; box-shadow: 0 6px 14px rgba(37,211,102,.35); }
+.btnKirimPesan:active { transform: translateY(1px); }
+.waIcon { width: 22px; height: 22px; display: inline-block; flex-shrink: 0; color: #fff; }
+
+/* ===== Bar Aksi (Approved state) ===== */
+.actionBtnRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;  /* default 2 kolom */
+  gap: 18px;
+  align-items: center;
+  justify-items: stretch;
+  margin-top: 10px;
+}
+.kirimPesanWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;             /* tombol full width kolom */
+}
+.actionBtnRow .kirimPesanWrapper {
+  grid-column: 1 / -1;   /* span semua kolom */
+  display: flex;
+  flex-direction: column;
+  align-items: center;   /* tengah */
+}
+.actionBtnRow .btnKirimPesan {
+  width: 60%;            /* biar agak kecil di tengah */
+  min-width: 280px;
+  max-width: 420px;
+  justify-content: center;
+}
+.kirimPesanNote {
+  text-align: center;
+}
+/* ===== Tombol Cancel Booking ===== */
+.btnCancel {
+  background: #DC3545;         /* merah bootstrap style */
+  color: #fff;
+  border: none;
+  border-radius: 18px;
+  padding: 11px 46px;
+  font-size: 18px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: 0 3px 12px rgba(220,53,69,0.18);
+  transition: background 0.15s ease, transform 0.06s ease;
+}
+.btnCancel:hover {
+  background: #c82333;
+}
+.btnCancel:active {
+  transform: translateY(1px);
+}
+
+/* agar sejajar di actionBtnRow */
+.actionBtnRow .btnCancel {
+  width: 100%;
+  min-height: 52px;
+  border-radius: 24px;
+  padding: 0 28px;
+}
+
+.actionBtnRow .btnKirimPesan,
+.actionBtnRow .btnSetujui {
+  width: 100%;
+  min-height: 52px;
+  border-radius: 24px;
+  padding: 0 28px;                  /* tinggi via min-height */
+}
+
+/* Note di bawah tombol */
+.kirimPesanNote {
+  font-size: 12px; color: #666; margin-top: 8px; text-align: center; max-width: unset; line-height: 1.4;
+  display: flex; align-items: flex-start; justify-content: center;
+}
+.iconInfo { width: 16px; height: 16px; flex-shrink: 0; margin-top: 1px; }
+
+/* ===== Reject info box ===== */
+.rejectBox {
+  margin-top: 14px; background: #fff5f5; border: 1.4px solid #f2b7b3; border-radius: 12px;
+  padding: 12px 14px; box-shadow: 0 2px 8px rgba(218,59,59,0.06);
+}
+.rejectTitle {
+  font-size: 13px; font-weight: 800; color: #c82b2b; text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 6px;
+}
+.rejectText { font-size: 14px; color: #2b1e1e; font-weight: 600; line-height: 1.45; white-space: pre-wrap; }
+
+/* ===== Loading ===== */
+.loadingState {
+  min-height: 60vh; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 12px; color: #334155;
+}
+.loaderRing {
+  width: 56px; height: 56px; border-radius: 9999px;
+  border: 4px solid rgba(51, 65, 85, .2);
+  border-top-color: #2563eb;
+  animation: dl-spin .8s linear infinite;
+}
+.loadingText { font-size: 14px; opacity: .85; }
+@keyframes dl-spin { to { transform: rotate(360deg); } }
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+  .mainContent { margin-left: 0; padding-top: 92px; }
+  .sidebar { display: none; }
+  .header { left: 0; padding: 0 8px; }
+  .detailCard { width: 98vw; padding: 22px 8vw 18px 8vw; border-radius: 12px; }
+  .titleBox { flex-direction: column; align-items: flex-start; margin: 22px 0 5px 0; gap: 9px; }
+  .pageTitle { margin-left: 0; font-size: 18px; }
+  .detailRow { flex-direction: column; gap: 12px; }
+  .detailColRight { border-left: none; padding-left: 0; margin-left: 0; }
+  .actionBtnRow { grid-template-columns: 1fr; }
+  .availabilityDropdown {
+    left: 0; right: auto; min-width: 180px; max-width: 200px; padding: 10px 5px;
+  }
+  .availabilityTables { flex-direction: column; gap: 8px; }
+}
+
+/* =========================
+   TITLE BAR: center title + back icon-only on mobile
+   ========================= */
+@media (max-width: 900px) {
+  /* jadikan bar judul grid: [ikon] [judul di tengah] [spacer] */
+  .titleBox {
+    display: grid !important;
+    grid-template-columns: 40px 1fr 40px;
+    align-items: center;
+    gap: 8px;
+    margin: 14px 0 8px 0;
+    width: 100%;
+  }
+  .titleBox::after { content: ""; } /* spacer kolom kanan */
+
+  /* judul benar2 center */
+  .title {
+    grid-column: 2;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: .02em;
+    margin: 0;
+  }
+
+  /* back jadi icon-only, tetap bulat & center */
+  .backBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 40px;
+    aspect-ratio: 1 / 1;       /* bulat sempurna */
+    padding: 0;
+    border-radius: 9999px;
+
+    background: #fff !important;
+    border: 1px solid #eef1f7;
+    box-shadow: 0 1px 3px rgba(47,77,142,.12) !important;
+
+    /* sembunyikan teks "Kembali" tanpa ambil ruang */
+    font-size: 0;
+    line-height: 0;
+    gap: 0;
+    margin: 0;
+  }
+  .backBtn svg {
+    /* penting: override inline marginRight: 7 dari JSX */
+    margin: 0 !important;
+    display: block;           /* hilangkan offset baseline */
+    width: 18px;
+    height: 18px;
+    color: #2F4D8E;
+    transform: none;          /* hapus nudge sebelumnya jika ada */
+  }
+}
+
+/* =========================
+   FORM & KONTEN: padding + lebar
+   ========================= */
+@media (max-width: 900px) {
+  .mainContent { padding-left: 14px; padding-right: 14px; }
+  .detailCard  { padding: 18px 14px 16px; width: 100%; max-width: 100%; }
+
+  /* header meta & kolom detail lebih rapi di HP */
+  .headerMetaWrap { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .headerDates { grid-template-columns: 1fr; row-gap: 6px; }
+  .detailRow { gap: 10px; }
+  .detailLabel { font-size: 12px; }
+  .detailValue { font-size: 14px; }
+}
+
+/* =========================
+   BUTTONS: full-width di mobile
+   ========================= */
+@media (max-width: 900px) {
+  .btnSetujui,
+  .btnTolak,
+  .btnKirimPesan {
+    width: 100%;
+    min-height: 48px;
+    padding: 0 18px;
+    border-radius: 22px;
+    font-size: 16px;
+  }
+}
+
+/* =========================
+   EXTRA SMALL
+   ========================= */
+@media (max-width: 480px) {
+  .title { font-size: 18px; }
+  .backBtn { width: 36px; }
+  .backBtn svg { width: 17px; height: 17px; }
+}
