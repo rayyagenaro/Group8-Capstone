@@ -19,7 +19,6 @@ import BiDriveSection from '@/components/DetailsLaporan/bidrive/BiDriveSection';
 import BiCareSection  from '@/components/DetailsLaporan/bicare/BiCareSection';
 import BiMeetSection  from '@/components/DetailsLaporan/bimeet/BiMeetSection';
 import BiStaySection  from '@/components/DetailsLaporan/bistay/BiStaySection';
-import BiMailSection  from '@/components/DetailsLaporan/bidocs/BiDocsSection';
 import BiMealSection  from '@/components/DetailsLaporan/bimeal/BiMealSection';
 
 // Helpers
@@ -706,16 +705,7 @@ export default function DetailsLaporanView({ initialRoleId = null }) {
                 onFinishBooking={handleFinishBooking}
               />
             )}
-            {slug === 'bimail' && (
-              <BiMailSection
-                styles={styles}
-                id={id}
-                detail={detail}
-                formatDateOnly={formatDateOnly}
-                formatDateTime={formatDateTime}
-                mapStatus={mapStatus}
-              />
-            )}
+            
             {slug === 'bimeal' && (
               <BiMealSection
                 styles={styles}

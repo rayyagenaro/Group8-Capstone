@@ -1,0 +1,234 @@
+.popupOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(44, 52, 83, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* --- Popup container: diperlebar, responsif --- */
+.popupBox {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px 0 rgba(70,90,150,0.13);
+  padding: 28px 28px 24px;
+  width: min(92vw, 980px);
+  min-width: 720px;
+  max-width: 980px;
+
+  /* 🔹 batasi tinggi popup agar tidak kepotong layar */
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+
+  position: relative;
+  border: 1.5px solid #bbb;
+  animation: popupFadeIn 0.19s cubic-bezier(.24,.97,.54,.98);
+  overflow: hidden; /* isi akan scroll di body */
+}
+
+@keyframes popupFadeIn {
+  from { opacity: 0; transform: translateY(32px) scale(0.99);}
+  to { opacity: 1; transform: translateY(0) scale(1);}
+}
+
+.popupHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+.popupTitle {
+  font-size: 26px;
+  color: #2f4d8e;
+  font-weight: bold;
+  text-align: center;
+  flex: 1;
+}
+.closeBtn {
+  background: none;
+  border: none;
+  color: #2f4d8e;
+  font-size: 26px;
+  cursor: pointer;
+  margin-left: 20px;
+  margin-right: 1px;
+  margin-top: 9px;
+  border-radius: 50%;
+  transition: background 0.12s;
+}
+.closeBtn:hover {
+  background: #e8f0fe;
+}
+
+.popupForm {
+  flex: 1;                /* isi form ambil sisa tinggi */
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;       /* 🔹 biar isi bisa discroll */
+  padding-right: 4px;     /* kasih space untuk scrollbar */
+}
+
+.formLabel {
+  color: #2f4d8e;
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.formInput {
+  padding: 10px 16px;
+  border-radius: 8px;
+  color: #2F4D8E;
+  border: 1.1px solid #bcd0f0;
+  font-size: 15px;
+  background: #f7faff;
+  outline: none;
+  font-weight: 500;
+}
+.formInput:focus {
+  border: 1.5px solid #2f4d8e;
+  background: #fff;
+}
+
+/* --- Tombol submit di footer --- */
+.submitBtn {
+  background: #2F4D8E;
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  padding: 11px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 14px 0 rgba(70,90,150,0.13);
+  transition: background 0.14s;
+  height: 44px;
+}
+.submitBtn:hover {
+  background: #253e70;
+}
+
+/* --- List vertikal lama (dipakai di driver jika mau), biar kompatibel --- */
+.multipleChoiceWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 4px;
+  max-height: 185px;
+  overflow-y: auto;
+  background: #f7faff;
+  padding: 10px 12px 7px 10px;
+  border-radius: 7px;
+  border: 1.1px solid #bcd0f0;
+}
+.checkboxLabel {
+  font-size: 15px;
+  color: #233e6b;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  cursor: pointer;
+  user-select: none;
+  font-weight: 500;
+}
+.checkboxInput {
+  accent-color: #2f4d8e;
+  width: 17px;
+  height: 17px;
+  margin-right: 4px;
+}
+
+/* ===================== */
+/*   2 COLUMNS LAYOUT    */
+/* ===================== */
+
+.columns {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: stretch;   /* biar dua kolom sama tinggi */
+  overflow: hidden;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow-y: auto;       /* 🔹 kolom bisa scroll mandiri */
+}
+
+/* --- Section per TIPE kendaraan --- */
+.typeSection + .typeSection {
+  margin-top: 12px;
+}
+
+.typeHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.typeTitle {
+  font-size: 14px;
+  color: #2f4d8e;
+}
+
+.typeCounter {
+  font-size: 12px;
+  color: #5b6b8b;
+}
+
+/* --- Box scroll untuk list checkbox kendaraan/driver --- */
+.scrollBox {
+  flex: 1;                /* isi penuh dalam col */
+  overflow-y: auto;
+  background: #f7f9fc;
+  border: 1px solid #e5e8f0;
+  border-radius: 10px;
+  padding: 10px;
+  max-height: none;       /* 🔹 biar ikut tinggi col */
+}
+/* --- Hint kosong --- */
+.emptyHint {
+  padding: 6px 2px;
+  color: #6b7280;
+  font-size: 14px;
+}
+.emptyHintSmall {
+  padding: 2px 0 6px;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* --- Footer: keterangan + submit sejajar --- */
+.footerRow {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px;
+  align-items: end;
+}
+.keteranganCol {
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- Responsive tweak --- */
+@media (max-width: 860px) {
+  .popupBox {
+    min-width: 92vw;
+    width: 92vw;
+  }
+  .columns {
+    grid-template-columns: 1fr; /* stack jadi 1 kolom di layar kecil */
+  }
+  .footerRow {
+    grid-template-columns: 1fr;
+  }
+}

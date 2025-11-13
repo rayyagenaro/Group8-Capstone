@@ -53,7 +53,6 @@ const FEATURE_OPTIONS = [
   { label: 'Care',  value: 'bicare' },
   { label: 'Meal',  value: 'bimeal' },
   { label: 'Meet',  value: 'bimeet' },
-  { label: 'Docs',  value: 'bimail' },
   { label: 'Stay',  value: 'bistay' },
 ];
 const FEATURE_LOGOS = {

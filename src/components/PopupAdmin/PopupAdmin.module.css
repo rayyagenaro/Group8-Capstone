@@ -1,0 +1,78 @@
+/* Overlay full screen */
+.popupOverlay {
+  position: fixed;
+  z-index: 1200;
+  left: 0; top: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(44, 51, 66, 0.21);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.22s;
+  backdrop-filter: blur(1.5px);
+}
+
+/* Card popup */
+.popupBox {
+  background: #fff;
+  border-radius: 22px;
+  box-shadow: 0 4px 32px 0 rgba(60,60,60,0.11);
+  text-align: center;
+  min-width: 0;
+  max-width: 97vw;
+  width: 100%;
+  max-width: 400px;
+  padding: 32px 18px 22px 18px;
+  box-sizing: border-box;
+  animation: fadeinpop .24s cubic-bezier(0.23,1,0.32,1);
+}
+
+/* Animasi muncul */
+@keyframes fadeinpop {
+  from { transform: scale(0.93); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+/* Icon */
+.popupIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 13px;
+  margin-top: 2px;
+}
+.popupIcon svg {
+  width: 52px !important;
+  height: 52px !important;
+}
+
+/* Pesan */
+.popupMsg {
+  font-size: 1.07rem;
+  color: #2c4065;
+  margin-bottom: 22px;
+  word-break: break-word;
+  line-height: 1.47;
+}
+
+@media (max-width: 600px) {
+  .popupBox {
+    max-width: 99vw;
+    padding: 16px 7px 16px 7px;
+    font-size: 0.99rem;
+  }
+  .popupMsg {
+    font-size: 0.95rem;
+  }
+  .popupIcon svg {
+    width: 40px !important;
+    height: 40px !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .popupBox {
+    padding: 8px 2vw 10px 2vw;
+    border-radius: 13px;
+  }
+}
