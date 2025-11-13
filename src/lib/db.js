@@ -48,7 +48,7 @@ if (!g._mysqlPool) {
       host: process.env.DB_HOST,
       user: process.env.DB_USER ?? 'root',
       passwordSent: hasPw, // false = tanpa password
-      db: process.env.DB_NAME ?? 'bione_db',
+      db: process.env.DB_NAME ?? 'bione_db1',
     });
   }
 }

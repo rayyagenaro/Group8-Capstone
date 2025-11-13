@@ -13,23 +13,27 @@ const CFG = {
   bidrive: {
     from: 'bidrive_bookings b LEFT JOIN booking_statuses s ON s.id = b.status_id',
     tableForCount: 'bidrive_bookings b',
-    select: 'b.id, b.tujuan, b.start_date, b.end_date, b.status_id, s.name AS status_name, b.created_at',
+    select:
+      'b.id, b.tujuan, b.start_date, b.end_date, b.status_id, s.name AS status_name, b.created_at',
     defaultOrder: 'ORDER BY b.created_at DESC',
-    pendingWhere: 'b.status_id = 1'
+    pendingWhere: 'b.status_id = 1',
   },
 
   bicare: {
     from: 'bicare_bookings b',
     tableForCount: 'bicare_bookings b',
-    select: "b.id, b.booking_date, b.slot_time, b.status, b.booker_name, b.patient_name, b.created_at",
+    select:
+      "b.id, b.booking_date, b.slot_time, b.status, b.booker_name, b.patient_name, b.created_at",
     defaultOrder: 'ORDER BY b.created_at DESC',
-    pendingWhere: "b.status = 'Booked'"
+    pendingWhere: "b.status = 'Booked'",
   },
 
+  // ✅ BI.MEAL (sudah join ke unit_kerja + booking_statuses)
   bimeal: {
     from: `
       bimeal_bookings b
       LEFT JOIN booking_statuses s ON s.id = b.status_id
+      LEFT JOIN unit_kerja u ON u.id = b.unit_kerja_id
     `,
     tableForCount: 'bimeal_bookings b',
     select: `
@@ -37,32 +41,26 @@ const CFG = {
       b.nama_pic,
       b.nama_pic_tagihan,
       b.no_wa_pic,
-      b.unit_kerja,
+      u.unit_kerja AS unit_kerja,
       b.waktu_pesanan,
       b.status_id,
       s.name AS status_name,
       b.created_at
     `,
     defaultOrder: 'ORDER BY b.created_at DESC',
-    pendingWhere: 'b.status_id = 1'
+    pendingWhere: 'b.status_id = 1',
   },
-
 
   bimeet: {
     from: 'bimeet_bookings b LEFT JOIN booking_statuses s ON s.id = b.status_id',
     tableForCount: 'bimeet_bookings b',
-    select: 'b.id, b.title, b.start_datetime, b.end_datetime, b.status_id, s.name AS status_name, b.created_at',
+    select:
+      'b.id, b.title, b.start_datetime, b.end_datetime, b.status_id, s.name AS status_name, b.created_at',
     defaultOrder: 'ORDER BY b.created_at DESC',
-    pendingWhere: '(b.status_id IS NULL OR b.status_id = 1)'
+    pendingWhere: '(b.status_id IS NULL OR b.status_id = 1)',
   },
 
-  bimail: {
-    from: 'bimail_docs b',
-    tableForCount: 'bimail_docs b',
-    select: 'b.id, b.nomor_surat, b.tanggal_dokumen, b.perihal, b.created_at',
-    defaultOrder: 'ORDER BY b.created_at DESC',
-    pendingWhere: null // tidak ada status -> treat as ALL
-  },
+  // ❌ bimail DIHAPUS karena tabelnya sudah di-drop
 
   bistay: {
     from: `
@@ -81,12 +79,13 @@ const CFG = {
     `,
     defaultOrder: 'ORDER BY b.created_at DESC',
     // anggap pending = 1 (boleh tambahkan 0/NULL jika ada sistem lama)
-    pendingWhere: '(b.status_id IS NULL OR b.status_id IN (0,1))'
-  }
+    pendingWhere: '(b.status_id IS NULL OR b.status_id IN (0,1))',
+  },
 };
 
 export default async function handler(req, res) {
-  if (req.method !== 'GET') return res.status(405).json({ error: 'Method not allowed' });
+  if (req.method !== 'GET')
+    return res.status(405).json({ error: 'Method not allowed' });
 
   try {
     const slug = String(req.query.slug || '').toLowerCase();
@@ -95,7 +94,10 @@ export default async function handler(req, res) {
 
     // pagination & filter
     const page = Math.max(1, parseInt(req.query.page || '1', 10));
-    const perPage = Math.min(50, Math.max(1, parseInt(req.query.perPage || '10', 10)));
+    const perPage = Math.min(
+      50,
+      Math.max(1, parseInt(req.query.perPage || '10', 10))
+    );
     const status = (req.query.status || 'pending').toLowerCase(); // 'pending' | 'all'
 
     // layanan tanpa tabel -> kosong saja
@@ -123,9 +125,9 @@ export default async function handler(req, res) {
       [perPage, offset]
     );
 
-    res.status(200).json({ items: rows, total, page, perPage });
+    return res.status(200).json({ items: rows, total, page, perPage });
   } catch (e) {
     console.error('queue API error:', e);
-    res.status(500).json({ error: 'Gagal mengambil data antrian' });
+    return res.status(500).json({ error: 'Gagal mengambil data antrian' });
   }
 }

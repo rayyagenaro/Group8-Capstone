@@ -12,7 +12,6 @@ export default async function handler(req, res) {
     bimeet: 'bimeet',
     bistay: 'bistay',
     bimeal: 'bimeal',
-    bimail: 'bimail',
     bidocs: 'bimail',
     docs: 'bimail',
     mail: 'bimail',

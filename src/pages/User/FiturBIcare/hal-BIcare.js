@@ -2,13 +2,14 @@
 import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { FaArrowLeft } from 'react-icons/fa';
+import { FaArrowLeft, FaCalendarAlt } from 'react-icons/fa';
 import styles from './hal-BIcare.module.css';
 import SidebarUser from '@/components/SidebarUser/SidebarUser';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import idLocale from 'date-fns/locale/id';
 import LogoutPopup from '@/components/LogoutPopup/LogoutPopup';
+import { useIsMobile } from '@/hooks/useIsMobile';
 
 /* ===================== hooks & helpers ===================== */
 const useDropdown = (initial = false) => {
@@ -25,29 +26,32 @@ const useDropdown = (initial = false) => {
 };
 
 const SuccessPopup = ({ onClose }) => (
-  <div className={styles.popupOverlay} role="dialog" aria-modal="true">
+  <div className={styles.popupOverlay}>
     <div className={styles.popupBox}>
-      <button className={styles.popupClose} onClick={onClose} aria-label="Tutup">×</button>
+      <button className={styles.popupClose} onClick={onClose}>
+        &times;
+      </button>
       <div className={styles.popupIcon}>
-        <svg width="70" height="70" viewBox="0 0 70 70" aria-hidden="true">
+        <svg width="70" height="70" viewBox="0 0 70 70">
           <circle cx="35" cy="35" r="35" fill="#7EDC89" />
-          <polyline points="23,36 33,46 48,29" fill="none" stroke="#fff" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/>
+          <polyline
+            points="23,36 33,46 48,29"
+            fill="none"
+            stroke="#fff"
+            strokeWidth="4"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
         </svg>
       </div>
-      <div className={styles.popupMsg}><b>Booking Klinik Berhasil!</b></div>
+      <div className={styles.popupMsg}>
+        <b>Pengajuan BI.Care Berhasil!</b>
+      </div>
     </div>
   </div>
 );
 
 /* kalender util */
-const toDateKey = (v) => {
-  if (!v) return '';
-  if (v instanceof Date) return ymd(v);
-  const s = String(v);
-  if (/^\d{4}-\d{2}-\d{2}/.test(s)) return s.slice(0, 10);
-  const d = new Date(s);
-  return isNaN(d) ? s : ymd(d);
-};
 const toHHMM = (s) => String(s || '').slice(0, 5);
 const ymd = (d) => {
   const y = d.getFullYear();
@@ -253,7 +257,108 @@ function DoctorCalendar({ slotMap, bookedMap, adminMap, onPick, minDate = new Da
 
 /* ===================== halaman utama ===================== */
 export default function FiturBICare() {
+  // --- PROFIL USER (untuk "Gunakan data saya")
+  const [myProfile, setMyProfile] = useState({ name: '', nip: '', phone: '' });
+  const [birthDate, setBirthDate] = useState({ tglLahir: '', });
+  const [genderOptions, setGenderOptions] = useState([]);
+
+  useEffect(() => {
+    let alive = true;
+
+    // helper: ambil nilai dari beberapa kandidat kunci
+    const fromKeys = (obj, keys) => {
+      for (const k of keys) {
+        const v = obj?.[k];
+        if (v != null && v !== '') return String(v);
+      }
+      return '';
+    };
+
+    // helper: scan rekursif untuk key tertentu
+    const deepFindByKeyRegex = (obj, regex) => {
+      if (!obj || typeof obj !== 'object') return '';
+      for (const [k, v] of Object.entries(obj)) {
+        if (regex.test(k) && (typeof v !== 'object' || v == null)) {
+          return String(v ?? '');
+        }
+        if (v && typeof v === 'object') {
+          const hit = deepFindByKeyRegex(v, regex);
+          if (hit) return hit;
+        }
+      }
+      return '';
+    };
+
+    (async () => {
+      try {
+        const r = await fetch('/api/me?scope=user', { cache: 'no-store', credentials: 'include' });
+        const d = await r.json().catch(() => ({}));
+        const p = d?.payload || {};
+
+        const name =
+          fromKeys(p, ['name','full_name','fullname','username','display_name']) ||
+          deepFindByKeyRegex(p, /name|nama/i);
+
+        // 🔑 perluas kandidat kunci NIP
+        let nip =
+          fromKeys(p, [
+            'nip','employee_id','employeeId','employee_number','employeeNumber',
+            'nrp','nim','nik','nopeg','no_pegawai','noPegawai','no_induk','noInduk','id_pegawai'
+          ]) ||
+          deepFindByKeyRegex(p, /(^|_)(nip|nrp|nim|nik|no.?pegawai|no.?induk)(_|$)/i);
+
+        const phone =
+          fromKeys(p, ['phone','no_wa','whatsapp','wa','tel','mobile']) ||
+          deepFindByKeyRegex(p, /(phone|wa|whats?app|tel|mobile)/i);
+
+        // 🔹 ambil tanggal lahir
+        const tglRaw = p.tanggal_lahir || p.tglLahir || null;
+        const tglLahir = tglRaw ? new Date(tglRaw) : null;
+
+        if (alive) {
+          setMyProfile({
+            name: String(name || ''),
+            nip: String(nip || ''),
+            phone: String(phone || ''),
+            jenis_kelamin_id: p.jenis_kelamin_id || '',
+            jenis_kelamin: p.jenis_kelamin || '',
+          });
+          setBirthDate({ tglLahir });
+        }
+      } catch {
+        if (alive) {
+          setMyProfile({ name: '', nip: '', phone: '' });
+          setBirthDate({ tglLahir: null });
+        }
+      }
+    })();
+
+    return () => { alive = false; };
+  }, []);
+  
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await fetch('/api/jenis-kelamin', { credentials: 'include' });
+        const json = await res.json();
+        if (json.ok && Array.isArray(json.data)) {
+          setGenderOptions(
+            json.data.map((g) => ({
+              value: String(g.id),
+              label: g.jenis_kelamin,
+            }))
+          );
+        }
+      } catch (e) {
+        console.error('Gagal load jenis kelamin:', e);
+      }
+    })();
+  }, []);
+
+
   const router = useRouter();
+  const isMobile = useIsMobile(768);
+  const [isCalendarOpen, setCalendarOpen] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
   // peta dari API rules+bookings
@@ -271,7 +376,7 @@ export default function FiturBICare() {
     const nsParam = typeof window !== 'undefined'
       ? new URLSearchParams(location.search).get('ns') || ''
       : '';
-    router.replace(`/User/StatusBooking/hal-statusBooking${nsParam ? `?ns=${encodeURIComponent(nsParam)}` : ''}`);
+    router.replace(`/User/OngoingBooking/bicare/hal-orders${nsParam ? `?ns=${encodeURIComponent(nsParam)}` : ''}`);
   }, [router]);
   useEffect(() => {
     return () => {
@@ -362,7 +467,7 @@ export default function FiturBICare() {
     wa: '',
     namaPasien: '',
     statusPasien: '',
-    jenisKelamin: '',
+    jenis_kelamin_id: '',
     tglLahir: null,
     tglPengobatan: null,
     pukulPengobatan: '',
@@ -375,6 +480,42 @@ export default function FiturBICare() {
     setFields((p) => ({ ...p, [name]: value }));
     if (errors[name]) setErrors((prev) => ({ ...prev, [name]: null }));
   };
+
+  const fillFromMyProfile = () => {
+    setFields(prev => ({
+      ...prev,
+      namaPemesan: myProfile.name || prev.namaPemesan,
+      nip: myProfile.nip || prev.nip,
+      wa: myProfile.phone || prev.wa,
+    }));
+    // clear error kalau ada
+    setErrors(prev => ({
+      ...prev,
+      namaPemesan: null,
+      nip: null,
+      wa: null,
+    }));
+  };
+
+  const fillPatientFromProfile = () => {
+    setFields((prev) => ({
+      ...prev,
+      namaPasien: myProfile.name || prev.namaPasien,
+      jenis_kelamin_id: myProfile.jenis_kelamin_id 
+        ? String(myProfile.jenis_kelamin_id) 
+        : prev.jenis_kelamin_id,
+      tglLahir: birthDate.tglLahir || prev.tglLahir,
+      statusPasien: 'Pegawai',
+    }));
+    setErrors((prev) => ({
+      ...prev,
+      namaPasien: null,
+      jenis_kelamin_id: null,
+      tglLahir: null,
+      statusPasien: null,
+    }));
+  };
+
   const handleDateChange = (date, key) => {
     setFields((p) => ({ ...p, [key]: date }));
     if (errors[key]) setErrors((p) => ({ ...p, [key]: null }));
@@ -387,7 +528,7 @@ export default function FiturBICare() {
     if (!fields.wa.trim()) e.wa = 'No WA wajib diisi';
     if (!fields.namaPasien.trim()) e.namaPasien = 'Nama pasien wajib diisi';
     if (!fields.statusPasien) e.statusPasien = 'Status pasien wajib dipilih';
-    if (!fields.jenisKelamin) e.jenisKelamin = 'Jenis kelamin wajib dipilih';
+    if (!fields.jenis_kelamin_id) e.jenis_kelamin_id = 'Jenis kelamin wajib dipilih';
     if (!fields.tglLahir) e.tglLahir = 'Tanggal lahir wajib diisi';
     if (!fields.tglPengobatan) e.tglPengobatan = 'Tanggal pengobatan wajib diisi';
     if (!fields.pukulPengobatan) e.pukulPengobatan = 'Pukul pengobatan wajib dipilih';
@@ -409,7 +550,7 @@ export default function FiturBICare() {
       wa: fields.wa,
       patient_name: fields.namaPasien,
       patient_status: fields.statusPasien,
-      gender: fields.jenisKelamin,
+      jenis_kelamin_id: Number(fields.jenis_kelamin_id),
       birth_date: fields.tglLahir ? fields.tglLahir.toISOString().slice(0, 10) : null,
       complaint: fields.keluhan || null,
     };
@@ -460,6 +601,9 @@ export default function FiturBICare() {
 
   const handlePickSession = (date, time) => {
     setFields((p) => ({ ...p, tglPengobatan: date, pukulPengobatan: time }));
+    if (isMobile) {
+      setCalendarOpen(false);
+    }
     document.getElementById('tglPengobatan')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
 
@@ -520,25 +664,82 @@ export default function FiturBICare() {
             />
           </div>
 
-          {/* Kalender */}
-          <div className={styles.calendarBlockLarge}>
-            <h3 className={styles.calendarTitle}>Pilih Tanggal & Sesi</h3>
-            <DoctorCalendar
-              key={`cal-${doctorId}`}
-              slotMap={slotMap}
-              bookedMap={bookedMap}
-              adminMap={adminMap}
-              onPick={handlePickSession}
-              minDate={new Date()}
-              onMonthChange={(ym) => handleMonthChange(ym, doctorId)}
-            />
-            <p className={styles.calendarHint}>Tanggal & waktu pengobatan hanya dapat diubah dari kalender ini.</p>
-          </div>
+          {/* 1. Tampilan Kalender Inline (Hanya untuk Desktop) */}
+          {!isMobile && (
+            <div className={styles.calendarBlockLarge}>
+              <h3 className={styles.calendarTitle}>Pilih Tanggal & Sesi</h3>
+              <DoctorCalendar
+                key={`cal-desktop-${doctorId}`}
+                slotMap={slotMap}
+                bookedMap={bookedMap}
+                adminMap={adminMap}
+                onPick={handlePickSession}
+                minDate={new Date()}
+                onMonthChange={(ym) => handleMonthChange(ym, doctorId)}
+              />
+              <p className={styles.calendarHint}>Tanggal & waktu pengobatan hanya dapat diubah dari kalender ini.</p>
+            </div>
+          )}
+
+          {/* 2. Tombol Pemicu Kalender (Hanya untuk Mobile) */}
+          {isMobile && (
+            <div className={styles.formGroup}>
+               <label>Pilih Tanggal & Sesi</label>
+               <button type="button" className={styles.calendarTriggerBtn} onClick={() => setCalendarOpen(true)}>
+                  <FaCalendarAlt />
+                  <span>
+                    {prettyDate && fields.pukulPengobatan 
+                      ? `${prettyDate} • ${fields.pukulPengobatan}`
+                      : 'Buka Kalender'}
+                  </span>
+               </button>
+            </div>
+          )}
+
+          {/* 3. Modal Kalender (Hanya untuk Mobile & Saat Terbuka) */}
+          {isMobile && isCalendarOpen && (
+            <div className={styles.popupOverlay}>
+                <div className={styles.calendarModalBox}>
+                    <div className={styles.calendarModalHeader}>
+                        <h3>Pilih Tanggal & Sesi</h3>
+                        <button onClick={() => setCalendarOpen(false)} className={styles.popupClose}>×</button>
+                    </div>
+                    <DoctorCalendar
+                        key={`cal-mobile-${doctorId}`}
+                        slotMap={slotMap}
+                        bookedMap={bookedMap}
+                        adminMap={adminMap}
+                        onPick={handlePickSession}
+                        minDate={new Date()}
+                        onMonthChange={(ym) => handleMonthChange(ym, doctorId)}
+                    />
+                </div>
+            </div>
+          )}
 
           {/* Form */}
           <form className={styles.formGrid} onSubmit={onSubmit} autoComplete="off">
             <div className={`${styles.formGroup} ${styles.colFull}`}>
-              <label htmlFor="namaPemesan">Nama Pemesan</label>
+              <label
+                htmlFor="namaPemesan"
+                style={{ display:'flex', alignItems:'center', justifyContent:'space-between', gap:8 }}
+              >
+                <span>Nama Pemesan</span>
+                <button
+                  type="button"
+                  className={styles.useMineBtn}
+                  onClick={fillFromMyProfile}
+                  disabled={!myProfile.name && !myProfile.nip && !myProfile.phone}
+                  title={
+                    (myProfile.name || myProfile.nip || myProfile.phone)
+                      ? 'Isi otomatis dari profil'
+                      : 'Data profil tidak ditemukan'
+                  }
+                >
+                  Gunakan data saya
+                </button>
+              </label>
+
               <input
                 id="namaPemesan" name="namaPemesan" type="text" placeholder="Masukkan Nama Anda"
                 value={fields.namaPemesan} onChange={handleChange}
@@ -565,17 +766,33 @@ export default function FiturBICare() {
               />
               {errors.wa && <span className={styles.errorMsg}>{errors.wa}</span>}
             </div>
-
             <div className={styles.formGroup}>
-              <label htmlFor="namaPasien">Nama Pasien</label>
+              <label
+                htmlFor="namaPasien"
+                style={{ display:'flex', alignItems:'center', justifyContent:'space-between', gap:8 }}
+              >
+                <span>Nama Pasien</span>
+                <button
+                  type="button"
+                  className={styles.useMineBtn}
+                  onClick={fillPatientFromProfile}
+                  disabled={!myProfile.name && !birthDate.tglLahir}
+                  title="Isi otomatis dari profil pasien"
+                >
+                  Gunakan data saya
+                </button>
+              </label>
               <input
-                id="namaPasien" name="namaPasien" type="text" placeholder="Masukkan Nama Pasien"
-                value={fields.namaPasien} onChange={handleChange}
+                id="namaPasien"
+                name="namaPasien"
+                type="text"
+                placeholder="Masukkan Nama Pasien"
+                value={fields.namaPasien}
+                onChange={handleChange}
                 className={errors.namaPasien ? styles.errorInput : ''}
               />
               {errors.namaPasien && <span className={styles.errorMsg}>{errors.namaPasien}</span>}
             </div>
-
             {/* Status Pasien */}
             <div className={styles.formGroup}>
               <label htmlFor="statusPasien">Status Pasien</label>
@@ -601,151 +818,41 @@ export default function FiturBICare() {
               <label htmlFor="jenisKelamin">Jenis Kelamin</label>
               <CustomSelect
                 id="jenisKelamin"
-                name="jenisKelamin"
+                name="jenis_kelamin_id"
                 placeholder="Pilih Jenis Kelamin"
-                value={fields.jenisKelamin}
+                value={fields.jenis_kelamin_id}
                 onChange={handleChange}
-                error={!!errors.jenisKelamin}
-                options={[
-                  { value: 'Laki-laki', label: 'Laki-laki' },
-                  { value: 'Perempuan', label: 'Perempuan' },
-                ]}
+                error={!!errors.jenis_kelamin_id}
+                options={genderOptions}
               />
-              {errors.jenisKelamin && <span className={styles.errorMsg}>{errors.jenisKelamin}</span>}
+              {errors.jenis_kelamin_id && <span className={styles.errorMsg}>{errors.jenis_kelamin_id}</span>}
             </div>
 
+            {/* Tanggal Lahir */}
             <div className={styles.formGroup}>
               <label htmlFor="tglLahir">Tanggal Lahir</label>
               <DatePicker
                 id="tglLahir"
                 selected={fields.tglLahir}
-                onChange={(d) => handleDateChange(d, 'tglLahir')}
+                onChange={(d) => handleDateChange(d, "tglLahir")}
                 dateFormat="dd MMMM yyyy"
-                maxDate={new Date()}
                 placeholderText="Pilih Tanggal Lahir"
                 locale={idLocale}
-                className={errors.tglLahir ? styles.errorInput : ''}
+                className={errors.tglLahir ? styles.errorInput : ""}
 
-                renderCustomHeader={({
-                  date,
-                  changeYear,
-                  changeMonth,
-                  decreaseMonth,
-                  increaseMonth,
-                  prevMonthButtonDisabled,
-                  nextMonthButtonDisabled
-                }) => {
-                  const currentYear = date.getFullYear();
-                  const currentMonth = date.getMonth();
-                  const openYearGrid = () => {
-                    const base = currentYear - (currentYear % 15);
-                    setYearGridStart(base);
-                    setYearGridOpen((v) => !v);
-                  };
-                  const pickYear = (yy) => {
-                    changeYear(yy);
-                    setYearGridOpen(false);
-                  };
+                // boleh ke masa lalu, batasi hanya sampai hari ini
+                maxDate={new Date()}
 
-                  return (
-                    <div className={styles.dpHeader}>
-                      <button
-                        type="button"
-                        className={styles.dpNavBtn}
-                        onClick={() => { setYearGridOpen(false); decreaseMonth(); }}
-                        disabled={prevMonthButtonDisabled}
-                        aria-label="Bulan sebelumnya"
-                      >
-                        ‹
-                      </button>
+                // pakai dropdown bawaan react-datepicker
+                showMonthDropdown
+                showYearDropdown
+                scrollableYearDropdown
+                dropdownMode="select"
 
-                      <div className={styles.dpSelectors}>
-                        {/* Bulan — tampil semua tanpa scroll */}
-                        <div className={styles.monthSelectWrap}>
-                          <CustomSelect
-                            id="monthSelect"
-                            name="monthSelect"
-                            placeholder="Pilih Bulan"
-                            value={currentMonth}
-                            onChange={(e) => {
-                              setYearGridOpen(false);
-                              changeMonth(Number(e.target.value));
-                            }}
-                            options={MONTHS.map((m, idx) => ({
-                              value: String(idx),
-                              label: m,
-                            }))}
-                          />
-                        </div>
-
-                        {/* Tahun — tombol membuka panel grid */}
-                        <button
-                          type="button"
-                          className={styles.dpYearBtn}
-                          onClick={openYearGrid}
-                          aria-haspopup="dialog"
-                          aria-expanded={yearGridOpen}
-                          title="Pilih tahun"
-                        >
-                          {currentYear} ▾
-                        </button>
-                      </div>
-
-                      <button
-                        type="button"
-                        className={styles.dpNavBtn}
-                        onClick={() => { setYearGridOpen(false); increaseMonth(); }}
-                        disabled={nextMonthButtonDisabled}
-                        aria-label="Bulan berikutnya"
-                      >
-                        ›
-                      </button>
-
-                      {/* Panel grid tahun */}
-                      {yearGridOpen && (
-                        <div className={styles.yearPanel} role="dialog" aria-label="Pilih tahun">
-                          <div className={styles.yearPanelHeader}>
-                            <button
-                              type="button"
-                              className={styles.dpNavBtn}
-                              onClick={() => setYearGridStart(s => s - 15)}
-                              aria-label="Rentang tahun sebelumnya"
-                            >‹</button>
-                            <div className={styles.yearRange}>
-                              {yearGridStart} – {yearGridStart + 14}
-                            </div>
-                            <button
-                              type="button"
-                              className={styles.dpNavBtn}
-                              onClick={() => setYearGridStart(s => s + 15)}
-                              aria-label="Rentang tahun berikutnya"
-                            >›</button>
-                          </div>
-
-                          <div className={styles.yearGrid}>
-                            {Array.from({ length: 15 }).map((_, i) => {
-                              const yy = yearGridStart + i;
-                              const active = yy === currentYear;
-                              return (
-                                <button
-                                  key={yy}
-                                  type="button"
-                                  className={`${styles.yearBtn} ${active ? styles.yearBtnActive : ''}`}
-                                  onClick={() => pickYear(yy)}
-                                >
-                                  {yy}
-                                </button>
-                              );
-                            })}
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  );
-                }}
-                popperPlacement="bottom-start"
-                showPopperArrow={false}
+                // opsional: kalau belum ada nilai, buka di tahun tertentu biar cepat
+                // openToDate={new Date(1995, 0, 1)}
               />
+              
               {errors.tglLahir && <span className={styles.errorMsg}>{errors.tglLahir}</span>}
             </div>
 

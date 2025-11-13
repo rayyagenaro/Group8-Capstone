@@ -42,18 +42,18 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Body harus JSON' });
   }
 
-  // Support camelCase (dari form) dan snake_case
-  const doctor_id      = body.doctor_id ?? body.doctorId;
-  const booking_date   = body.booking_date ?? body.bookingDate;        // "YYYY-MM-DD"
-  const slot_time_in   = body.slot_time ?? body.slotTime;              // "HH:mm" / "HH:mm:ss"
-  const booker_name    = body.booker_name ?? body.bookerName;
-  const nip            = body.nip;
-  const wa_in          = body.wa;
-  const patient_name   = body.patient_name ?? body.patientName;
-  const patient_status = body.patient_status ?? body.patientStatus;
-  const gender         = body.gender;
-  const birth_date     = body.birth_date ?? body.birthDate ?? null;    // "YYYY-MM-DD"
-  const complaint      = body.complaint ?? null;
+  // Support camelCase dan snake_case
+  const doctor_id       = body.doctor_id ?? body.doctorId;
+  const booking_date    = body.booking_date ?? body.bookingDate; // "YYYY-MM-DD"
+  const slot_time_in    = body.slot_time ?? body.slotTime;       // "HH:mm" / "HH:mm:ss"
+  const booker_name     = body.booker_name ?? body.bookerName;
+  const nip             = body.nip;
+  const wa_in           = body.wa;
+  const patient_name    = body.patient_name ?? body.patientName;
+  const patient_status  = body.patient_status ?? body.patientStatus;
+  const jenis_kelamin_id = body.jenis_kelamin_id ?? body.jenisKelaminId; // ✅ pakai ID integer
+  const birth_date      = body.birth_date ?? body.birthDate ?? null;
+  const complaint       = body.complaint ?? null;
 
   const slot_time = hhmmToHms(slot_time_in);
   const wa = to62(wa_in);
@@ -68,7 +68,7 @@ export default async function handler(req, res) {
   if (!wa) errors.wa = 'wa wajib';
   if (!patient_name) errors.patient_name = 'patient_name wajib';
   if (!patient_status) errors.patient_status = 'patient_status wajib';
-  if (!gender) errors.gender = 'gender wajib';
+  if (!jenis_kelamin_id) errors.jenis_kelamin_id = 'jenis_kelamin_id wajib';
   if (Object.keys(errors).length) {
     return res.status(422).json({ error: 'VALIDATION_ERROR', details: errors });
   }
@@ -77,9 +77,15 @@ export default async function handler(req, res) {
     const [result] = await db.execute(
       `
       INSERT INTO bicare_bookings
-        (user_id, doctor_id, booking_date, slot_time, status, booker_name, nip, wa, patient_name, patient_status, gender, birth_date, complaint, created_at)
+        (user_id, doctor_id, booking_date, slot_time, status,
+         booker_name, nip, wa,
+         patient_name, patient_status,
+         jenis_kelamin_id, birth_date, complaint, created_at)
       VALUES
-        (?,       ?,         ?,            ?,         'Booked', ?,           ?,   ?,  ?,            ?,             ?,      ?,          ?,        NOW())
+        (?, ?, ?, ?, 'Booked',
+         ?, ?, ?,
+         ?, ?,
+         ?, ?, ?, NOW())
       `,
       [
         userId,
@@ -91,7 +97,7 @@ export default async function handler(req, res) {
         String(wa),
         String(patient_name),
         String(patient_status),
-        String(gender),
+        Number(jenis_kelamin_id), // ✅ pakai integer FK
         birth_date || null,
         complaint || null,
       ]

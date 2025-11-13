@@ -5,7 +5,8 @@ import { verifyAuth } from '@/lib/auth';
 /* ===================== utils ===================== */
 const pad2 = (n) => String(n).padStart(2, '0');
 
-const ymd = (d) => `${d.getFullYear()}-${pad2(d.getMonth() + 1)}-${pad2(d.getDate())}`;
+const ymd = (d) =>
+  `${d.getFullYear()}-${pad2(d.getMonth() + 1)}-${pad2(d.getDate())}`;
 
 // pastikan SEMUA key tanggal bentuknya "YYYY-MM-DD"
 const toDateKey = (val) => {
@@ -66,7 +67,9 @@ export default async function handler(req, res) {
     const doctorId = Number(req.query.doctorId || 0);
     const monthStr = String(req.query.month || '').trim(); // "YYYY-MM"
     if (!doctorId || !/^\d{4}-\d{2}$/.test(monthStr)) {
-      return res.status(400).json({ error: 'Bad request', details: 'doctorId & month=YYYY-MM wajib' });
+      return res
+        .status(400)
+        .json({ error: 'Bad request', details: 'doctorId & month=YYYY-MM wajib' });
     }
 
     const { first, last, firstStr, lastStr } = monthRange(monthStr);
@@ -98,15 +101,23 @@ export default async function handler(req, res) {
       }
     }
 
-    /* ---------- 2) ADMIN BLOCKS (opsional, tabel terpisah) ---------- */
+    /* ---------- 2) ADMIN BLOCKS (kosong dulu, belum pakai tabel terpisah) ---------- */
     const blocksRanges = [];
 
-    /* ---------- 3) BOOKINGS (pisahkan ADMIN_BLOCK & user booking) ---------- */
+    /* ---------- 3) BOOKINGS ---------- */
     let bookings = [];
     try {
       const [rows] = await db.query(
-        `SELECT id, user_id, doctor_id, booking_date, slot_time, status,
-                booker_name, nip, wa, patient_name, patient_status, gender, birth_date, complaint, created_at
+        `SELECT
+           id,
+           user_id,
+           doctor_id,
+           booking_date,
+           slot_time,
+           status,
+           booker_name,
+           nip,
+           wa
          FROM bicare_bookings
          WHERE doctor_id = ?
            AND booking_date BETWEEN ? AND ?`,
@@ -127,12 +138,15 @@ export default async function handler(req, res) {
     const adminBlocksFromBookings = {};
 
     for (const r of bookings) {
-      const dateKey = toDateKey(r.booking_date);   // <<< FIX penting
+      const dateKey = toDateKey(r.booking_date);
       const timeHHMM = toHHMM(r.slot_time);
 
+      // booking yang dipakai admin untuk nge-block slot
       const isAdminBlock =
         String(r.booker_name || '').toUpperCase() === 'ADMIN_BLOCK' ||
-        (r.user_id == null && String(r.nip || '-') === '-' && String(r.wa || '-') === '-');
+        (r.user_id == null &&
+          String(r.nip || '-') === '-' &&
+          String(r.wa || '-') === '-');
 
       if (isAdminBlock) {
         if (!adminBlocksFromBookings[dateKey]) adminBlocksFromBookings[dateKey] = new Set();
@@ -141,6 +155,7 @@ export default async function handler(req, res) {
       }
 
       const statusNorm = String(r.status || 'Booked').trim();
+      // di schema kita cuma 'Booked' & 'Finished'; kita anggap semua aktif kecuali 'Cancelled'
       const isActive = statusNorm.toLowerCase() !== 'cancelled';
       if (!isActive) continue;
 
@@ -168,10 +183,10 @@ export default async function handler(req, res) {
 
     /* ---------- 5) adminBlocks akhir ---------- */
     const adminBlocks = {};
-    // (a) dari tabel ranges (jika ada)
+    // (a) dari tabel ranges (kalau nanti dipakai)
     if (blocksRanges.length && Object.keys(slotMap).length) {
       for (const [dateKey, slots] of Object.entries(slotMap)) {
-        const ranges = blocksRanges.filter((b) => toDateKey(b.block_date) === dateKey); // <<< FIX
+        const ranges = blocksRanges.filter((b) => toDateKey(b.block_date) === dateKey);
         if (!ranges.length) continue;
         const blocked = new Set();
         for (const hhmm of slots) {
@@ -188,7 +203,7 @@ export default async function handler(req, res) {
         if (blocked.size) adminBlocks[dateKey] = Array.from(blocked).sort();
       }
     }
-    // (b) union dengan ADMIN_BLOCK yang disimpan di bookings
+    // (b) union dengan ADMIN_BLOCK dari bookings
     for (const [dateKey, setFromBookings] of Object.entries(adminBlocksFromBookings)) {
       const list = Array.from(setFromBookings).sort();
       if (adminBlocks[dateKey]) {
@@ -206,9 +221,9 @@ export default async function handler(req, res) {
     return res.status(200).json({
       ok: true,
       ns: auth.ns,
-      slotMap,
-      bookedMap,
-      adminBlocks,
+      slotMap,     // semua slot yg mungkin berdasarkan rules
+      bookedMap,   // slot yg sudah dibooking user
+      adminBlocks, // slot yg di-block admin
     });
   } catch (e) {
     console.error('Error in GET /api/BIcare/booked:', e?.message, e);

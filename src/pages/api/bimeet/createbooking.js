@@ -1,4 +1,3 @@
-// /pages/api/bimeet/createbooking.js
 import db from '@/lib/db';
 import { verifyAuth } from '@/lib/auth';
 
@@ -50,8 +49,6 @@ export default async function handler(req, res) {
 
       const whereSQL = where.length ? `WHERE ${where.join(' AND ')}` : '';
 
-      // NOTE: bimeet_bookings tidak punya unit_kerja_id → simpan nama.
-      // Untuk tetap mengirim unit_kerja_id ke UI, join balik via nama.
       const [rows] = await db.query(
         `
         SELECT
@@ -60,12 +57,12 @@ export default async function handler(req, res) {
           b.room_id,
           r.name AS room_name,
           r.capacity AS room_capacity,
-          u.id AS unit_kerja_id,   -- hasil join balik berdasar nama
-          b.unit_kerja,            -- string yang disimpan
+          b.unit_kerja_id,
+          u.unit_kerja AS unit_kerja,
           b.title,
           b.description,
           b.start_datetime AS start_date,
-          b.end_datetime   AS end_date,
+          b.end_datetime AS end_date,
           b.participants,
           b.contact_phone,
           b.pic_name,
@@ -74,12 +71,13 @@ export default async function handler(req, res) {
           b.updated_at
         FROM bimeet_bookings b
         LEFT JOIN bimeet_rooms r ON r.id = b.room_id
-        LEFT JOIN unit_kerja u ON u.unit_kerja = b.unit_kerja
+        LEFT JOIN unit_kerja u ON u.id = b.unit_kerja_id
         ${whereSQL}
         ORDER BY b.start_datetime DESC
         `,
         params
       );
+
 
       if (bookingId) {
         return res.status(200).json({ item: rows[0] || null });
@@ -104,23 +102,16 @@ export default async function handler(req, res) {
       // 🔐 user biasa: pakai id dari token, admin: boleh override body.user_id
       const userId = !isAdminScope ? auth.userId : (req.body?.user_id || auth.userId);
 
-      const body = req.body || {};
-      const room_id = Number(body.room_id);
-      // robust: terima beberapa kemungkinan nama properti
-      const rawUnitId = body.unit_kerja_id ?? body.unitKerjaId ?? body.unitKerja;
-      const unit_kerja_id = Number(rawUnitId);
-      const title        = body.title;
-      const description  = body.description;
-      const start_date   = body.start_date;
-      const end_date     = body.end_date;
-      const participants = body.participants;
-      const contact_phone= body.contact_phone;
-      const pic_name     = body.pic_name;
+      const {
+        room_id, unit_kerja_id, title, description,
+        start_date, end_date, participants,
+        contact_phone, pic_name
+      } = req.body || {};
 
       // validasi field wajib
       const miss = [];
       if (!room_id) miss.push('room_id');
-      if (!Number.isFinite(unit_kerja_id) || unit_kerja_id <= 0) miss.push('unit_kerja_id');
+      if (!unit_kerja_id) miss.push('unit_kerja_id');
       if (!title) miss.push('title');
       if (!start_date) miss.push('start_date');
       if (!end_date) miss.push('end_date');
@@ -140,16 +131,10 @@ export default async function handler(req, res) {
         return res.status(400).json({ error: 'VALIDATION_ERROR', reason: 'participants harus angka > 0' });
       }
 
-      // room exist?
       const [rooms] = await db.query('SELECT capacity FROM bimeet_rooms WHERE id=?', [room_id]);
       if (!rooms.length) return res.status(404).json({ error: 'NOT_FOUND', reason: 'Ruangan tidak ditemukan' });
 
-      // map unit_kerja_id -> unit_kerja (nama)
-      const [ukers] = await db.query('SELECT unit_kerja FROM unit_kerja WHERE id=?', [unit_kerja_id]);
-      if (!ukers.length) return res.status(404).json({ error: 'NOT_FOUND', reason: 'Unit kerja tidak ditemukan' });
-      const unitKerjaName = ukers[0].unit_kerja;
-
-      // cek bentrok booking (occupied = Approved = 2)
+      // cek bentrok booking
       const [conflict] = await db.query(
         `SELECT id FROM bimeet_bookings
          WHERE room_id=? AND status_id=2
@@ -161,14 +146,13 @@ export default async function handler(req, res) {
         return res.status(409).json({ error: 'CONFLICT', reason: 'Jadwal bentrok dengan pemakaian lain' });
       }
 
-      // INSERT simpan nama unit_kerja (varchar)
       const [result] = await db.query(
         `INSERT INTO bimeet_bookings
-        (user_id, room_id, unit_kerja, title, description,
-         start_datetime, end_datetime, participants, contact_phone, pic_name,
-         status_id, created_at, updated_at)
+        (user_id, room_id, unit_kerja_id, title, description,
+        start_datetime, end_datetime, participants, contact_phone, pic_name,
+        status_id, created_at, updated_at)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, NOW(), NOW())`,
-        [userId, room_id, unitKerjaName, title, description || null,
+        [userId, room_id, unit_kerja_id, title, description || null,
          toSqlDateTime(start), toSqlDateTime(end),
          participantsNum, contact_phone, pic_name]
       );
