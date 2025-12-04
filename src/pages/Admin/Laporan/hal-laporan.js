@@ -19,7 +19,6 @@ const SERVICE_ID_MAP = {
   2: 'bicare',
   3: 'bimeal',
   4: 'bimeet',
-  5: 'bimail', // alias docs
   6: 'bistay',
 };
 
@@ -30,16 +29,12 @@ const MODULES = [
   { value: 'bi-meal',  label: 'MEAL',  serviceKey: 'bimeal'  },
   { value: 'bi-meet',  label: 'MEET',  serviceKey: 'bimeet'  },
   { value: 'bi-stay',  label: 'STAY',  serviceKey: 'bistay'  },
-  { value: 'bi-docs',  label: 'DOCS',  serviceKey: 'bimail'  },
 ];
 
 // Alias service key yang dianggap sama
 const isAlias = (svcKey, compare) => {
   if (!svcKey || !compare) return false;
   if (svcKey === compare) return true;
-  // docs <-> mail alias
-  if ((svcKey === 'bimail' && compare === 'bidocs') || (svcKey === 'bidocs' && compare === 'bimail')) return true;
-  return false;
 };
 
 // helper ns
