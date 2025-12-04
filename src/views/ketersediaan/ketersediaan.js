@@ -623,6 +623,19 @@ export default function KetersediaanPage({ initialRoleId = null, initialAllowedS
               </div>
             )}
 
+            {/* MEET → Rooms */}
+            {mainTab === 'meet' && subMeet === 'rooms' && (
+              <RoomsSection
+                styles={styles}
+                loading={loading}
+                rows={pageRows}
+                statusMap={meetStatusMap}
+                onAdd={() => handleOpenModal('bimeet_rooms')}
+                onEdit={(row) => handleOpenModal('bimeet_rooms', row)}
+                onDelete={(id) => handleDelete('bimeet_rooms', id)}
+              />
+            )}
+
             {/* MEET → Rules */}
             {mainTab === 'meet' && subMeet === 'rules' && (
               <RulesMeetSection
